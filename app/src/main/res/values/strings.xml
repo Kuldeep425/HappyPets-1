@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HappyPets</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string-array name="Gender">
+        <item>Select pets Gender</item>
+        <item>Female</item>
+        <item>Male</item>
+
+    </string-array>
+</resources>
