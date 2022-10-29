@@ -1,4 +1,4 @@
-package com.example.happypets;
+package com.example.happypets.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.happypets.R;
 
 public class SPlashScreenActivity extends Activity {
     private ImageView logo;
@@ -29,11 +31,11 @@ public class SPlashScreenActivity extends Activity {
         slogan.setAnimation(bottomAnimation);
 
 
-        int SPLASH_SCREEN = 4300;
+        int SPLASH_SCREEN = 4500;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SPlashScreenActivity.this,LoginActivity.class);
+                Intent intent = new Intent(SPlashScreenActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

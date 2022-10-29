@@ -34,7 +34,7 @@ public class UserController {
     if(user2.isPresent() && user2.get().isVerified()) return ResponseEntity.ok("Already registered Email");
     User user1=userService.registerUser(user);
     generateToken.generateToekn(user1,"Register", applicationUrl(request));
-    return ResponseEntity.ok(user1);
+    return ResponseEntity.ok(user1.getId());
    }
    
    @GetMapping("/verifyRegistration")
@@ -44,7 +44,7 @@ public class UserController {
      return res;
    }
    
-   @GetMapping("/login/user")
+   @PostMapping("/login/user")
    public String loginUser(@RequestBody LoginModel loginModel){
        return userService.loginUser(loginModel);
    }
