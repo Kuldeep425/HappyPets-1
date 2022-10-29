@@ -1,8 +1,10 @@
-package com.example.happypets;
+package com.example.happypets.Activity;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.example.happypets.R;
 
 public class MainActivity extends AppCompatActivity {
 

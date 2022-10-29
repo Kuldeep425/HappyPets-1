@@ -20,6 +20,7 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private String phoneNumber;
     private Binary image;
     private List<String>postedPetId;
     private boolean hasLoggedIn=false;
