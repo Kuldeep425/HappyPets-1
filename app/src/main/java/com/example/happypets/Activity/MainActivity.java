@@ -1,4 +1,4 @@
-package com.example.happypets;
+package com.example.happypets.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,3 +12,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 }
+
+

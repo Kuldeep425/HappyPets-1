@@ -1,6 +1,9 @@
-package com.example.happypets;
+package com.example.happypets.Activity;
+
+import android.os.Bundle;
 
         import androidx.appcompat.app.AppCompatActivity;
+
 
         import android.app.ProgressDialog;
         import android.content.Intent;
@@ -24,6 +27,7 @@ package com.example.happypets;
 
 
         import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class PetRegistrationActivity extends AppCompatActivity {
     private TextView backButton;
