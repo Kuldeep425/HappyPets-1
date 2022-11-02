@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/drawer_layout_profile"
+            android:icon="@drawable/ic_baseline_portrait_24"
+            android:title="@string/drawer_string_profile" />
+        <item
+            android:id="@+id/drawer_layout_chat"
+            android:icon="@drawable/ic_baseline_chat_bubble_outline_24"
+            android:title="@string/drawer_layout_string_chat" />
+        <item
+            android:id="@+id/drawer_layout_fav"
+            android:icon="@drawable/ic_baseline_favorite_border_24"
+            android:title="@string/drawer_layout_string_favorite" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="@string/drawer_layout_string_communication">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item android:title="@string/drawer_layout_string_share"
+                        android:id="@+id/drawer_layout_share"
+                        android:icon="@drawable/ic_baseline_share_24"/>
+                </group>
+            </menu>
+        </item>
+    </group><group android:checkableBehavior="single">
+    <item android:title="@string/drawer_layout_string_logout">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:title="@string/drawer_layout_string_logout"
+                    android:id="@+id/drawer_layout_logout"
+                    android:icon="@drawable/ic_baseline_arrow_circle_left_24"/>
+            </group>
+        </menu>
+    </item>
+</group>
+</menu>
