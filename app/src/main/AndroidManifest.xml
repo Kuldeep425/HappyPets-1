@@ -29,6 +29,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="YOUR_API_KEY" />
 
+
         <activity
             android:name=".Activity.MainActivity"
             android:exported="true">
@@ -46,6 +47,9 @@
             android:exported="false" />
         <activity
             android:name=".Activity.PetRegistrationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Map.MapsActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.SPlashScreenActivity"
