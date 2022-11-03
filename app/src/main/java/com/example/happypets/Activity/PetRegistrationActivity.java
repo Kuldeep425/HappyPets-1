@@ -41,9 +41,8 @@ public class PetRegistrationActivity extends AppCompatActivity {
 
     private ProgressDialog loader ;
 
-
-
-
+    // created a null constructor
+    public PetRegistrationActivity(){}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
