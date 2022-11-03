@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HappyPets"
         android:usesCleartextTraffic="true">
-
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -28,7 +27,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="YOUR_API_KEY" />
-
 
         <activity
             android:name=".Activity.MainActivity"
@@ -52,8 +50,11 @@
             android:name=".Map.MapsActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.SPlashScreenActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

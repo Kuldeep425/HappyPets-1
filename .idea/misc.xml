@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_circle_left_24.xml" value="0.1515" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/activity_pet_registeration.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/fragment_info.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/fragment_pets.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.24635416666666668" />

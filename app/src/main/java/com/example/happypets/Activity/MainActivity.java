@@ -33,19 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(actionBarDrawerToggle.onOptionsItemSelected(item))
-            return true;
-
-        if(item.getItemId() == R.id.map_button){
-            Intent i = new Intent(getApplicationContext(), MapsActivity.class);
-            startActivity(i);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -75,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.drawer_layout_profile:
                         Log.e(TAG,"profile");
+                        Intent profileIntent = new Intent(getApplicationContext(),ProfileActivity.class);
+                        startActivity(profileIntent);
                         break;
                     case R.id.drawer_layout_chat:
                         Log.e(TAG,"chat");
@@ -97,10 +86,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // inflate menu for map button
         getMenuInflater().inflate(R.menu.map_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // this is to close the drawer if it is open
+        if(actionBarDrawerToggle.onOptionsItemSelected(item))
+            return true;
+
+        // set the functionality of the map button
+        if(item.getItemId() == R.id.map_button){
+            Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+            startActivity(i);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
