@@ -19,7 +19,8 @@ import android.os.Bundle;
         import android.widget.TextView;
         import android.widget.Toast;
 
-        import com.google.android.material.textfield.TextInputEditText;
+import com.example.happypets.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 
         import java.io.ByteArrayOutputStream;
