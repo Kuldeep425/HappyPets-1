@@ -32,5 +32,6 @@
     <string name="search_fragment_card_rabbit">Rabbit</string>
     <string name="search_fragment_card_bird">Bird</string>
     <string name="search_fragment_card_others">Others</string>
-    <string name="search_fragment_cardview_categories">CATEGORIES</string>
+    <string name="search_fragment_cardview_categories">CHOOSE TYPE OF PET TO ADOPT</string>
+    <string name="button_add_pets">Add Pets</string>
 </resources>
