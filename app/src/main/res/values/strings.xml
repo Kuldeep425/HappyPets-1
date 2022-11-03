@@ -26,4 +26,11 @@
     <string name="drawer_layout_string_communication">Communication</string>
     <string name="drawer_layout_string_share">Share</string>
     <string name="drawer_layout_string_logout">Logout</string>
+    <string name="search_fragment_card_cat">Cat</string>
+    <string name="search_fragment_card_dog">Dog</string>
+    <string name="search_fragment_card_fish">Fish</string>
+    <string name="search_fragment_card_rabbit">Rabbit</string>
+    <string name="search_fragment_card_bird">Bird</string>
+    <string name="search_fragment_card_others">Others</string>
+    <string name="search_fragment_cardview_categories">CATEGORIES</string>
 </resources>
