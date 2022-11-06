@@ -22,6 +22,8 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     EditText emailTxt,passwordTxt;
     Button loginBtn;
+
+    // to initialize all fields
     public void initialize(){
         emailTxt=findViewById(R.id.loginEmail);
         passwordTxt=findViewById(R.id.loginPassword);
@@ -38,9 +40,11 @@ public class LoginActivity extends AppCompatActivity {
         RetrofitService retrofitService=new RetrofitService();
         APICall apiCall=retrofitService.getRetrofit().create(APICall.class);
 
+        // to login
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String email=emailTxt.getText().toString().trim();
                 String password=passwordTxt.getText().toString().trim();
                 if(password.length()==0 || email.length()==0){
@@ -56,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                    /* this is working ... Lucky and Apoorv  from here you can change activity like if the login is
                       completed you can go dashboard activity...
                     */
+                     startActivity(new Intent(LoginActivity.this,MainActivity.class));
                  }
 
                  @Override
@@ -67,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
+  // go to registration page if don't have account
     public void goToRegistrationPage(View v){
         startActivity(new Intent(LoginActivity.this, SignupActivity.class));
     }

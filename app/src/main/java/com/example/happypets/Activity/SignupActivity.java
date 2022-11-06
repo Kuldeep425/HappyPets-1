@@ -12,7 +12,9 @@ import com.example.happypets.Model.User;
 import com.example.happypets.R;
 import com.example.happypets.Retrofit.APICall;
 import com.example.happypets.Retrofit.RetrofitService;
+import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,20 +24,21 @@ public class SignupActivity extends AppCompatActivity {
 
     EditText nameEdtxt,phoneNumberEdtxt,emailEdtxt,passwordEdtxt;
     Button  registerbtn;
-
+    CircleImageView signUpProfileImage;
     public void initialize(){
         nameEdtxt=findViewById(R.id.registerFullName);
         phoneNumberEdtxt=findViewById(R.id.registerPhoneNumber);
         emailEdtxt=findViewById(R.id.registerEmail);
         passwordEdtxt=findViewById(R.id.registerPassword);
         registerbtn=findViewById(R.id.registerButton);
+        signUpProfileImage=findViewById(R.id.profile_image);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         initialize();
-
+        Picasso.get().load("https://storage.cloud.google.com/happy_pets_storage/Screenshot%20(470).png").into(signUpProfileImage);
         // retrofit service
         RetrofitService retrofitService=new RetrofitService();
         APICall apiCall=retrofitService.getRetrofit().create(APICall.class);
