@@ -23,7 +23,7 @@ public class Pet {
     private String color;
     private String age;
     private String category;
-    private Binary image;
+    private String imageURL;
     private String ownerId;
     
 }
