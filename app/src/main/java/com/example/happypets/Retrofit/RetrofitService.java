@@ -3,6 +3,9 @@ package com.example.happypets.Retrofit;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -13,9 +16,16 @@ public class RetrofitService {
     }
 
     private void initializeRetrofit() {
+        OkHttpClient.Builder client = new OkHttpClient.Builder();
+        client.connectTimeout(30, TimeUnit.SECONDS);
+        client.readTimeout(30, TimeUnit.SECONDS);
+        client.writeTimeout(30, TimeUnit.SECONDS);
+
+
         retrofit=new Retrofit.Builder()
-                .baseUrl("http://192.168.216.17:8080")
+                .baseUrl("http://192.168.9.71:8080")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
+                .client(client.build())
                 .build();
     }
 
