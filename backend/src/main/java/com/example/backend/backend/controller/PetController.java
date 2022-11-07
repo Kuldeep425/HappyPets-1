@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +23,19 @@ public class PetController {
 
     // to post a pet 
     @PostMapping("/post/pet/{userId}")
-    public ResponseEntity<?> postAPost(@PathVariable String userId,@ModelAttribute Pet pet,@RequestParam ("file") MultipartFile file){
+    public ResponseEntity<?> postAPost(@PathVariable String userId,
+    @RequestPart ("image") MultipartFile file,
+    @RequestPart("name") String name,
+    @RequestPart("age") String age,
+    @RequestPart("color") String color,
+    @RequestPart("breed") String breed){
+      System.out.println("api is called");
+      System.out.println(name);
+      Pet pet=new Pet();
+      pet.setName(name);
+      pet.setBreed(breed);
+      pet.setAge(age);
+      pet.setColor(color);
      return ResponseEntity.ok(petService.postAPet(userId,pet,file));
     }
 

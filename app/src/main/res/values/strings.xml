@@ -8,6 +8,7 @@
         <item>Male</item>
 
     </string-array>
+
     <string-array name="PetCategory">
         <item>Select pets category</item>
         <item>Dog</item>
@@ -17,4 +18,32 @@
         <item>others</item>
 
     </string-array>
+
+
+    <!--    string for tab layout-->
+    <string name="info_tab">Info</string>
+    <string name="search_tab">Search</string>
+    <string name="pets_tab">Pets</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="drawer_string_profile">Profile</string>
+    <string name="drawer_layout_string_chat">Chat</string>
+    <string name="drawer_layout_string_favorite">Favorite</string>
+    <string name="drawer_layout_string_communication">Communication</string>
+    <string name="drawer_layout_string_share">Share</string>
+    <string name="drawer_layout_string_logout">Logout</string>
+    <string name="search_fragment_card_cat">Cat</string>
+    <string name="search_fragment_card_dog">Dog</string>
+    <string name="search_fragment_card_fish">Fish</string>
+    <string name="search_fragment_card_rabbit">Rabbit</string>
+    <string name="search_fragment_card_bird">Bird</string>
+    <string name="search_fragment_card_others">Others</string>
+    <string name="search_fragment_cardview_categories">CHOOSE TYPE OF PET TO ADOPT</string>
+    <string name="button_add_pets">Add Pets</string>
+
 </resources>

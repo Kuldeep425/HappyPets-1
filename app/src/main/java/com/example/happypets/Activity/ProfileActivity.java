@@ -1,4 +1,4 @@
-package com.example.happypets;
+package com.example.happypets.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.happypets.databinding.ActivityMainBinding;
 
 
-public class SignupActivity extends AppCompatActivity {
+import com.example.happypets.R;
+
+public class ProfileActivity extends AppCompatActivity {
 
     EditText nameEdtxt,phoneNumberEdtxt,emailEdtxt,passwordEdtxt;
     Button  registerbtn;
@@ -29,6 +31,7 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_signup);
         initialize();
 
@@ -63,6 +66,8 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+        setContentView(R.layout.activity_profile);
+
     }
 
 
