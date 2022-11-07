@@ -7,7 +7,6 @@ package com.example.happypets;
         import android.graphics.Bitmap;
         import android.net.Uri;
         import android.os.Bundle;
-
         import android.provider.MediaStore;
         import android.text.TextUtils;
         import android.view.View;
@@ -17,8 +16,6 @@ package com.example.happypets;
         import android.widget.Toast;
 
         import com.google.android.material.textfield.TextInputEditText;
-
-
         import java.io.ByteArrayOutputStream;
         import java.io.IOException;
 
@@ -28,9 +25,9 @@ package com.example.happypets;
 public class PetRegistrationActivity extends AppCompatActivity {
     private TextView backButton;
     private CircleImageView pet_profile_image;
-    private TextInputEditText registerPetName,registerPetBreed, registerPetColor,
-            registerPetAge, registerPetWeight, registerPetId , registerOwnerId;
-    private Spinner GenderSpinner ;
+    private TextInputEditText registerPetName,registerPetBreed,
+            registerPetAge, registerPetWeight ;
+    private Spinner GenderSpinner,CategorySpinner ;
     private Button registerButton ;
     private Uri resultUri;
 
@@ -55,11 +52,12 @@ public class PetRegistrationActivity extends AppCompatActivity {
         pet_profile_image = findViewById(R.id.pet_profile_image);
         registerPetName= findViewById(R.id.registerPetName);
         registerPetBreed = findViewById(R.id.registerPetBreed);
-        registerPetColor = findViewById(R.id.registerPetColor);
+
         registerPetAge = findViewById(R.id.registerPetAge);
         registerPetWeight = findViewById(R.id.registerPetWeight);
-        registerPetId = findViewById(R.id.registerPetId);
+
         GenderSpinner = findViewById(R.id.GenderSpinner);
+        CategorySpinner = findViewById(R.id.CategorySpinner);
         registerButton = findViewById(R.id.registerButton);
         loader = new ProgressDialog(this);
 
@@ -80,13 +78,12 @@ public class PetRegistrationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String PetName = registerPetName.getText().toString().trim();
                 final String PetBreed = registerPetBreed.getText().toString().trim();
-                final String PetColor = registerPetColor.getText().toString().trim();
+
                 final String PetAge = registerPetAge.getText().toString().trim();
                 final String PetWeight = registerPetWeight.getText().toString().trim();
-                final String PetId = registerPetId.getText().toString().trim();
-                final String OwnerId = registerOwnerId.getText().toString().trim();
-                final String Gender = GenderSpinner.getSelectedItem().toString();
 
+                final String Gender = GenderSpinner.getSelectedItem().toString();
+                final String Category = CategorySpinner.getSelectedItem().toString();
                 if(TextUtils.isEmpty(PetName)){
                     registerPetName.setError("PetName is required!");
                     return;
@@ -95,10 +92,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                     registerPetBreed.setError("PetBreed is required!");
                     return;
                 }
-                if(TextUtils.isEmpty(PetColor)){
-                    registerPetColor.setError("PetColor is required!");
-                    return;
-                }
+
                 if(TextUtils.isEmpty(PetAge)){
                     registerPetAge.setError("PetAge is required!");
                     return;
@@ -107,12 +101,8 @@ public class PetRegistrationActivity extends AppCompatActivity {
                     registerPetWeight.setError("PetWeight is required!");
                     return;
                 }
-                if(TextUtils.isEmpty(PetId)){
-                    registerPetId.setError("PetId is required!");
-                    return;
-                }
-                if(TextUtils.isEmpty(OwnerId)){
-                    registerOwnerId.setError("OwnerId is required!");
+                if(Category.equals("Select pet's category here!!")){
+                    Toast.makeText(PetRegistrationActivity.this, "Select your pet's Category!!",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(Gender.equals("Select pet's gender here!!")){

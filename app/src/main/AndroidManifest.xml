@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HappyPets">
         <activity
+            android:name=".PetDisplayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OwnerProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".PetRegistrationActivity"
             android:exported="false" />
         <activity
@@ -20,6 +26,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SPlashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
