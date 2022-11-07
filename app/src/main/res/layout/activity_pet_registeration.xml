@@ -104,6 +104,17 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/CategorySpinner"
+                    android:gravity="center"
+                    android:background="#fff"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:entries="@array/PetCategory"
+                    android:layout_gravity="center"/>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/GenderSpinner"
                     android:gravity="center"
                     android:background="#fff"
@@ -113,27 +124,7 @@
                     android:entries="@array/Gender"
                     android:layout_gravity="center"/>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextInputLayoutStyle"
-                    app:boxStrokeColor="#000"
-                    app:hintTextAppearance="@color/purple_500"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/registerPetColor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Pet's colour"
-                        android:inputType="textPersonName"
 
-                        android:drawablePadding="10dp"
-                        android:textColor="#000"
-                        android:textSize="18sp"
-                        android:textColorHint="#000"
-                        android:drawableStart="@drawable/ic_person"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -179,47 +170,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextInputLayoutStyle"
-                    app:boxStrokeColor="#000"
-                    app:hintTextAppearance="@color/purple_500"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/registerPetId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Pet's id"
-                        android:inputType="number"
-
-                        android:drawablePadding="10dp"
-                        android:textColor="#000"
-                        android:textSize="18sp"
-                        android:textColorHint="#000"
-                        android:drawableStart="@drawable/ic_person"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextInputLayoutStyle"
-                    app:boxStrokeColor="#000"
-                    app:hintTextAppearance="@color/purple_500"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/registerOwnerId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="owner id"
-                        android:inputType="number"
-                        android:drawablePadding="10dp"
-                        android:textColor="#000"
-                        android:textSize="18sp"
-                        android:textColorHint="#000"
-                        android:drawableStart="@drawable/ic_phone"/>
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/registerButton"

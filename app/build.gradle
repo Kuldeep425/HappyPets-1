@@ -1,4 +1,4 @@
-plugins {
+lugins {
     id 'com.android.application'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
@@ -26,9 +26,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildFeatures {
+
+    buildFeatures{
         viewBinding true
-    }
+
+
 }
 
 dependencies {
