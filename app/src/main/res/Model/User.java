@@ -5,16 +5,8 @@ public class User {
     private String email;
     private String password;
     private String phoneNumber;
-    private String imageUrl;
 
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     public User(String name, String email, String password, String phoneNumber) {
         this.name = name;
@@ -55,4 +47,3 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 }
-

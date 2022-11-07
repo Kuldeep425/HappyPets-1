@@ -9,6 +9,17 @@
 
     </string-array>
 
+    <string-array name="PetCategory">
+        <item>Select pets category</item>
+        <item>Dog</item>
+        <item>Cat</item>
+        <item>bird</item>
+        <item>rabbit</item>
+        <item>others</item>
+
+    </string-array>
+
+
     <!--    string for tab layout-->
     <string name="info_tab">Info</string>
     <string name="search_tab">Search</string>
@@ -34,4 +45,5 @@
     <string name="search_fragment_card_others">Others</string>
     <string name="search_fragment_cardview_categories">CHOOSE TYPE OF PET TO ADOPT</string>
     <string name="button_add_pets">Add Pets</string>
+
 </resources>
