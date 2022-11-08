@@ -1,21 +1,18 @@
 
 package com.example.happypets.Adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.happypets.Model.User;
+
+import com.example.happypets.Model.Pet;
 import com.example.happypets.R;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashMap;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -23,60 +20,49 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
 
     private Context context;
-    private List<User> userList;
+    private List<Pet> petList;
 
-    public PetAdapter(Context context, List<User> userList) {
+    public PetAdapter(Context context, List<Pet> petList) {
         this.context = context;
-        this.userList = userList;
+        this.petList = petList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_pet_display,parent,
+        View view = LayoutInflater.from(context).inflate(R.layout.pet_display_format,parent,
                 false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final User user = userList.get(position);
-
-        holder.userEmail.setText(user.getEmail());
-        holder.phoneNumber.setText(user.getPhoneNumber());
-        holder.userName.setText(user.getName());
-
-
-      //  Glide.with(context).load(user.getProfilepictureurl()).into(holder.userProfileImage);
-
-
-
-
-
-
+        Pet pet= petList.get(position);
+        holder.petName.setText(pet.getName());
+        holder.gender.setText(pet.getGender());
+        holder.category.setText(pet.getCategory());
+        holder.breed.setText(pet.getBreed());
+        Picasso.get().load(pet.getImageUrl()).into(holder.petImage);
     }
 
     @Override
     public int getItemCount() {
-        return userList.size();
+        return petList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public CircleImageView userProfileImage;
-        public TextView type, userName ,phoneNumber , userEmail;
+        public CircleImageView petImage;
+        public TextView petName,breed,gender,category;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-
-            userProfileImage = itemView.findViewById(R.id.userProfileImage);
-
-
-
+            petName=itemView.findViewById(R.id.DisplayPetName);
+            breed=itemView.findViewById(R.id.DisplayPetBreed);
+            gender=itemView.findViewById(R.id.DisplayPetGender);
+            petImage = itemView.findViewById(R.id.petImage);
+            category=itemView.findViewById(R.id.DisplayPetCategory);
         }
     }
-
-
 }

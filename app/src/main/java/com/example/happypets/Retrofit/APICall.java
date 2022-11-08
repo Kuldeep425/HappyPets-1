@@ -12,7 +12,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
-
+import java.util.*;
 public interface APICall {
 
     // to register a user
@@ -34,5 +34,8 @@ public interface APICall {
                          @Part("age") String age,
                          @Part("color") String color,
                          @Part("breed") String breed);
+
+    @GET("/get/all/posted/pets/")
+    Call<List<Pet>>getAllPostedPet();
 
 }

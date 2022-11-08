@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
         navigationView.bringToFront(); // making drawer to come to the front of the screen
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // make burger button to become back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // make burger button to become back button
         // setting listener when options are selected on the navigation view
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.drawer_layout_profile:
                         Log.e(TAG,"profile");
-                        Intent profileIntent = new Intent(getApplicationContext(),ProfileActivity.class);
+                        Intent profileIntent = new Intent(getApplicationContext(),OwnerProfileActivity.class);
                         startActivity(profileIntent);
                         break;
                     case R.id.drawer_layout_chat:

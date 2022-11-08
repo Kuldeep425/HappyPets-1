@@ -49,9 +49,9 @@ public class PetRegistrationActivity extends AppCompatActivity {
 
     String path;
     private CircleImageView pet_profile_image;
-    private TextInputEditText registerPetName,registerPetBreed, registerPetColor,
-            registerPetAge, registerPetWeight, registerPetId , registerOwnerId;
-    private Spinner GenderSpinner ;
+    private TextInputEditText registerPetName,registerPetBreed,
+            registerPetAge, registerPetWeight;
+    private Spinner GenderSpinner,CategorySpinner;
     private Button registerButton ;
     private Uri selectedImageUri;
     private Bitmap selectedImageBitmap;
@@ -80,13 +80,11 @@ public class PetRegistrationActivity extends AppCompatActivity {
         pet_profile_image = findViewById(R.id.pet_profile_image);
         registerPetName= findViewById(R.id.registerPetName);
         registerPetBreed = findViewById(R.id.registerPetBreed);
-        registerPetColor = findViewById(R.id.registerPetColor);
         registerPetAge = findViewById(R.id.registerPetAge);
         registerPetWeight = findViewById(R.id.registerPetWeight);
-        registerPetId = findViewById(R.id.registerPetId);
         GenderSpinner = findViewById(R.id.GenderSpinner);
+        CategorySpinner = findViewById(R.id.CategorySpinner);
         registerButton = findViewById(R.id.registerButton);
-        registerOwnerId=findViewById(R.id.registerOwnerId);
         loader = new ProgressDialog(this);
 
 
@@ -105,12 +103,10 @@ public class PetRegistrationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String PetName = registerPetName.getText().toString().trim();
                 final String PetBreed = registerPetBreed.getText().toString().trim();
-                final String PetColor = registerPetColor.getText().toString().trim();
                 final String PetAge = registerPetAge.getText().toString().trim();
                 final String PetWeight = registerPetWeight.getText().toString().trim();
-                final String PetId = registerPetId.getText().toString().trim();
-                final String OwnerId = registerOwnerId.getText().toString().trim();
                 final String Gender = GenderSpinner.getSelectedItem().toString();
+                final String Category = CategorySpinner.getSelectedItem().toString();
 
                 if(TextUtils.isEmpty(PetName)){
                     registerPetName.setError("PetName is required!");
@@ -120,10 +116,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                     registerPetBreed.setError("PetBreed is required!");
                     return;
                 }
-                if(TextUtils.isEmpty(PetColor)){
-                    registerPetColor.setError("PetColor is required!");
-                    return;
-                }
+
                 if(TextUtils.isEmpty(PetAge)){
                     registerPetAge.setError("PetAge is required!");
                     return;
@@ -132,14 +125,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                     registerPetWeight.setError("PetWeight is required!");
                     return;
                 }
-                if(TextUtils.isEmpty(PetId)){
-                    registerPetId.setError("PetId is required!");
-                    return;
-                }
-                if(TextUtils.isEmpty(OwnerId)){
-                    registerOwnerId.setError("OwnerId is required!");
-                    return;
-                }
+
                 if(Gender.equals("Select pet's gender here!!")){
                     Toast.makeText(PetRegistrationActivity.this, "Select your pet's gender!!",Toast.LENGTH_SHORT).show();
                     return;
@@ -150,7 +136,6 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 }
                 String pet_name=registerPetName.getText().toString().trim();
                 String pet_age=registerPetAge.getText().toString().trim();
-                String pet_color=registerPetColor.getText().toString().trim();
                 String pet_breed=registerPetBreed.getText().toString().trim();
                 System.out.println("path: "+path);
                 File image=new File(path);
@@ -160,7 +145,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 APICall apiCall = retrofitService.getRetrofit().create(APICall.class);
 
                 // to post a pet
-                apiCall.postAPet(body,pet_name,pet_age,pet_color,pet_breed).enqueue(new Callback<String>() {
+                apiCall.postAPet(body,pet_name,pet_age,Category,pet_breed).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         Toast.makeText(PetRegistrationActivity.this, ""+response, Toast.LENGTH_SHORT).show();
@@ -183,10 +168,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
     private void makeEmptyAllField() {
         registerPetName.setText("");
         registerPetAge.setText("");
-        registerPetColor.setText("");
-        registerPetId.setText("");
         registerPetWeight.setText("");
-        registerOwnerId.setText("");
         pet_profile_image.setImageDrawable(getResources().getDrawable(R.drawable.profile_image));
     }
 

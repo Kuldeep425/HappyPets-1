@@ -80,8 +80,8 @@ public class PetServiceImpl implements PetService {
 
     // get all posted pets
     @Override
-    public ResponseEntity<?> getAllpostedPets(){
-      return ResponseEntity.ok(petRepo.findAll());
+    public List<Pet> getAllpostedPets(){
+      return petRepo.findAll();
     }
 
   
