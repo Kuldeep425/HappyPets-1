@@ -1,5 +1,7 @@
 package com.example.backend.backend.controller;
 
+import java.util.Locale.Category;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,7 @@ public class PetController {
     @RequestPart ("image") MultipartFile file,
     @RequestPart("name") String name,
     @RequestPart("age") String age,
-    @RequestPart("color") String color,
+    @RequestPart("category") String category,
     @RequestPart("breed") String breed){
       System.out.println("api is called");
       System.out.println(name);
@@ -35,7 +37,7 @@ public class PetController {
       pet.setName(name);
       pet.setBreed(breed);
       pet.setAge(age);
-      pet.setColor(color);
+      pet.setCategory(category);
      return ResponseEntity.ok(petService.postAPet(userId,pet,file));
     }
 
@@ -48,6 +50,7 @@ public class PetController {
     // get all posted pets
     @GetMapping("/get/all/posted/pets")
     public ResponseEntity<?> getAllPostedPets(){
+      System.out.println("called");
       return ResponseEntity.ok(petService.getAllpostedPets());
     }
 }
