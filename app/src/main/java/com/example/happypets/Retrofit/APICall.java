@@ -18,23 +18,25 @@ public interface APICall {
     // to register a user
     @POST("/register/user")
     @Multipart
-    Call<String> registerUser(@Part MultipartBody.Part image,
-                              @Part("user") User user);
+    Call<String> registerUser(@Part MultipartBody.Part image, @Part("user") User user);
 
     // to login user
     @POST("/login/user")
     Call<String> loginUser(@Body Login login);
 
-
-
     // to post a pet
     @POST("/post/pet/636a85f6dee1b6038c81f6b7")
     @Multipart
-    Call<String>postAPet(
-                         @Part MultipartBody.Part image,
-                         @Part("pet") Pet pet );
+    Call<String>postAPet(@Part MultipartBody.Part image,@Part("pet") Pet pet );
 
+    //to get all posted pets
     @GET("/get/all/posted/pets/")
     Call<List<Pet>>getAllPostedPet();
+
+
+   // to get pets by category
+    @GET("get/pets/category/{num}")
+    Call<List<Pet>>getPetByCategory(@Path("num") int num);
+
 
 }

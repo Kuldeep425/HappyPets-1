@@ -1,5 +1,8 @@
 package com.example.backend.backend.service;
 
+import java.util.List;
+
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,5 +15,8 @@ public interface PetService {
     ResponseEntity<?> getAllpostedPetOfASpecificUser(String userId);
 
     Object getAllpostedPets();
+
+    
+    List<Pet> getPostedPetOnBasisOfCategory(String category);
     
 }

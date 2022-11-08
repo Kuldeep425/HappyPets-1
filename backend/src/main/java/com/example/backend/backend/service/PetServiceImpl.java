@@ -84,6 +84,12 @@ public class PetServiceImpl implements PetService {
       return petRepo.findAll();
     }
 
+    @Override
+    public List<Pet> getPostedPetOnBasisOfCategory(String category) {
+      return petRepo.getPostedPetOnBasisOfCategory(category);
+      
+    }
+
   
 
 
