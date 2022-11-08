@@ -27,17 +27,9 @@ public class PetController {
     @PostMapping("/post/pet/{userId}")
     public ResponseEntity<?> postAPost(@PathVariable String userId,
     @RequestPart ("image") MultipartFile file,
-    @RequestPart("name") String name,
-    @RequestPart("age") String age,
-    @RequestPart("category") String category,
-    @RequestPart("breed") String breed){
+    @RequestPart ("pet") Pet pet){
       System.out.println("api is called");
-      System.out.println(name);
-      Pet pet=new Pet();
-      pet.setName(name);
-      pet.setBreed(breed);
-      pet.setAge(age);
-      pet.setCategory(category);
+      System.out.println(pet.getName());
      return ResponseEntity.ok(petService.postAPet(userId,pet,file));
     }
 

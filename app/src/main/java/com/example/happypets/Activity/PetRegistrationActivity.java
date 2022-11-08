@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.happypets.Model.Pet;
 import com.example.happypets.R;
 import com.example.happypets.Utils.RealPathUtil;
 import com.example.happypets.Retrofit.APICall;
@@ -106,7 +107,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 final String PetAge = registerPetAge.getText().toString().trim();
                 final String PetWeight = registerPetWeight.getText().toString().trim();
                 final String Gender = GenderSpinner.getSelectedItem().toString();
-                final String Category = CategorySpinner.getSelectedItem().toString();
+              //  final String Category = CategorySpinner.getSelectedItem().toString();
 
                 if(TextUtils.isEmpty(PetName)){
                     registerPetName.setError("PetName is required!");
@@ -134,9 +135,12 @@ public class PetRegistrationActivity extends AppCompatActivity {
                     Toast.makeText(PetRegistrationActivity.this, "Please select a image", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String pet_name=registerPetName.getText().toString().trim();
-                String pet_age=registerPetAge.getText().toString().trim();
-                String pet_breed=registerPetBreed.getText().toString().trim();
+                Pet pet=new Pet();
+                pet.setName(PetName);
+                pet.setAge(PetAge);
+                pet.setBreed(PetBreed);
+               // pet.setCategory(Category);
+                pet.setGender(Gender);
                 System.out.println("path: "+path);
                 File image=new File(path);
                 RequestBody requestFile=RequestBody.create(MediaType.parse("multipart/form-data"),image);
@@ -145,7 +149,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 APICall apiCall = retrofitService.getRetrofit().create(APICall.class);
 
                 // to post a pet
-                apiCall.postAPet(body,pet_name,pet_age,Category,pet_breed).enqueue(new Callback<String>() {
+                apiCall.postAPet(body,pet).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         Toast.makeText(PetRegistrationActivity.this, ""+response, Toast.LENGTH_SHORT).show();
@@ -169,6 +173,8 @@ public class PetRegistrationActivity extends AppCompatActivity {
         registerPetName.setText("");
         registerPetAge.setText("");
         registerPetWeight.setText("");
+        registerPetBreed.setText("");
+
         pet_profile_image.setImageDrawable(getResources().getDrawable(R.drawable.profile_image));
     }
 
