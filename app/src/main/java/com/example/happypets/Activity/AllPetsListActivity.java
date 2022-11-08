@@ -1,6 +1,7 @@
 package com.example.happypets.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -20,11 +21,13 @@ public class AllPetsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_pets_list);
 
         //receiving values from intent
-        String value = getIntent().getExtras().getString("SelectedValue");
+        String value = getIntent().getExtras().getInt("SelectedValue")+"";
 
-        Log.e(TAG,value);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.all_pets_recycler_view);
 
-        TextView textView = findViewById(R.id.text_view);
-        textView.setText(value);
+//        MyListAdapter adapter = new MyListAdapter(myListData);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setAdapter(adapter);
     }
 }
