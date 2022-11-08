@@ -83,7 +83,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
         registerPetAge = findViewById(R.id.registerPetAge);
         registerPetWeight = findViewById(R.id.registerPetWeight);
         GenderSpinner = findViewById(R.id.GenderSpinner);
-        CategorySpinner = findViewById(R.id.CategorySpinner);
+       // CategorySpinner = findViewById(R.id.CategorySpinner);
         registerButton = findViewById(R.id.registerButton);
         loader = new ProgressDialog(this);
 

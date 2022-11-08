@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.happypets.Adapter.PetAdapter;
+import com.example.happypets.Adapters.PetAdapter;
 import com.example.happypets.Model.Pet;
 import com.example.happypets.R;
 import com.example.happypets.Retrofit.APICall;
@@ -15,7 +15,6 @@ import com.example.happypets.Retrofit.RetrofitService;
 
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -2,7 +2,6 @@ package com.example.happypets.Model;
 
 
 public class Login {
-  
   private String email;
   private String password;
 
@@ -26,6 +25,5 @@ public class Login {
     this.email = email;
     this.password = password;
   }
-
 
 }

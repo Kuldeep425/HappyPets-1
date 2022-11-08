@@ -1,5 +1,5 @@
 
-package com.example.happypets.Adapter;
+package com.example.happypets.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
