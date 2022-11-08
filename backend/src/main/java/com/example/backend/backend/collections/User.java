@@ -21,7 +21,7 @@ public class User {
     private String email;
     private String password;
     private String phoneNumber;
-    private Binary image;
+    private String  imageURL;
     private List<String>postedPetId;
     private boolean hasLoggedIn=false;
     private boolean verified=false;

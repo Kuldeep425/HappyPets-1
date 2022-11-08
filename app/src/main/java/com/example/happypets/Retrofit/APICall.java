@@ -17,7 +17,9 @@ public interface APICall {
 
     // to register a user
     @POST("/register/user")
-    Call<String> registerUser(@Body User user);
+    @Multipart
+    Call<String> registerUser(@Part MultipartBody.Part image,
+                              @Part("user") User user);
 
     // to login user
     @POST("/login/user")
@@ -26,14 +28,11 @@ public interface APICall {
 
 
     // to post a pet
-    @POST("/post/pet/89084w0989045")
+    @POST("/post/pet/636a85f6dee1b6038c81f6b7")
     @Multipart
     Call<String>postAPet(
                          @Part MultipartBody.Part image,
-                         @Part("name") String name,
-                         @Part("age") String age,
-                         @Part("color") String color,
-                         @Part("breed") String breed);
+                         @Part("pet") Pet pet );
 
     @GET("/get/all/posted/pets/")
     Call<List<Pet>>getAllPostedPet();

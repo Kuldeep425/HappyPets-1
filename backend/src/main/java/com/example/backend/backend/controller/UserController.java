@@ -1,6 +1,7 @@
 package com.example.backend.backend.controller;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.backend.backend.Model.LoginModel;
 import com.example.backend.backend.Reposistory.UserRepo;
@@ -10,6 +11,7 @@ import com.example.backend.backend.utils.GenerateToken;
 
 import java.util.Optional;
 
+import javax.mail.Multipart;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 
 
 @RestController
@@ -29,10 +32,12 @@ public class UserController {
    @Autowired private GenerateToken generateToken;
 
    @PostMapping("/register/user")
-   public ResponseEntity<?> registerUser(@RequestBody User user,final HttpServletRequest request){
+   public ResponseEntity<?> registerUser(@RequestPart("image") MultipartFile file,
+   @RequestPart("user") User user,
+   final HttpServletRequest request){
     Optional<User>user2=userRepo.findByEmail(user.getEmail());
     if(user2.isPresent() && user2.get().isVerified()) return ResponseEntity.ok("Already registered Email");
-    User user1=userService.registerUser(user);
+    User user1=userService.registerUser(user,file);
     generateToken.generateToekn(user1,"Register", applicationUrl(request));
     return ResponseEntity.ok(user1.getId());
    }
