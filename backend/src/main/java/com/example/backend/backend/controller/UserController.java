@@ -9,6 +9,7 @@ import com.example.backend.backend.collections.User;
 import com.example.backend.backend.service.UserService;
 import com.example.backend.backend.utils.GenerateToken;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 import javax.mail.Multipart;
@@ -67,6 +68,8 @@ public class UserController {
      private String applicationUrl(HttpServletRequest request) {
       return "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
     }
+
+   
    
 
 

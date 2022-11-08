@@ -76,7 +76,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
             breed=itemView.findViewById(R.id.DisplayPetBreed);
             gender=itemView.findViewById(R.id.DisplayPetGender);
             petImage = itemView.findViewById(R.id.petImage);
-            category=itemView.findViewById(R.id.DisplayPetCategory);
+            category=itemView.findViewById(R.id.PetType);
             addToFavourite=itemView.findViewById(R.id.favIcon);
             notifyToOwner=itemView.findViewById(R.id.notifyIcon);
             chatWithOwner=itemView.findViewById(R.id.ChatIcon);

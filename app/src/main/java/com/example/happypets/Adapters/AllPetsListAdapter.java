@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.happypets.Model.Pet;
 import com.example.happypets.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,10 +38,22 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
         // class is need to be defined which will objectify the api data
         // then methods of that class will be used to bind the data to the layouts in the pets item
         // below view holder is defined which is used to store the pets item data
+
+        //extracting data from list
+        Pet pet = petsListData.get(position);
+
+        Picasso.get().load(pet.getImageUrl()).into(holder.pet_imageview);
+        holder.pet_type_textview.setText(pet.getCategory());
+        holder.pet_name_textview.setText(pet.getName());
+        holder.pet_breed_textview.setText(pet.getBreed());
+        holder.pet_gender_textview.setText(pet.getGender());
+
     }
+
 
     @Override
     public int getItemCount() {
+
         return petsListData.size();
     }
 
@@ -52,17 +65,15 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
         public TextView pet_name_textview;
         public TextView pet_breed_textview;
         public TextView pet_gender_textview;
-        public TextView pet_category_textview;
 
         public ViewHolder(@NonNull View itemView) {
 
             super(itemView);
-            this.pet_imageview = (CircleImageView) itemView.findViewById(R.id.petImage);
-            this.pet_type_textview = (TextView) itemView.findViewById(R.id.PetType);
-            this.pet_name_textview = (TextView) itemView.findViewById(R.id.DisplayPetName);
-            this.pet_breed_textview = (TextView) itemView.findViewById(R.id.DisplayPetBreed);
-            this.pet_gender_textview = (TextView) itemView.findViewById(R.id.DisplayPetGender);
-            this.pet_category_textview = (TextView) itemView.findViewById(R.id.DisplayPetCategory);
+            pet_imageview = (CircleImageView) itemView.findViewById(R.id.petImage);
+            pet_type_textview = (TextView) itemView.findViewById(R.id.PetType);
+            pet_name_textview = (TextView) itemView.findViewById(R.id.DisplayPetName);
+            pet_breed_textview = (TextView) itemView.findViewById(R.id.DisplayPetBreed);
+            pet_gender_textview = (TextView) itemView.findViewById(R.id.DisplayPetGender);
 
         }
     }

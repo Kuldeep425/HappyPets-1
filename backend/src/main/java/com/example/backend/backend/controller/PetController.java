@@ -1,5 +1,6 @@
 package com.example.backend.backend.controller;
 
+import java.util.HashMap;
 import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,19 @@ public class PetController {
     public ResponseEntity<?> getAllPostedPets(){
       System.out.println("called");
       return ResponseEntity.ok(petService.getAllpostedPets());
+    }
+
+    HashMap<Integer,String>map=new HashMap<>();
+     
+    @GetMapping("get/pets/category/{num}")
+    public ResponseEntity<?> getPetOnBasisOfCategory(@PathVariable("num") int num){
+       map.put(0,"Dog");
+       map.put(1,"Cat");
+       map.put(2,"Fish");
+       map.put(3,"Rabbit");
+       map.put(4,"Bird");
+       map.put(5,"Others");
+       String category=map.get(num);
+       return ResponseEntity.ok(petService.getPostedPetOnBasisOfCategory(category));
     }
 }
