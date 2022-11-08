@@ -5,7 +5,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +29,6 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
         this.context = context;
         this.petList = petList;
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,6 +45,18 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
         holder.category.setText(pet.getCategory());
         holder.breed.setText(pet.getBreed());
         Picasso.get().load(pet.getImageUrl()).into(holder.petImage);
+        holder.chatWithOwner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, pet.getOwnerId(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.notifyToOwner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, pet.getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -54,7 +68,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
 
         public CircleImageView petImage;
         public TextView petName,breed,gender,category;
-
+        ImageView addToFavourite,notifyToOwner,chatWithOwner;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +77,9 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
             gender=itemView.findViewById(R.id.DisplayPetGender);
             petImage = itemView.findViewById(R.id.petImage);
             category=itemView.findViewById(R.id.DisplayPetCategory);
+            addToFavourite=itemView.findViewById(R.id.favIcon);
+            notifyToOwner=itemView.findViewById(R.id.notifyIcon);
+            chatWithOwner=itemView.findViewById(R.id.ChatIcon);
         }
     }
 }

@@ -17,9 +17,9 @@ public class RetrofitService {
 
     private void initializeRetrofit() {
         OkHttpClient.Builder client = new OkHttpClient.Builder();
-        client.connectTimeout(30, TimeUnit.SECONDS);
-        client.readTimeout(30, TimeUnit.SECONDS);
-        client.writeTimeout(30, TimeUnit.SECONDS);
+        client.connectTimeout(200, TimeUnit.SECONDS);
+        client.readTimeout(200, TimeUnit.SECONDS);
+        client.writeTimeout(200, TimeUnit.SECONDS);
 
 
         retrofit=new Retrofit.Builder()

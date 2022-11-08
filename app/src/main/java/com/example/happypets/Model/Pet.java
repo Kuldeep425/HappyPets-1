@@ -2,14 +2,18 @@ package com.example.happypets.Model;
 
 public class Pet {
 
-
+    private String id;
     private String name;
     private String breed;
     private String gender;
+    private String age;
     private String category;
     private String imageURL;
-    private String id;
     private String ownerId;
+
+    public Pet(){
+
+    }
 
     public String getName() {
         return name;
@@ -86,6 +90,6 @@ public class Pet {
         this.age = age;
     }
 
-    private String age;
+
 
 }
