@@ -3,6 +3,7 @@ package com.example.happypets.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,7 +43,7 @@ public class UserPetsListAdapter extends RecyclerView.Adapter<UserPetsListAdapte
         holder.pet_breed_textview.setText(userPet.getBreed());
         holder.pet_gender_textview.setText(userPet.getGender());
         // setting item click listener
-        holder.user_pets_recycler_view.setOnClickListener(new View.OnClickListener() {
+        holder.user_pets_item_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // setting functionality
@@ -62,7 +63,7 @@ public class UserPetsListAdapter extends RecyclerView.Adapter<UserPetsListAdapte
         public TextView pet_name_textview;
         public TextView pet_breed_textview;
         public TextView pet_gender_textview;
-        public RecyclerView user_pets_recycler_view;
+        public RelativeLayout user_pets_item_layout;
 
         public ViewHolder(@NonNull View itemView) {
 
@@ -72,7 +73,7 @@ public class UserPetsListAdapter extends RecyclerView.Adapter<UserPetsListAdapte
             pet_name_textview = (TextView) itemView.findViewById(R.id.DisplayPetName);
             pet_breed_textview = (TextView) itemView.findViewById(R.id.DisplayPetBreed);
             pet_gender_textview = (TextView) itemView.findViewById(R.id.DisplayPetGender);
-            user_pets_recycler_view = (RecyclerView) itemView.findViewById(R.id.user_pets_recycler_view);
+            user_pets_item_layout = (RelativeLayout) itemView.findViewById(R.id.pet_list_item_layout);
 
         }
     }
