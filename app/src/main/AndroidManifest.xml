@@ -16,13 +16,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".Activity.PetOwnerPreviewActivity"
-            android:exported="true" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false" >
         </activity>
         <activity
             android:name=".Activity.AllPetsListActivity"
@@ -51,9 +45,15 @@
         <activity
             android:name=".Activity.PetRegistrationActivity"
             android:exported="false" />
+            
         <activity
-            android:name=".Activity.SPlashScreenActivity"
-            android:exported="false" >
+            android:name=".Activity.MainActivity"
+            android:exported="true"/>
+                <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.LoginActivity"
@@ -74,7 +74,7 @@
             android:name=".Activity.OwnerProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".Activity.SPlashScreenActivity"
             android:exported="true">
         </activity>
     </application>
