@@ -39,7 +39,7 @@
         </activity>
         <activity
             android:name=".Activity.SPlashScreenActivity"
-            android:exported="true">
+            android:exported="false">
 
         </activity>
         <activity
