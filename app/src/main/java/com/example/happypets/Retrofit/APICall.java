@@ -26,7 +26,11 @@ public interface APICall {
     Call<String> loginUser(@Body Login login);
 
     @GET("/get/user/{userId}")
-    Call<User> getLoggedInUser(@Path("userId") String userId);
+    Call<User>getSpecificInUser(@Path("userId") String userId);
+
+    //get all user
+    @GET("/get/all/users")
+    Call<List<User>>getAllUser();
 
     // to post a pet
     @POST("/post/pet/{userId}")

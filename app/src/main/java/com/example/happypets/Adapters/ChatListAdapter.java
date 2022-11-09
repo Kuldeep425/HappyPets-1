@@ -51,13 +51,13 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         Picasso.get().load(user.getImageUrl()).into(holder.userImage);
         holder.userName.setText(user.getName());
         //setting onClickItem event listener
-        holder.chatRecyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ChatDetailActivity.class);
-                context.startActivity(intent);
-            }
-        });
+//        holder.chatRecyclerView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, ChatDetailActivity.class);
+//                context.startActivity(intent);
+//            }
+//        });
 
     }
 
@@ -78,7 +78,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             super(itemView);
             userImage = (CircleImageView) itemView.findViewById(R.id.chat_list_item_user_image);
             userName = (TextView) itemView.findViewById(R.id.chat_list_item_user_name);
-            chatRecyclerView = (RecyclerView) itemView.findViewById(R.id.chat_recycler_view);
         }
     }
 }

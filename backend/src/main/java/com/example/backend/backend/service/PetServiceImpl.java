@@ -36,7 +36,7 @@ public class PetServiceImpl implements PetService {
     public String postAPet(String userId, Pet pet, MultipartFile file) {
       Optional<User>user=userRepo.findById(userId);
       if(user.isEmpty())
-        return " logged in user not found";
+        return "logged in user not found";
         pet.setOwnerId(userId);
         String originalFileName=file.getOriginalFilename();
         if(originalFileName==null){

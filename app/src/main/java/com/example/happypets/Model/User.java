@@ -3,6 +3,7 @@ package com.example.happypets.Model;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
+    private String id;
     private String name;
     private String email;
     private String password;
@@ -24,7 +25,7 @@ public class User {
         this.password = password;
         this.phoneNumber = phoneNumber;
     }
-
+    public String getId(){ return id; }
     public String getName() {
         return name;
     }

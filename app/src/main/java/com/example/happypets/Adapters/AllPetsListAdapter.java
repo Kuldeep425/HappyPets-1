@@ -1,13 +1,18 @@
 package com.example.happypets.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.happypets.Activity.ChatDetailActivity;
 import com.example.happypets.Model.Pet;
 import com.example.happypets.R;
 import com.squareup.picasso.Picasso;
@@ -19,9 +24,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.ViewHolder> {
 
     private List<Pet> petsListData;
+    Context context;
 
-    public AllPetsListAdapter(List<Pet> petsListData){
+    public AllPetsListAdapter(List<Pet> petsListData,Context context){
         this.petsListData = petsListData;
+        this.context=context;
     }
 
     @NonNull
@@ -48,6 +55,23 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
         holder.pet_breed_textview.setText(pet.getBreed());
         holder.pet_gender_textview.setText(pet.getGender());
 
+        holder.chatWithOwner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, pet.getOwnerId(), Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(context, ChatDetailActivity.class);
+                System.out.println(pet.getOwnerId());
+                intent.putExtra("ownerId",pet.getOwnerId());
+                context.startActivity(intent);
+            }
+        });
+        holder.notifyToOwner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, pet.getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 
@@ -61,6 +85,7 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
 
 
         public CircleImageView pet_imageview;
+        ImageView addToFavourite,notifyToOwner,chatWithOwner;
         public TextView pet_type_textview;
         public TextView pet_name_textview;
         public TextView pet_breed_textview;
@@ -74,6 +99,9 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
             pet_name_textview = (TextView) itemView.findViewById(R.id.DisplayPetName);
             pet_breed_textview = (TextView) itemView.findViewById(R.id.DisplayPetBreed);
             pet_gender_textview = (TextView) itemView.findViewById(R.id.DisplayPetGender);
+            addToFavourite=itemView.findViewById(R.id.favIcon);
+            notifyToOwner=itemView.findViewById(R.id.notifyIcon);
+            chatWithOwner=itemView.findViewById(R.id.ChatIcon);
 
         }
     }

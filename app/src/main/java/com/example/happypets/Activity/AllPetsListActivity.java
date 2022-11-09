@@ -50,7 +50,7 @@ public class AllPetsListActivity extends AppCompatActivity {
                     return;
                 }
                 petListData=response.body();
-                AllPetsListAdapter adapter = new AllPetsListAdapter(petListData);
+                AllPetsListAdapter adapter = new AllPetsListAdapter(petListData,AllPetsListActivity.this);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(adapter);
 
@@ -58,7 +58,8 @@ public class AllPetsListActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Pet>> call, Throwable t) {
-
+                System.out.println(call);
+                System.out.println(t);
             }
         });
 
