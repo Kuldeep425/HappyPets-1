@@ -16,13 +16,10 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.ViewHolder> {
+public class UserPetsListAdapter extends RecyclerView.Adapter<UserPetsListAdapter.ViewHolder> {
 
-    private List<Pet> petsListData;
-
-    public AllPetsListAdapter(List<Pet> petsListData){
-        this.petsListData = petsListData;
-    }
+    // list of user pets
+    private List<Pet> userPetsList;
 
     @NonNull
     @Override
@@ -35,45 +32,37 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // class is need to be defined which will objectify the api data
-        // then methods of that class will be used to bind the data to the layouts in the pets item
-        // below view holder is defined which is used to store the pets item data
 
-        //extracting data from list
-        Pet pet = petsListData.get(position);
-
-        Picasso.get().load(pet.getImageUrl()).into(holder.pet_imageview);
-        holder.pet_type_textview.setText(pet.getCategory());
-        holder.pet_name_textview.setText(pet.getName());
-        holder.pet_breed_textview.setText(pet.getBreed());
-        holder.pet_gender_textview.setText(pet.getGender());
-
-        //setting item click listener
-        holder.pets_recycler_view.setOnClickListener(new View.OnClickListener() {
+        //user pet data
+        Pet userPet = userPetsList.get(position);
+        //binding data
+        Picasso.get().load(userPet.getImageUrl()).into(holder.pet_imageview);
+        holder.pet_type_textview.setText(userPet.getCategory());
+        holder.pet_name_textview.setText(userPet.getName());
+        holder.pet_breed_textview.setText(userPet.getBreed());
+        holder.pet_gender_textview.setText(userPet.getGender());
+        // setting item click listener
+        holder.user_pets_recycler_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //adding functionality
+                // setting functionality
             }
         });
-
     }
-
 
     @Override
     public int getItemCount() {
-
-        return petsListData.size();
+        return userPetsList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
 
         public CircleImageView pet_imageview;
         public TextView pet_type_textview;
         public TextView pet_name_textview;
         public TextView pet_breed_textview;
         public TextView pet_gender_textview;
-        public RecyclerView pets_recycler_view;
+        public RecyclerView user_pets_recycler_view;
 
         public ViewHolder(@NonNull View itemView) {
 
@@ -83,7 +72,7 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
             pet_name_textview = (TextView) itemView.findViewById(R.id.DisplayPetName);
             pet_breed_textview = (TextView) itemView.findViewById(R.id.DisplayPetBreed);
             pet_gender_textview = (TextView) itemView.findViewById(R.id.DisplayPetGender);
-            pets_recycler_view = (RecyclerView) itemView.findViewById(R.id.all_pets_recycler_view);
+            user_pets_recycler_view = (RecyclerView) itemView.findViewById(R.id.user_pets_recycler_view);
 
         }
     }
