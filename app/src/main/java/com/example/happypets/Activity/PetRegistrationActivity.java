@@ -32,6 +32,7 @@ import com.example.happypets.Utils.RealPathUtil;
 import com.example.happypets.Retrofit.APICall;
 import com.example.happypets.Retrofit.RetrofitService;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.JsonObject;
 
 
 import java.io.File;
@@ -151,16 +152,16 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 APICall apiCall = retrofitService.getRetrofit().create(APICall.class);
 
                 // to post a pet
-                apiCall.postAPet(userId,body,pet).enqueue(new Callback<String>() {
+                apiCall.postAPet(userId,body,pet).enqueue(new Callback<JsonObject>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                         Toast.makeText(PetRegistrationActivity.this, ""+response, Toast.LENGTH_SHORT).show();
                         System.out.println(response);
                         makeEmptyAllField();
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
                         System.out.println(t);
                         System.out.println(call);
                         Toast.makeText(PetRegistrationActivity.this, "error", Toast.LENGTH_SHORT).show();
