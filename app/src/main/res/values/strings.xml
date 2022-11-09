@@ -46,4 +46,6 @@
     <string name="search_fragment_card_others">Others</string>
     <string name="search_fragment_cardview_categories">CHOOSE TYPE OF PET TO ADOPT</string>
     <string name="button_add_pets">Add Pets</string>
+    <string name="chat_enter_the_message">Enter the Message</string>
 </resources>
+
