@@ -52,10 +52,12 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         Picasso.get().load(user.getImageUrl()).into(holder.userImage);
         holder.userName.setText(user.getName());
         //setting onClickItem event listener
+
         holder.chatLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ChatDetailActivity.class);
+                intent.putExtra("ownerId",user.getId());
                 context.startActivity(intent);
             }
         });

@@ -11,7 +11,7 @@ import com.example.backend.backend.collections.Pet;
 public interface PetRepo extends MongoRepository<Pet,String>{
     
     @Query("{ownerId:?0}")
-    ResponseEntity<?> findAllByUserId(String userId);
+    List<Pet> findAllByUserId(String userId);
 
     @Query("{category:?0}")
     List<Pet> getPostedPetOnBasisOfCategory(String category);

@@ -36,7 +36,7 @@ public class PetServiceImpl implements PetService {
     public String postAPet(String userId, Pet pet, MultipartFile file) {
       Optional<User>user=userRepo.findById(userId);
       if(user.isEmpty())
-        return " logged in user not found";
+        return "logged in user not found";
         pet.setOwnerId(userId);
         String originalFileName=file.getOriginalFilename();
         if(originalFileName==null){
@@ -72,9 +72,9 @@ public class PetServiceImpl implements PetService {
 
    // get all posted pets of a specific user
     @Override
-    public ResponseEntity<?> getAllpostedPetOfASpecificUser(String userId) {
-        if(userRepo.findById(userId).isEmpty()) return ResponseEntity.ok("user not found");
-        return ResponseEntity.ok(petRepo.findAllByUserId(userId));
+    public List<Pet> getAllpostedPetOfASpecificUser(String userId) {
+        if(userRepo.findById(userId).isEmpty()) return null;
+        return petRepo.findAllByUserId(userId);
     }
 
 

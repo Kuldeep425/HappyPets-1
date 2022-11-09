@@ -38,7 +38,8 @@ public class ProfileActivity extends AppCompatActivity {
         // retrofit service
         RetrofitService retrofitService=new RetrofitService();
         APICall apiCall=retrofitService.getRetrofit().create(APICall.class);
-        apiCall.getLoggedInUser(userId).enqueue(new Callback<User>() {
+        // to get logged in user
+        apiCall.getSpecificInUser(userId).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.body()!=null){

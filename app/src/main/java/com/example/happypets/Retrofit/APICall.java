@@ -26,7 +26,11 @@ public interface APICall {
     Call<String> loginUser(@Body Login login);
 
     @GET("/get/user/{userId}")
-    Call<User> getLoggedInUser(@Path("userId") String userId);
+    Call<User>getSpecificInUser(@Path("userId") String userId);
+
+    //get all user
+    @GET("/get/all/users")
+    Call<List<User>>getAllUser();
 
     // to post a pet
     @POST("/post/pet/{userId}")
@@ -36,6 +40,10 @@ public interface APICall {
     //to get all posted pets
     @GET("/get/all/posted/pets/")
     Call<List<Pet>>getAllPostedPet();
+
+    //to get all posted pet of a specific user
+    @GET("/get/all/posted/pet/{userId}")
+    Call<List<Pet>>getAllPostedPetOfSpecificUser(@Path("userId")String userId);
 
 
    // to get pets by category

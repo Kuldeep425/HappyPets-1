@@ -21,6 +21,9 @@ public class UserPetsListAdapter extends RecyclerView.Adapter<UserPetsListAdapte
 
     // list of user pets
     private List<Pet> userPetsList;
+    public UserPetsListAdapter(List<Pet> userPetsList){
+        this.userPetsList=userPetsList;
+    }
 
 
     @NonNull
