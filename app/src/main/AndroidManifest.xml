@@ -38,7 +38,7 @@
             android:exported="false">
         </activity>
         <activity
-            android:name=".Activity.SPlashScreenActivity"
+            android:name=".Activity.MainActivity"
             android:exported="false">
 
         </activity>
@@ -63,7 +63,7 @@
             android:name=".Activity.OwnerProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".Activity.SPlashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

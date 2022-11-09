@@ -1,6 +1,7 @@
 package com.example.happypets.Retrofit;
 
 import com.example.happypets.Model.*;
+import com.google.gson.JsonObject;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -30,7 +31,7 @@ public interface APICall {
     // to post a pet
     @POST("/post/pet/{userId}")
     @Multipart
-    Call<String>postAPet(@Path("userId") String userId,@Part MultipartBody.Part image,@Part("pet") Pet pet );
+    Call<JsonObject>postAPet(@Path("userId") String userId, @Part MultipartBody.Part image, @Part("pet") Pet pet );
 
     //to get all posted pets
     @GET("/get/all/posted/pets/")
