@@ -10,7 +10,6 @@ public class User {
     @SerializedName("imageURL")
     private String imageUrl;
 
-
     public String getImageUrl() {
         return imageUrl;
     }

@@ -16,6 +16,12 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".Activity.AllPetsListActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".Activity.ChatDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ChatActivity"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -69,8 +75,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
     </application>
 
 </manifest>

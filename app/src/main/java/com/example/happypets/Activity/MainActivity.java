@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.drawer_layout_chat:
                         Log.e(TAG,"chat");
+                        Intent chatIntent = new Intent(getApplicationContext(),ChatActivity.class);
+                        startActivity(chatIntent);
                         break;
                     case R.id.drawer_layout_fav:
                         Log.e(TAG,"fav");
