@@ -2,6 +2,8 @@ package com.example.happypets.Activity;
 
 
 
+import static com.example.happypets.Activity.LoginActivity.userId;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -84,7 +86,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
         registerPetAge = findViewById(R.id.registerPetAge);
         registerPetWeight = findViewById(R.id.registerPetWeight);
         GenderSpinner = findViewById(R.id.GenderSpinner);
-       // CategorySpinner = findViewById(R.id.CategorySpinner);
+        CategorySpinner = findViewById(R.id.CategorySpinner);
         registerButton = findViewById(R.id.registerButton);
         loader = new ProgressDialog(this);
 
@@ -107,7 +109,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 final String PetAge = registerPetAge.getText().toString().trim();
                 final String PetWeight = registerPetWeight.getText().toString().trim();
                 final String Gender = GenderSpinner.getSelectedItem().toString();
-              //  final String Category = CategorySpinner.getSelectedItem().toString();
+                final String Category = CategorySpinner.getSelectedItem().toString();
 
                 if(TextUtils.isEmpty(PetName)){
                     registerPetName.setError("PetName is required!");
@@ -139,7 +141,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 pet.setName(PetName);
                 pet.setAge(PetAge);
                 pet.setBreed(PetBreed);
-               // pet.setCategory(Category);
+               pet.setCategory(Category);
                 pet.setGender(Gender);
                 System.out.println("path: "+path);
                 File image=new File(path);
@@ -149,7 +151,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 APICall apiCall = retrofitService.getRetrofit().create(APICall.class);
 
                 // to post a pet
-                apiCall.postAPet(body,pet).enqueue(new Callback<String>() {
+                apiCall.postAPet(userId,body,pet).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         Toast.makeText(PetRegistrationActivity.this, ""+response, Toast.LENGTH_SHORT).show();

@@ -60,9 +60,9 @@ public class UserController {
       return userService.logoutUser(userId);
    }
 
-    @GetMapping("/get/user/{user_id}")
-    public Optional<User> getUserByUserId(@PathVariable String user_id){ 
-     return userService.getUserByUserId(user_id); 
+    @GetMapping("/get/user/{userId}")
+    public Optional<User> getUserByUserId(@PathVariable String userId){ 
+     return userService.getUserByUserId(userId); 
      }
 
      private String applicationUrl(HttpServletRequest request) {

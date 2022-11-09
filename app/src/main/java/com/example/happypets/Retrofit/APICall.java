@@ -24,10 +24,13 @@ public interface APICall {
     @POST("/login/user")
     Call<String> loginUser(@Body Login login);
 
+    @GET("/get/user/{userId}")
+    Call<User> getLoggedInUser(@Path("userId") String userId);
+
     // to post a pet
-    @POST("/post/pet/636a85f6dee1b6038c81f6b7")
+    @POST("/post/pet/{userId}")
     @Multipart
-    Call<String>postAPet(@Part MultipartBody.Part image,@Part("pet") Pet pet );
+    Call<String>postAPet(@Path("userId") String userId,@Part MultipartBody.Part image,@Part("pet") Pet pet );
 
     //to get all posted pets
     @GET("/get/all/posted/pets/")
