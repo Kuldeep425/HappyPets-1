@@ -22,7 +22,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     EditText emailTxt,passwordTxt;
     Button loginBtn;
-
+    public static String userId;
     // to initialize all fields
     public void initialize(){
         emailTxt=findViewById(R.id.loginEmail);
@@ -60,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
                    /* this is working ... Lucky and Apoorv  from here you can change activity like if the login is
                       completed you can go dashboard activity...
                     */
+
+                     userId=response.body();
                      startActivity(new Intent(LoginActivity.this,MainActivity.class));
                  }
 

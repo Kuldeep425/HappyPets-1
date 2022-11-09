@@ -1,10 +1,13 @@
 package com.example.happypets.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
     private String name;
     private String email;
     private String password;
     private String phoneNumber;
+    @SerializedName("imageURL")
     private String imageUrl;
 
     public String getImageUrl() {

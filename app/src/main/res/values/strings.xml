@@ -8,7 +8,19 @@
         <item>Male</item>
 
     </string-array>
+    
+    
+    
+    <string-array name="PetCategory">
+        <item>Select pets category</item>
+        <item>Dog</item>
+        <item>Cat</item>
+        <item>Bird</item>
+        <item>Rabbit</item>
+        <item>Others</item>
 
+    </string-array>
+    
     <!--    string for tab layout-->
     <string name="info_tab">Info</string>
     <string name="search_tab">Search</string>
@@ -36,3 +48,4 @@
     <string name="button_add_pets">Add Pets</string>
     <string name="chat_enter_the_message">Enter the Message</string>
 </resources>
+
