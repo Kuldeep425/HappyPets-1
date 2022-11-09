@@ -72,9 +72,9 @@ public class PetServiceImpl implements PetService {
 
    // get all posted pets of a specific user
     @Override
-    public ResponseEntity<?> getAllpostedPetOfASpecificUser(String userId) {
-        if(userRepo.findById(userId).isEmpty()) return ResponseEntity.ok("user not found");
-        return ResponseEntity.ok(petRepo.findAllByUserId(userId));
+    public List<Pet> getAllpostedPetOfASpecificUser(String userId) {
+        if(userRepo.findById(userId).isEmpty()) return null;
+        return petRepo.findAllByUserId(userId);
     }
 
 

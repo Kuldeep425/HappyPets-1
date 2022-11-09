@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -51,13 +52,15 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         Picasso.get().load(user.getImageUrl()).into(holder.userImage);
         holder.userName.setText(user.getName());
         //setting onClickItem event listener
-//        holder.chatRecyclerView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, ChatDetailActivity.class);
-//                context.startActivity(intent);
-//            }
-//        });
+
+        holder.chatLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ChatDetailActivity.class);
+                intent.putExtra("ownerId",user.getId());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -71,13 +74,14 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
         public CircleImageView userImage;
         public TextView userName;
-        public RecyclerView chatRecyclerView;
+        public LinearLayout chatLinearLayout;
 
         // here we are defining the variables in the list item view which will be used to bind data in them
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             userImage = (CircleImageView) itemView.findViewById(R.id.chat_list_item_user_image);
             userName = (TextView) itemView.findViewById(R.id.chat_list_item_user_name);
+            chatLinearLayout = (LinearLayout) itemView.findViewById(R.id.user_list_item_layout);
         }
     }
 }

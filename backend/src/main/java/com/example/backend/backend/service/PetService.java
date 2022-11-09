@@ -12,7 +12,7 @@ public interface PetService {
 
     String postAPet(String userId, Pet pet, MultipartFile file);
 
-    ResponseEntity<?> getAllpostedPetOfASpecificUser(String userId);
+    List<Pet> getAllpostedPetOfASpecificUser(String userId);
 
     Object getAllpostedPets();
 

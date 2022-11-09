@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,16 +27,16 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
     private List<Pet> petsListData;
     Context context;
 
-    public AllPetsListAdapter(List<Pet> petsListData,Context context){
+    public AllPetsListAdapter(List<Pet> petsListData, Context context) {
         this.petsListData = petsListData;
-        this.context=context;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.pet_display_format, parent, false);
+        View listItem = layoutInflater.inflate(R.layout.pet_display_format, parent, false);
         ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
     }
@@ -59,9 +60,9 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, pet.getOwnerId(), Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(context, ChatDetailActivity.class);
+                Intent intent = new Intent(context, ChatDetailActivity.class);
                 System.out.println(pet.getOwnerId());
-                intent.putExtra("ownerId",pet.getOwnerId());
+                intent.putExtra("ownerId", pet.getOwnerId());
                 context.startActivity(intent);
             }
         });
@@ -69,6 +70,14 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, pet.getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //setting item click listener
+        holder.pets_relative_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //adding functionality
             }
         });
 
@@ -85,11 +94,12 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
 
 
         public CircleImageView pet_imageview;
-        ImageView addToFavourite,notifyToOwner,chatWithOwner;
+        ImageView addToFavourite, notifyToOwner, chatWithOwner;
         public TextView pet_type_textview;
         public TextView pet_name_textview;
         public TextView pet_breed_textview;
         public TextView pet_gender_textview;
+        public RelativeLayout pets_relative_layout;
 
         public ViewHolder(@NonNull View itemView) {
 
@@ -99,10 +109,12 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
             pet_name_textview = (TextView) itemView.findViewById(R.id.DisplayPetName);
             pet_breed_textview = (TextView) itemView.findViewById(R.id.DisplayPetBreed);
             pet_gender_textview = (TextView) itemView.findViewById(R.id.DisplayPetGender);
-            addToFavourite=itemView.findViewById(R.id.favIcon);
-            notifyToOwner=itemView.findViewById(R.id.notifyIcon);
-            chatWithOwner=itemView.findViewById(R.id.ChatIcon);
+            addToFavourite = itemView.findViewById(R.id.favIcon);
+            notifyToOwner = itemView.findViewById(R.id.notifyIcon);
+            chatWithOwner = itemView.findViewById(R.id.ChatIcon);
+            pets_relative_layout = (RelativeLayout) itemView.findViewById(R.id.pet_list_item_layout);
 
         }
     }
 }
+

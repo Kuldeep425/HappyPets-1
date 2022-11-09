@@ -41,6 +41,10 @@ public interface APICall {
     @GET("/get/all/posted/pets/")
     Call<List<Pet>>getAllPostedPet();
 
+    //to get all posted pet of a specific user
+    @GET("/get/all/posted/pet/{userId}")
+    Call<List<Pet>>getAllPostedPetOfSpecificUser(@Path("userId")String userId);
+
 
    // to get pets by category
     @GET("get/pets/category/{num}")
