@@ -7,7 +7,6 @@ public class User {
     private String phoneNumber;
     private String imageUrl;
 
-
     public String getImageUrl() {
         return imageUrl;
     }
