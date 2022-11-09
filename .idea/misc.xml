@@ -35,11 +35,14 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/activity_pet_display.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/activity_pet_owner_preview.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/activity_pet_registeration.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/all_pets_list_item.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/chat_user_list_item.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_info.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/fragment_owner_preview.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/fragment_pet_preview.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_pets.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/header_menu.xml" value="0.11980749746707194" />
