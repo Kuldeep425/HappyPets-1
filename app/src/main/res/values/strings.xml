@@ -8,7 +8,19 @@
         <item>Male</item>
 
     </string-array>
+    
+    
+    
+    <string-array name="PetCategory">
+        <item>Select pets category</item>
+        <item>Dog</item>
+        <item>Cat</item>
+        <item>bird</item>
+        <item>rabbit</item>
+        <item>others</item>
 
+    </string-array>
+    
     <!--    string for tab layout-->
     <string name="info_tab">Info</string>
     <string name="search_tab">Search</string>
