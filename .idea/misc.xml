@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/drawable/bg_chat_message.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/button_background.xml" value="0.1515" />
         <entry key="app/src/main/res/drawable/card_border.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_circle_left_24.xml" value="0.1515" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_outward_24.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/ic_baseline_portrait_24.xml" value="0.1595" />
@@ -29,7 +30,6 @@
         <entry key="app/src/main/res/drawable/profile_image.xml" value="0.1595" />
         <entry key="app/src/main/res/font/text_styles.xml" value="0.2712820512820513" />
         <entry key="app/src/main/res/layout/activity_all_pets_list.xml" value="0.23229166666666667" />
-        <entry key="app/src/main/res/font/text_styles.xml" value="0.2712820512820513" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/activity_chat_detail.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.24635416666666668" />

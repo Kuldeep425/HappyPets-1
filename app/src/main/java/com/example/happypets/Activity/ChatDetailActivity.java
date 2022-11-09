@@ -12,5 +12,10 @@ public class ChatDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_detail);
+
+        // this is to hide the action bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
     }
 }
