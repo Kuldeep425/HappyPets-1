@@ -15,9 +15,9 @@
         <item>Select pets category</item>
         <item>Dog</item>
         <item>Cat</item>
-        <item>bird</item>
-        <item>rabbit</item>
-        <item>others</item>
+        <item>Bird</item>
+        <item>Rabbit</item>
+        <item>Others</item>
 
     </string-array>
     
