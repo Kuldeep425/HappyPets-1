@@ -22,6 +22,7 @@ public class UserPetsListAdapter extends RecyclerView.Adapter<UserPetsListAdapte
     // list of user pets
     private List<Pet> userPetsList;
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
