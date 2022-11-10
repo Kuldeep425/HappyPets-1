@@ -10,9 +10,9 @@ import com.example.backend.backend.collections.Pet;
 
 public interface PetService {
 
-    ResponseEntity<?> postAPet(String userId, Pet pet, MultipartFile file);
+    String postAPet(String userId, Pet pet, MultipartFile file);
 
-    ResponseEntity<?> getAllpostedPetOfASpecificUser(String userId);
+    List<Pet> getAllpostedPetOfASpecificUser(String userId);
 
     Object getAllpostedPets();
 

@@ -49,6 +49,7 @@ public class PetController {
 
     HashMap<Integer,String>map=new HashMap<>();
      
+    // to get pet on the basis of filter
     @GetMapping("get/pets/category/{num}")
     public ResponseEntity<?> getPetOnBasisOfCategory(@PathVariable("num") int num){
        map.put(0,"Dog");

@@ -33,14 +33,14 @@ public class PetServiceImpl implements PetService {
 
     // post a pet to adopt 
     @Override
-    public ResponseEntity<?> postAPet(String userId, Pet pet, MultipartFile file) {
+    public String postAPet(String userId, Pet pet, MultipartFile file) {
       Optional<User>user=userRepo.findById(userId);
       if(user.isEmpty())
-        return ResponseEntity.ok("user not found");
+        return "logged in user not found";
         pet.setOwnerId(userId);
         String originalFileName=file.getOriginalFilename();
         if(originalFileName==null){
-           return ResponseEntity.ok("original file name is null");
+           return "original file name is null";
          }
         Path path=new File(originalFileName).toPath();
         String url=null;
@@ -67,14 +67,14 @@ public class PetServiceImpl implements PetService {
         else
         PetId.add(p.getId());
         userRepo.save(u);
-        return ResponseEntity.ok("Pet posted successfully");
+        return "Pet posted successfully";
     }
 
    // get all posted pets of a specific user
     @Override
-    public ResponseEntity<?> getAllpostedPetOfASpecificUser(String userId) {
-        if(userRepo.findById(userId).isEmpty()) return ResponseEntity.ok("user not found");
-        return ResponseEntity.ok(petRepo.findAllByUserId(userId));
+    public List<Pet> getAllpostedPetOfASpecificUser(String userId) {
+        if(userRepo.findById(userId).isEmpty()) return null;
+        return petRepo.findAllByUserId(userId);
     }
 
 
@@ -83,7 +83,9 @@ public class PetServiceImpl implements PetService {
     public List<Pet> getAllpostedPets(){
       return petRepo.findAll();
     }
+    
 
+    // to find pets on basis of category 
     @Override
     public List<Pet> getPostedPetOnBasisOfCategory(String category) {
       return petRepo.getPostedPetOnBasisOfCategory(category);

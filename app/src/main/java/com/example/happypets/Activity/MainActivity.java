@@ -63,11 +63,13 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.drawer_layout_profile:
                         Log.e(TAG,"profile");
-                        Intent profileIntent = new Intent(getApplicationContext(),OwnerProfileActivity.class);
+                        Intent profileIntent = new Intent(getApplicationContext(),ProfileActivity.class);
                         startActivity(profileIntent);
                         break;
                     case R.id.drawer_layout_chat:
                         Log.e(TAG,"chat");
+                        Intent chatIntent = new Intent(getApplicationContext(),ChatActivity.class);
+                        startActivity(chatIntent);
                         break;
                     case R.id.drawer_layout_fav:
                         Log.e(TAG,"fav");

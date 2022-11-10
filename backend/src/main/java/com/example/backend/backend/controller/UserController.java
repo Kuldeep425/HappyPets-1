@@ -10,6 +10,7 @@ import com.example.backend.backend.service.UserService;
 import com.example.backend.backend.utils.GenerateToken;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 import javax.mail.Multipart;
@@ -59,10 +60,17 @@ public class UserController {
    public ResponseEntity<?>logoutUser(@PathVariable ("userId") String userId){
       return userService.logoutUser(userId);
    }
+   
+    @GetMapping("/get/user/{userId}")
+    public Optional<User> getUserByUserId(@PathVariable String userId){ 
+     return userService.getUserByUserId(userId); 
+     }
 
-    @GetMapping("/get/user/{user_id}")
-    public Optional<User> getUserByUserId(@PathVariable String user_id){ 
-     return userService.getUserByUserId(user_id); 
+     //to find all users
+
+     @GetMapping("/get/all/users")
+     public List<User> getAllUser(){
+       return userService.getAllUsers();
      }
 
      private String applicationUrl(HttpServletRequest request) {

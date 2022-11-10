@@ -1,6 +1,5 @@
 package com.example.backend.backend.service;
 
-import java.util.Optional;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -103,6 +102,12 @@ public class UserServiceImpl implements UserService {
        userRepo.save(user.get());
        return ResponseEntity.ok("logout successfullly");
    }
+
+  // to find all users
+  @Override
+  public List<User> getAllUsers() {
+     return userRepo.findAll();
+  }
 
     
     

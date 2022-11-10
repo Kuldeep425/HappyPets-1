@@ -1,5 +1,6 @@
 package com.example.backend.backend.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.mail.Multipart;
@@ -22,5 +23,8 @@ public interface UserService {
     String loginUser(LoginModel loginModel);
 
     ResponseEntity<?> logoutUser(String userId);
+
+
+    List<User> getAllUsers();
     
 }
