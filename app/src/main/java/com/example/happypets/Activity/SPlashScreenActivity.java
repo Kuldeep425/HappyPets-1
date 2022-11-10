@@ -15,6 +15,7 @@ import com.example.happypets.R;
 public class SPlashScreenActivity extends Activity {
     private ImageView logo;
     private TextView title,slogan;
+    public static boolean isLoggedIn=false;
     Animation topAnimation,bottomAnimation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,8 @@ public class SPlashScreenActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SPlashScreenActivity.this, LoginActivity.class);
+                Intent intent;
+                intent = new Intent(SPlashScreenActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

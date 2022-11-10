@@ -60,9 +60,10 @@ public class LoginActivity extends AppCompatActivity {
                    /* this is working ... Lucky and Apoorv  from here you can change activity like if the login is
                       completed you can go dashboard activity...
                     */
-
+                    // isLoggedIn=true;
                      userId=response.body();
                      startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                     finish();
                  }
 
                  @Override
