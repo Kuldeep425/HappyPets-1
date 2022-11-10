@@ -39,6 +39,8 @@
         <entry key="app/src/main/res/layout/activity_pet_registeration.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/all_pets_list_item.xml" value="0.2453125" />
+        <entry key="app/src/main/res/layout/chat_details_item_recieved_message.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/chat_details_item_sent_message.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/chat_user_list_item.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_info.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/layout/fragment_owner_preview.xml" value="0.24635416666666668" />

@@ -50,6 +50,8 @@
     <string name="search_fragment_cardview_categories">CHOOSE TYPE OF PET TO ADOPT</string>
     <string name="button_add_pets">Add Pets</string>
     <string name="chat_enter_the_message">Enter the Message</string>
+    <string name="chat_sample_text">This is a sample text</string>
+    <string name="chat_user_name">User name</string>
 
 </resources>
 
