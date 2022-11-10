@@ -26,10 +26,10 @@ public class OwnerProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_owner_profile);
         toolbar = findViewById(R.id.toolbar);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("My Profile");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setTitle("My Profile");
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         name = findViewById(R.id.name);
         email= findViewById(R.id.email);
