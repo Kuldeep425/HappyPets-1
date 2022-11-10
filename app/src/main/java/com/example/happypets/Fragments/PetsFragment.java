@@ -52,6 +52,8 @@ public class PetsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_pets, container, false);
+
+        //initialising for calling api
         retrofitService=new RetrofitService();
         apiCall=retrofitService.getRetrofit().create(APICall.class);
         userPetRecyclerView=rootView.findViewById(R.id.user_pets_recycler_view);
@@ -59,7 +61,6 @@ public class PetsFragment extends Fragment {
 
         // calling api to display posted pets by loggedIn user
          loadUserPostedPet();
-
 
 
         //hooking button
