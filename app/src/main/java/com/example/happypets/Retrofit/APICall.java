@@ -35,7 +35,7 @@ public interface APICall {
     // to post a pet
     @POST("/post/pet/{userId}")
     @Multipart
-    Call<JsonObject>postAPet(@Path("userId") String userId, @Part MultipartBody.Part image, @Part("pet") Pet pet );
+    Call<String>postAPet(@Path("userId") String userId, @Part MultipartBody.Part image, @Part("pet") Pet pet );
 
     //to get all posted pets
     @GET("/get/all/posted/pets/")
@@ -46,7 +46,7 @@ public interface APICall {
     Call<List<Pet>>getAllPostedPetOfSpecificUser(@Path("userId")String userId);
 
 
-   // to get pets by category
+   //to get pets by category
     @GET("get/pets/category/{num}")
     Call<List<Pet>>getPetByCategory(@Path("num") int num);
 

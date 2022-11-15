@@ -2,6 +2,7 @@ package com.example.happypets.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -17,6 +18,7 @@ public class SPlashScreenActivity extends Activity {
     private TextView title,slogan;
     public static boolean isLoggedIn=false;
     Animation topAnimation,bottomAnimation;
+    public static SharedPreferences userInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,11 @@ public class SPlashScreenActivity extends Activity {
             @Override
             public void run() {
                 Intent intent;
+                userInfo=getSharedPreferences(LoginActivity.PREFERENCE_DETAIL,MODE_PRIVATE);
+                boolean isLoggedIn=userInfo.getBoolean("hasLoggedIn",false);
+                String userId=userInfo.getString("userId",null);
+                if(isLoggedIn && userId!=null) intent=new Intent(SPlashScreenActivity.this,MainActivity.class);
+                else
                 intent = new Intent(SPlashScreenActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();

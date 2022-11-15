@@ -26,12 +26,12 @@ public class PetController {
 
     // to post a pet 
     @PostMapping("/post/pet/{userId}")
-    public ResponseEntity<?> postAPost(@PathVariable String userId,
+    public String postAPost(@PathVariable String userId,
     @RequestPart ("image") MultipartFile file,
     @RequestPart ("pet") Pet pet){
       System.out.println("api is called");
       System.out.println(pet.getName());
-     return ResponseEntity.ok(petService.postAPet(userId,pet,file));
+     return petService.postAPet(userId,pet,file);
     }
 
     // to get all posted pet of specific user

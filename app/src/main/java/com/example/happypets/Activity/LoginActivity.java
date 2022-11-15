@@ -3,6 +3,7 @@ package com.example.happypets.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,9 @@ public class LoginActivity extends AppCompatActivity {
     EditText emailTxt,passwordTxt;
     Button loginBtn;
     public static String userId;
+    public static SharedPreferences userDetail;
+    public static  String PREFERENCE_DETAIL="Details";
+    SharedPreferences.Editor myedit;
     // to initialize all fields
     public void initialize(){
         emailTxt=findViewById(R.id.loginEmail);
@@ -61,7 +65,16 @@ public class LoginActivity extends AppCompatActivity {
                       completed you can go dashboard activity...
                     */
                     // isLoggedIn=true;
+                     if(response.body()==null){
+                         Toast.makeText(LoginActivity.this, "check entered credentials", Toast.LENGTH_SHORT).show();
+                         return;
+                     }
                      userId=response.body();
+                     userDetail=getSharedPreferences(PREFERENCE_DETAIL,MODE_PRIVATE);
+                     myedit=userDetail.edit();
+                     myedit.putBoolean("hasLoggedIn",true);
+                     myedit.putString("userId",userId);
+                     myedit.commit();
                      startActivity(new Intent(LoginActivity.this,MainActivity.class));
                      finish();
                  }

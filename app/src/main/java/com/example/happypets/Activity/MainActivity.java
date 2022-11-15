@@ -1,5 +1,7 @@
 package com.example.happypets.Activity;
 
+import static com.example.happypets.Activity.LoginActivity.userId;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         //setting viewpager to tab layout
         TabLayout mainTab = findViewById(R.id.mainTab);
         mainTab.setupWithViewPager(viewPager);
-
+        userId=getSharedPreferences(LoginActivity.PREFERENCE_DETAIL,MODE_PRIVATE).getString("userId",null);
+        System.out.println(userId);
         /* declaring objects needed for navigation view */
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
@@ -78,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
                         Log.e(TAG,"share");
                         break;
                     case R.id.drawer_layout_logout:
+                        getSharedPreferences(LoginActivity.PREFERENCE_DETAIL,MODE_PRIVATE).edit().putBoolean("hasLoggedIn",false).commit();
+                        getSharedPreferences(LoginActivity.PREFERENCE_DETAIL,MODE_PRIVATE).edit().putString("userId",null).commit();
+                        Toast.makeText(MainActivity.this, "logout", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this,SPlashScreenActivity.class));
                         Log.e(TAG,"logout");
                         break;
                 }

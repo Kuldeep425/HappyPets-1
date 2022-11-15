@@ -23,6 +23,8 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.concurrent.TimeUnit;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.OkHttpClient;
 import okhttp3.WebSocket;
@@ -46,7 +48,7 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
 
     //creating objects to open web socket
     WebSocket webSocket;
-    private String SERVER_PATH = "";
+    final private String SERVER_PATH = "http://192.168.9.71:8080/ws";
 
 
     @Override
@@ -57,6 +59,10 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
         // getting the user id to retrieve its data in the toolbar
         String chatUserId=getIntent().getStringExtra("ownerId");
         System.out.println(chatUserId);
+
+        chatUserProfile=findViewById(R.id.chat_details_user_image);
+        chatUserName=findViewById(R.id.chat_details_user_name);
+
 
         // this is to hide the action bar
         if (getSupportActionBar() != null) {
@@ -73,7 +79,9 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
                     Toast.makeText(ChatDetailActivity.this,"error in loading user data", Toast.LENGTH_SHORT).show();
                      return;
                 }
+
                 User user=response.body();
+
                 Picasso.get().load(user.getImageUrl()).into(chatUserProfile);
                 userName = user.getName();
                 chatUserName.setText(user.getName());
@@ -86,7 +94,6 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
                 Toast.makeText(ChatDetailActivity.this, ""+call, Toast.LENGTH_SHORT).show();
             }
         });
-
         initiateSocketConnection();
     }
 
@@ -98,16 +105,17 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
 
     // creates inner class which is used to set socket
     private class SocketListener extends WebSocketListener {
+
         @Override
         public void onOpen(WebSocket webSocket, okhttp3.Response response) {
             super.onOpen(webSocket, response);
-
+            System.out.println("calling this onOpen");
             runOnUiThread(() -> {
                 Toast.makeText(ChatDetailActivity.this,
                         "Socket Connection Successful!",
                         Toast.LENGTH_SHORT).show();
-
-                initializeView();
+                System.out.println("Connected successfully");
+                        initializeView();
             });
         }
 
@@ -118,10 +126,10 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
     }
 
     private void initializeView(){
-        chatUserProfile=findViewById(R.id.chat_details_user_image);
-        chatUserName=findViewById(R.id.chat_details_user_name);
+
         messageEditText = findViewById(R.id.chat_send_message_edit_text);
         sendButton = findViewById(R.id.chat_send_message_button);
+        messagesRecyclerView=findViewById(R.id.chat_display_recycler_view);
 
         // attaching adapter to the recycler view
         messageAdapter = new ChatDetailsListAdapter(getLayoutInflater());
@@ -142,7 +150,10 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
                 try {
                     jsonObject.put("name", userName);
                     jsonObject.put("message", messageEditText.getText().toString());
-
+                    if(messageEditText.getText().toString().length()==0){
+                        Toast.makeText(ChatDetailActivity.this, "Please enter message", Toast.LENGTH_SHORT).show();
+                         return;
+                    }
                     // sending json data using websocket
                     webSocket.send(jsonObject.toString());
 

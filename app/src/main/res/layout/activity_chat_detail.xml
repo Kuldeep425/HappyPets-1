@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_200"
+    android:background="@color/white"
     tools:context=".Activity.ChatDetailActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -27,7 +27,7 @@
         <EditText
             android:id="@+id/chat_send_message_edit_text"
             android:inputType="textMultiLine"
-            android:background="@drawable/bg_chat_message"
+            android:background="@drawable/bg_receive_message"
             android:layout_width="0dp"
             android:layout_weight="100"
             android:padding="6dp"

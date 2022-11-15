@@ -30,4 +30,5 @@ public class SecurityConfigurer {
           .permitAll();
           return http.build();
     }
+
 }

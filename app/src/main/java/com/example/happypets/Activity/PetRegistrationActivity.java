@@ -152,19 +152,20 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 APICall apiCall = retrofitService.getRetrofit().create(APICall.class);
 
                 // to post a pet
-                apiCall.postAPet(userId,body,pet).enqueue(new Callback<JsonObject>() {
+                apiCall.postAPet(userId,body,pet).enqueue(new Callback<String>() {
                     @Override
-                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                    public void onResponse(Call<String> call, Response<String> response) {
                         Toast.makeText(PetRegistrationActivity.this, ""+response, Toast.LENGTH_SHORT).show();
                         System.out.println(response);
                         makeEmptyAllField();
                     }
 
                     @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                    public void onFailure(Call<String> call, Throwable t) {
                         System.out.println(t);
                         System.out.println(call);
                         Toast.makeText(PetRegistrationActivity.this, "error", Toast.LENGTH_SHORT).show();
+
                     }
                 });
             }
