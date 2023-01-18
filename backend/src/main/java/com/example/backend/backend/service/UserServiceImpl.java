@@ -7,7 +7,16 @@ import java.nio.file.Path;
 import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import com.example.backend.backend.Model.LoginModel;
@@ -17,17 +26,19 @@ import com.example.backend.backend.collections.Token;
 import com.example.backend.backend.collections.User;
 import com.example.backend.backend.config.SecurityConfigurer;
 import com.example.backend.backend.utils.DataBucketUtil;
+import com.example.backend.backend.utils.JwtUtil;
+import com.google.gson.JsonObject;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepo userRepo;
-    @Autowired
-    private SecurityConfigurer securityConfigurer;
-    @Autowired 
-    private TokenRepo tokenRepo;
+    @Autowired private UserRepo userRepo;
+    @Autowired private SecurityConfigurer securityConfigurer;
+    @Autowired private TokenRepo tokenRepo;
     @Autowired DataBucketUtil dataBucketUtil;
+    @Autowired private AuthenticationManager authenticationManager;
+    @Autowired private JwtUtil jwtUtil;
+    @Autowired private JwtUserDetail jwtUserDetail;
 
     // register a user 
     @Override
@@ -81,16 +92,26 @@ public class UserServiceImpl implements UserService {
 
    // to login user
    @Override
-   public String loginUser(LoginModel loginModel) {
-        if(loginModel==null) return "No credential found";
-        Optional<User> user=userRepo.findByEmail(loginModel.getEmail());
-        if(user.isEmpty()) return "user not found associated to this email";
-        if(securityConfigurer.passwordEncoder().matches(loginModel.getPassword(), user.get().getPassword())){
-           user.get().setHasLoggedIn(true);
-           userRepo.save(user.get());
-           return user.get().getId();
+   public ResponseEntity<?> loginUser(LoginModel loginModel) throws Exception {
+        if(loginModel==null || loginModel.getEmail()==null || loginModel.getPassword()==null) return ResponseEntity.ok("No credential found");
+        try {
+           authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword()));
+        } 
+        catch (BadCredentialsException e){
+          throw new Exception("Invalid credentials");
         }
-        return "Bad Credential";
+        catch (Exception e) {
+           System.out.println(e);
+        }
+        UserDetails userDetail=jwtUserDetail.loadUserByUsername(loginModel.getEmail());
+        User user=userRepo.findByEmailAndPassword(userDetail.getUsername(),userDetail.getPassword());
+        if(user.isVerified()==false) throw new Exception("Account is not verified");
+        String  token=jwtUtil.generateToken(jwtUserDetail.loadUserByUsername(loginModel.getEmail()));
+        System.out.println(token);
+        HashMap<String,String>map=new HashMap<>();
+        map.put("id",user.getId());
+        map.put("token",token);
+        return ResponseEntity.ok(map); 
    }
 
    // logout the user
@@ -109,6 +130,7 @@ public class UserServiceImpl implements UserService {
      return userRepo.findAll();
   }
 
-    
-    
+
+  
+   
 }

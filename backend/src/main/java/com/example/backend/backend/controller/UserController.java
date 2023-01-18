@@ -18,10 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 
@@ -32,6 +34,7 @@ public class UserController {
    @Autowired private UserService userService;
    @Autowired private UserRepo userRepo;
    @Autowired private GenerateToken generateToken;
+   @Autowired PasswordEncoder passwordEncoder;
 
    @PostMapping("/register/user")
    public ResponseEntity<?> registerUser(@RequestPart("image") MultipartFile file,
@@ -40,7 +43,7 @@ public class UserController {
     Optional<User>user2=userRepo.findByEmail(user.getEmail());
     if(user2.isPresent() && user2.get().isVerified()) return ResponseEntity.ok("Already registered Email");
     User user1=userService.registerUser(user,file);
-    generateToken.generateToekn(user1,"Register", applicationUrl(request));
+     generateToken.generateToekn(user1,"Register", applicationUrl(request));
     return ResponseEntity.ok(user1.getId());
    }
    
@@ -52,7 +55,7 @@ public class UserController {
    }
    
    @PostMapping("/login/user")
-   public String loginUser(@RequestBody LoginModel loginModel){
+   public ResponseEntity<?> loginUser(@RequestBody LoginModel loginModel) throws Exception{
        return userService.loginUser(loginModel);
    }
 

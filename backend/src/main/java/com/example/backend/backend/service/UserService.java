@@ -20,7 +20,7 @@ public interface UserService {
 
     String VerifyTokenAndValidateUser(String token);
 
-    String loginUser(LoginModel loginModel);
+    ResponseEntity<?> loginUser(LoginModel loginModel) throws Exception;
 
     ResponseEntity<?> logoutUser(String userId);
 

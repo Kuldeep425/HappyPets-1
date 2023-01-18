@@ -3,6 +3,7 @@ package com.example.backend.backend.collections;
 import java.util.List;
 
 import org.bson.types.Binary;
+import org.checkerframework.common.aliasing.qual.Unique;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
