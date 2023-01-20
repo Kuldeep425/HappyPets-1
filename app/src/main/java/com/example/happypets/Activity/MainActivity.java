@@ -1,5 +1,6 @@
 package com.example.happypets.Activity;
 
+import static com.example.happypets.Activity.LoginActivity.token;
 import static com.example.happypets.Activity.LoginActivity.userId;
 
 import androidx.annotation.NonNull;
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     // creating a Tag string
     private final String TAG = MainActivity.class.getSimpleName();
-
     //creating variables for adding functionality to the drawer layout
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        System.out.println(token);
 
         //setting viewpager
         ViewPager viewPager = findViewById(R.id.viewpager);

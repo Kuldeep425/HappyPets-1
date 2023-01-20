@@ -2,6 +2,7 @@ package com.example.happypets.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,9 +12,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.happypets.Model.Login;
+import com.example.happypets.Model.LoginResponse;
 import com.example.happypets.R;
 import com.example.happypets.Retrofit.APICall;
 import com.example.happypets.Retrofit.RetrofitService;
+import com.google.android.gms.common.util.JsonUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -26,12 +32,21 @@ public class LoginActivity extends AppCompatActivity {
     public static String userId;
     public static SharedPreferences userDetail;
     public static  String PREFERENCE_DETAIL="Details";
+    public static String token=null;
     SharedPreferences.Editor myedit;
+    ProgressDialog progressDialog;
     // to initialize all fields
     public void initialize(){
         emailTxt=findViewById(R.id.loginEmail);
         passwordTxt=findViewById(R.id.loginPassword);
         loginBtn=findViewById(R.id.loginButton);
+    }
+    // open progress
+    public void progressDialogOpen(){
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Please wait....");
+        progressDialog.show();
     }
 
     @Override
@@ -55,33 +70,40 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "fill all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // open dialog box
+                 progressDialogOpen();
                 Login login=new Login(email,password);
+
                 // this is api calling which will take Login model and send to the server
-             apiCall.loginUser(login).enqueue(new Callback<String>() {
+             apiCall.loginUser(login).enqueue(new Callback<LoginResponse>() {
                  @Override
-                 public void onResponse(Call<String> call, Response<String> response) {
+                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                      Toast.makeText(LoginActivity.this, ""+response.body(), Toast.LENGTH_SHORT).show();
-                   /* this is working ... Lucky and Apoorv  from here you can change activity like if the login is
-                      completed you can go dashboard activity...
-                    */
-                    // isLoggedIn=true;
                      if(response.body()==null){
                          Toast.makeText(LoginActivity.this, "check entered credentials", Toast.LENGTH_SHORT).show();
                          return;
                      }
-                     userId=response.body();
+                     LoginResponse loginResponse =response.body();
                      userDetail=getSharedPreferences(PREFERENCE_DETAIL,MODE_PRIVATE);
                      myedit=userDetail.edit();
-                     myedit.putBoolean("hasLoggedIn",true);
-                     myedit.putString("userId",userId);
+                     try {
+                         myedit.putBoolean("hasLoggedIn", true);
+                         myedit.putString("userId", loginResponse.getId());
+                         myedit.putString("token", "Bearer "+loginResponse.getToken());
+                         token="Bearer "+loginResponse.getToken();
+                     }
+                     catch(Exception e){
+                         System.out.println(e);
+                     }
                      myedit.commit();
                      startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                     progressDialog.dismiss();
                      finish();
                  }
 
                  @Override
-                 public void onFailure(Call<String> call, Throwable t) {
-                     System.out.println(t);
+                 public void onFailure(Call<LoginResponse> call, Throwable t) {
+                     progressDialog.dismiss();
                  }
              });
             }

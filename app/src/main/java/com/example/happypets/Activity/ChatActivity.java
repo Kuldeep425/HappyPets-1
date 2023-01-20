@@ -1,5 +1,7 @@
 package com.example.happypets.Activity;
 
+import static com.example.happypets.Activity.LoginActivity.token;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,7 +40,7 @@ public class ChatActivity extends AppCompatActivity {
         RetrofitService retrofitService=new RetrofitService();
         APICall apiCall=retrofitService.getRetrofit().create(APICall.class);
 
-        apiCall.getAllUser().enqueue(new Callback<List<User>>() {
+        apiCall.getAllUser(token).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                if(!response.isSuccessful()){

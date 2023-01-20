@@ -1,5 +1,6 @@
 package com.example.happypets.Fragments;
 
+import static com.example.happypets.Activity.LoginActivity.token;
 import static com.example.happypets.Activity.LoginActivity.userId;
 
 import android.content.Intent;
@@ -81,7 +82,7 @@ public class PetsFragment extends Fragment {
     }
 
     private void loadUserPostedPet() {
-        apiCall.getAllPostedPetOfSpecificUser(userId).enqueue(new Callback<List<Pet>>() {
+        apiCall.getAllPostedPetOfSpecificUser(token,userId).enqueue(new Callback<List<Pet>>() {
             @Override
             public void onResponse(Call<List<Pet>> call, Response<List<Pet>> response) {
                 if(!response.isSuccessful()){

@@ -1,5 +1,7 @@
 package com.example.happypets.Activity;
 
+import static com.example.happypets.Activity.LoginActivity.token;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +44,7 @@ public class AllPetsListActivity extends AppCompatActivity {
 
         RetrofitService retrofitService=new RetrofitService();
         APICall apiCall=retrofitService.getRetrofit().create(APICall.class);
-        apiCall.getPetByCategory(value).enqueue(new Callback<List<Pet>>() {
+        apiCall.getPetByCategory(token,value).enqueue(new Callback<List<Pet>>() {
             @Override
             public void onResponse(Call<List<Pet>> call, Response<List<Pet>> response) {
                 if(!response.isSuccessful()){

@@ -1,5 +1,6 @@
 package com.example.happypets.Activity;
 
+import static com.example.happypets.Activity.LoginActivity.token;
 import static com.example.happypets.Activity.LoginActivity.userId;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
         RetrofitService retrofitService=new RetrofitService();
         APICall apiCall=retrofitService.getRetrofit().create(APICall.class);
         // to get logged in user
-        apiCall.getSpecificInUser(userId).enqueue(new Callback<User>() {
+        apiCall.getSpecificInUser(token,userId).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.body()!=null){

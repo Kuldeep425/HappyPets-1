@@ -1,7 +1,10 @@
 package com.example.happypets.Activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.example.happypets.Model.User;
 import com.example.happypets.R;
@@ -43,6 +47,10 @@ public class SignupActivity extends AppCompatActivity {
     String path;
     Uri selectedImageUri;
     Bitmap selectedImageBitmap;
+    ProgressDialog progressDialog;
+    CardView cardView;
+
+    // to initialize the components
     public void initialize(){
         nameEdtxt=findViewById(R.id.registerFullName);
         phoneNumberEdtxt=findViewById(R.id.registerPhoneNumber);
@@ -50,12 +58,25 @@ public class SignupActivity extends AppCompatActivity {
         passwordEdtxt=findViewById(R.id.registerPassword);
         registerbtn=findViewById(R.id.registerButton);
         signUpProfileImage=findViewById(R.id.profile_image);
+        cardView=findViewById(R.id.cardViewSignup);
+        cardView.setTranslationY(2000);
+    }
+
+
+    public void progressDialogOpen(){
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Please wait....");
+        progressDialog.show();
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         initialize();
+
+
+        cardView.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(900).start();
         //choose profile picture from gallery
 
         signUpProfileImage.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +107,7 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(SignupActivity.this, "complete all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                progressDialogOpen();
                 User user=new User(name,email,password,phone);
                 // image
                 File image=new File(path);
@@ -96,11 +118,15 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         Toast.makeText(SignupActivity.this, "Please check the email", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        showAlertDialogmessageOnResponse();
                         makeEmptyToAllfield();
                     }
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
                         System.out.println(call.toString());
+                        progressDialog.dismiss();
+                        showAlertDialogmessageOnErrorResponse();
                         System.out.println(t);
                     }
                 });
@@ -152,4 +178,40 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 }
             });
+
+  // this is the method which will show alert dialog message if there is error in response
+    private void showAlertDialogmessageOnErrorResponse() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("\t\tError");
+        builder.setIcon(R.drawable.cancelicon);
+        builder.setMessage("\t\tSomething went wrong\n"+"\t\tor\n"+"\t\tEmail already registered");
+        builder.setCancelable(true);
+        builder.setPositiveButton(
+                "Back",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
+    }
+
+    // this will execute when api give right response
+    private void showAlertDialogmessageOnResponse() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("Successfully sent");
+        builder.setIcon(R.drawable.rightcheck);
+        builder.setMessage("We have sent verification link on "+nameEdtxt.getText().toString()+"\n\nplease verify for further process..😊😊\nPlease verify and login");
+        builder.setCancelable(true);
+        builder.setPositiveButton(
+                "ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
+    }
 }

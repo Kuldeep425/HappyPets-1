@@ -56,6 +56,7 @@ public class UserController {
    
    @PostMapping("/login/user")
    public ResponseEntity<?> loginUser(@RequestBody LoginModel loginModel) throws Exception{
+       System.out.println(loginModel.getEmail());
        return userService.loginUser(loginModel);
    }
 

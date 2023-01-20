@@ -1,12 +1,20 @@
 package com.example.happypets.Activity;
 
+import static android.content.ContentValues.TAG;
+import static com.example.happypets.Activity.LoginActivity.token;
+import static com.example.happypets.Activity.LoginActivity.userId;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.RemoteInput;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +31,12 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -33,6 +47,9 @@ import okhttp3.WebSocketListener;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
+import ua.naiksoftware.stomp.dto.StompHeader;
 
 public class ChatDetailActivity extends AppCompatActivity implements TextWatcher {
 
@@ -42,13 +59,15 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
     EditText messageEditText;
     Button sendButton;
     RecyclerView messagesRecyclerView;
+    private StompClient stompClient;
+
 
     // recycler view adapter object
     ChatDetailsListAdapter messageAdapter;
 
     //creating objects to open web socket
     WebSocket webSocket;
-    final private String SERVER_PATH = "http://192.168.9.71:8080/ws";
+    final private String SERVER_PATH = "ws://192.168.103.112:8080/topic/websocket";
 
 
     @Override
@@ -72,7 +91,7 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
         // calling chatting user data in the toolbar
         RetrofitService retrofitService=new RetrofitService();
         APICall apiCall=retrofitService.getRetrofit().create(APICall.class);
-        apiCall.getSpecificInUser(chatUserId).enqueue(new Callback<User>() {
+        apiCall.getSpecificInUser(token,chatUserId).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(!response.isSuccessful()){
@@ -81,8 +100,9 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
                 }
 
                 User user=response.body();
-
-                Picasso.get().load(user.getImageUrl()).into(chatUserProfile);
+                if(user.getImageUrl()!=null) {
+                    Picasso.get().load(user.getImageUrl()).into(chatUserProfile);
+                }
                 userName = user.getName();
                 chatUserName.setText(user.getName());
             }
@@ -94,13 +114,7 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
                 Toast.makeText(ChatDetailActivity.this, ""+call, Toast.LENGTH_SHORT).show();
             }
         });
-        initiateSocketConnection();
-    }
-
-    private void initiateSocketConnection() {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(SERVER_PATH).build();
-        webSocket = client.newWebSocket(request, new SocketListener());
+       initializeWebsocket();
     }
 
     // creates inner class which is used to set socket
@@ -119,10 +133,62 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
             });
         }
 
+
+
         @Override
         public void onMessage(WebSocket webSocket, String text) {
             super.onMessage(webSocket, text);
         }
+    }
+     Map<String,String> header=new HashMap<>();
+    // define stompclient
+    public void initializeWebsocket(){
+        header.put("Authorization",token);
+        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP,SERVER_PATH,header);
+        stompClient.connect();
+        stompClient.topic("/app/chat").subscribe(topicMessage -> {
+            Log.d(TAG, topicMessage.getPayload());
+            runOnUiThread(()->{
+                JSONObject j= null;
+
+                try {
+                    j = new JSONObject(topicMessage.getPayload());
+                    JSONObject jj=new JSONObject();
+                    jj.put("message",j.getString("message"));
+                    jj.put("isSent",false);
+                    messageAdapter.addItem(jj);
+                    messagesRecyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            });
+        });
+        stompClient.lifecycle().subscribe(lifecycleEvent -> {
+            switch (lifecycleEvent.getType()) {
+                case OPENED:
+                    Log.d(TAG, "Stomp connection opened");
+                    runOnUiThread(()->{
+                        Toast.makeText(this, "connected to the server" , Toast.LENGTH_SHORT).show();
+                        System.out.println(stompClient.isConnected());
+                        initializeView();
+                       //stompClient.send("/app/chat","Hi hello").subscribe();
+                    });
+                    break;
+
+                case ERROR:
+                    Log.e(TAG, "Error", lifecycleEvent.getException());
+                    System.out.println("Error found in connecting the server");
+                    break;
+
+                case CLOSED:
+                    Log.d(TAG, "Stomp connection closed");
+                    break;
+                case FAILED_SERVER_HEARTBEAT:
+                    Log.d(TAG,"Error", lifecycleEvent.getException());
+                    System.out.println("Heart beats does not match");
+                    break;
+            }
+        });
     }
 
     private void initializeView(){
@@ -154,9 +220,8 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
                         Toast.makeText(ChatDetailActivity.this, "Please enter message", Toast.LENGTH_SHORT).show();
                          return;
                     }
-                    // sending json data using websocket
-                    webSocket.send(jsonObject.toString());
-
+                   //webSocket.send(jsonObject.toString());
+                     stompClient.send("/app/chat",jsonObject.toString()).subscribe();
                     jsonObject.put("isSent", true);
                     messageAdapter.addItem(jsonObject);
 

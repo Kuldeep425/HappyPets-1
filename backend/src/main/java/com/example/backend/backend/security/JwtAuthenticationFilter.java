@@ -17,10 +17,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.backend.backend.service.JwtUserDetail;
 import com.example.backend.backend.utils.JwtUtil;
+import com.mongodb.lang.Nullable;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -41,12 +44,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+            throws ServletException, IOException{
             String requestToken=request.getHeader("Authorization");
+            System.out.println("Got an request");
+            System.out.println(request);
             System.out.println(requestToken);
+            if(requestToken==null) return;
             String email=null;
             String token=null;
-            if(request!=null && requestToken.startsWith("Bearer")){
+            if(request!=null && requestToken.startsWith("Bearer ")){
               token=requestToken.substring(7);
               try{
               email=jwtUtil.extractUsername(token);

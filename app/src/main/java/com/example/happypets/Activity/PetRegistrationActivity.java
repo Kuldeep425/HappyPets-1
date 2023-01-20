@@ -2,6 +2,7 @@ package com.example.happypets.Activity;
 
 
 
+import static com.example.happypets.Activity.LoginActivity.token;
 import static com.example.happypets.Activity.LoginActivity.userId;
 
 import android.app.Activity;
@@ -32,7 +33,7 @@ import com.example.happypets.Utils.RealPathUtil;
 import com.example.happypets.Retrofit.APICall;
 import com.example.happypets.Retrofit.RetrofitService;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.gson.JsonObject;
+
 
 
 import java.io.File;
@@ -152,7 +153,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 APICall apiCall = retrofitService.getRetrofit().create(APICall.class);
 
                 // to post a pet
-                apiCall.postAPet(userId,body,pet).enqueue(new Callback<String>() {
+                apiCall.postAPet(token,userId,body,pet).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         Toast.makeText(PetRegistrationActivity.this, ""+response, Toast.LENGTH_SHORT).show();

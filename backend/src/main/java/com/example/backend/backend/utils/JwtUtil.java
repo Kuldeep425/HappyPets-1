@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtUtil {
-    public static final long JwtTokenValidity=1000*60*60*24*30;
+    public static final long  JwtTokenValidity=1000*60*60*10*30;
     private String SECRET_KEY = "HappyPetKd@123";
 
      // get username from token
