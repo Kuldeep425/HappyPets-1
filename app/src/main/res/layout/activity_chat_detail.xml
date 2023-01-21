@@ -47,13 +47,14 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/chat_details_toolbar"
         android:theme="?attr/actionBarTheme"
-        android:background="@color/pink_200"
+        android:background="@color/light_pink"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/light_pink">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/chat_details_user_image"
@@ -69,6 +70,7 @@
                 android:id="@+id/chat_details_user_name"
                 android:layout_centerVertical="true"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:textSize="25sp"
                 android:layout_toRightOf="@id/chat_details_user_image"
                 android:layout_width="wrap_content"

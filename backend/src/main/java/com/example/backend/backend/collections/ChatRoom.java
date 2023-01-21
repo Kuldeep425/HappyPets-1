@@ -1,5 +1,7 @@
 package com.example.backend.backend.collections;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,7 +18,5 @@ import lombok.NoArgsConstructor;
 public class ChatRoom {
    @Id
    private String id;
-   private String chatId;
-   private String senderId;
-   private String recipientId; 
+   List<ChatMessage>messages;
 }

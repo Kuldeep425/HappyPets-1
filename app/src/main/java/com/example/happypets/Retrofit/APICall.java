@@ -51,5 +51,8 @@ public interface APICall {
     @GET("get/pets/category/{num}")
     Call<List<Pet>>getPetByCategory(@Header ("Authorization") String token,@Path("num") int num);
 
+    @GET("/get/messages/{senderId}/{receiverId}")
+    Call<List<ChatMessage>>getAllPreviousChats(@Header("Authorization") String token,@Path("senderId") String senderId,@Path("receiverId") String recipientId);
+
 
 }

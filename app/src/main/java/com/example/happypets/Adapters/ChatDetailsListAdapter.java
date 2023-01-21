@@ -1,5 +1,7 @@
 package com.example.happypets.Adapters;
 
+import static com.example.happypets.Activity.LoginActivity.userId;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.happypets.Model.ChatMessage;
 import com.example.happypets.R;
 
 import org.json.JSONException;
@@ -24,6 +27,7 @@ public class ChatDetailsListAdapter extends RecyclerView.Adapter {
 
     private LayoutInflater inflater;
     private List<JSONObject> messages = new ArrayList<>();
+
 
     public ChatDetailsListAdapter (LayoutInflater inflater) {
         this.inflater = inflater;

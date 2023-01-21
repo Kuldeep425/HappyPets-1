@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.happypets.Adapters.ChatDetailsListAdapter;
+import com.example.happypets.Adapters.ChatListAdapter;
+import com.example.happypets.Model.ChatMessage;
 import com.example.happypets.Model.User;
 import com.example.happypets.R;
 import com.example.happypets.Retrofit.APICall;
@@ -60,13 +62,10 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
     Button sendButton;
     RecyclerView messagesRecyclerView;
     private StompClient stompClient;
-
-
-    // recycler view adapter object
+    String chatUserId;
+    APICall apiCall;
     ChatDetailsListAdapter messageAdapter;
-
-    //creating objects to open web socket
-    WebSocket webSocket;
+    List<ChatMessage>previousMessages;
     final private String SERVER_PATH = "ws://192.168.103.112:8080/topic/websocket";
 
 
@@ -76,21 +75,16 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
         setContentView(R.layout.activity_chat_detail);
 
         // getting the user id to retrieve its data in the toolbar
-        String chatUserId=getIntent().getStringExtra("ownerId");
-        System.out.println(chatUserId);
-
+        chatUserId=getIntent().getStringExtra("ownerId");
         chatUserProfile=findViewById(R.id.chat_details_user_image);
         chatUserName=findViewById(R.id.chat_details_user_name);
-
-
         // this is to hide the action bar
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-
         // calling chatting user data in the toolbar
         RetrofitService retrofitService=new RetrofitService();
-        APICall apiCall=retrofitService.getRetrofit().create(APICall.class);
+         apiCall=retrofitService.getRetrofit().create(APICall.class);
         apiCall.getSpecificInUser(token,chatUserId).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -114,39 +108,17 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
                 Toast.makeText(ChatDetailActivity.this, ""+call, Toast.LENGTH_SHORT).show();
             }
         });
+
        initializeWebsocket();
     }
-
-    // creates inner class which is used to set socket
-    private class SocketListener extends WebSocketListener {
-
-        @Override
-        public void onOpen(WebSocket webSocket, okhttp3.Response response) {
-            super.onOpen(webSocket, response);
-            System.out.println("calling this onOpen");
-            runOnUiThread(() -> {
-                Toast.makeText(ChatDetailActivity.this,
-                        "Socket Connection Successful!",
-                        Toast.LENGTH_SHORT).show();
-                System.out.println("Connected successfully");
-                        initializeView();
-            });
-        }
-
-
-
-        @Override
-        public void onMessage(WebSocket webSocket, String text) {
-            super.onMessage(webSocket, text);
-        }
-    }
-     Map<String,String> header=new HashMap<>();
-    // define stompclient
+    // created map to the keep header to pass during establishing the websocket connection
+     Map<String,String> m=new HashMap<>();
+    // define stompclient to connect websocket
     public void initializeWebsocket(){
-        header.put("Authorization",token);
-        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP,SERVER_PATH,header);
+        m.put("Authorization",token);
+        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP,SERVER_PATH,m);
         stompClient.connect();
-        stompClient.topic("/app/chat").subscribe(topicMessage -> {
+        stompClient.topic("/user/"+userId+"/queue/messages"+chatUserId).subscribe(topicMessage -> {
             Log.d(TAG, topicMessage.getPayload());
             runOnUiThread(()->{
                 JSONObject j= null;
@@ -157,6 +129,7 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
                     jj.put("message",j.getString("message"));
                     jj.put("isSent",false);
                     messageAdapter.addItem(jj);
+                    System.out.println(jj);
                     messagesRecyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -171,7 +144,6 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
                         Toast.makeText(this, "connected to the server" , Toast.LENGTH_SHORT).show();
                         System.out.println(stompClient.isConnected());
                         initializeView();
-                       //stompClient.send("/app/chat","Hi hello").subscribe();
                     });
                     break;
 
@@ -198,9 +170,39 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
         messagesRecyclerView=findViewById(R.id.chat_display_recycler_view);
 
         // attaching adapter to the recycler view
+
+
         messageAdapter = new ChatDetailsListAdapter(getLayoutInflater());
         messagesRecyclerView.setAdapter(messageAdapter);
         messagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        apiCall.getAllPreviousChats(token,userId,chatUserId).enqueue(new Callback<List<ChatMessage>>() {
+            @Override
+            public void onResponse(Call<List<ChatMessage>> call, Response<List<ChatMessage>> response) {
+                previousMessages=response.body();
+                Toast.makeText(ChatDetailActivity.this, "found response", Toast.LENGTH_SHORT).show();
+                for(int i=0; i<previousMessages.size(); i++){
+                       JSONObject j=new JSONObject();
+                     try {
+                   j.put("name", previousMessages.get(i).getSenderName());
+                   j.put("message", previousMessages.get(i).getMessage());
+                   boolean flag=userId.equals(previousMessages.get(i).getSenderId());
+                         System.out.println(flag);
+                   j.put("isSent", flag);
+                    messageAdapter.addItem(j);
+                    messagesRecyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+                }
+            catch(Exception e){
+                System.out.println(e);
+            }
+        }
+            }
+
+            @Override
+            public void onFailure(Call<List<ChatMessage>> call, Throwable t) {
+
+            }
+        });
+
 
         // setting text change listener
         messageEditText.addTextChangedListener(this);
@@ -214,7 +216,8 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
                 // we are showing this value in the adapter to show it in recycler view
                 JSONObject jsonObject = new JSONObject();
                 try {
-                    jsonObject.put("name", userName);
+                    jsonObject.put("senderId",userId);
+                    jsonObject.put("receiverId",chatUserId);
                     jsonObject.put("message", messageEditText.getText().toString());
                     if(messageEditText.getText().toString().length()==0){
                         Toast.makeText(ChatDetailActivity.this, "Please enter message", Toast.LENGTH_SHORT).show();

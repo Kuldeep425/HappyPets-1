@@ -1,6 +1,7 @@
 package com.example.happypets.Activity;
 
 import static com.example.happypets.Activity.LoginActivity.token;
+import static com.example.happypets.Activity.LoginActivity.userId;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -43,7 +44,7 @@ public class SPlashScreenActivity extends Activity {
                 Intent intent;
                 userInfo=getSharedPreferences(LoginActivity.PREFERENCE_DETAIL,MODE_PRIVATE);
                 boolean isLoggedIn=userInfo.getBoolean("hasLoggedIn",false);
-                String userId=userInfo.getString("userId",null);
+                userId=userInfo.getString("userId",null);
                 token=userInfo.getString("token",null);
                 if(isLoggedIn && userId!=null && token!=null) intent=new Intent(SPlashScreenActivity.this,MainActivity.class);
                 else

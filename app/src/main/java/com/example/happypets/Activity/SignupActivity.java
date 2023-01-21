@@ -74,8 +74,6 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         initialize();
-
-
         cardView.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(900).start();
         //choose profile picture from gallery
 
