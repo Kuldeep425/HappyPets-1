@@ -1,6 +1,7 @@
 package com.example.backend.backend.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,11 +55,17 @@ public class PetController {
     public ResponseEntity<?> getPetOnBasisOfCategory(@PathVariable("num") int num){
        map.put(0,"Dog");
        map.put(1,"Cat");
-       map.put(2,"Fish");
-       map.put(3,"Rabbit");
-       map.put(4,"Bird");
-       map.put(5,"Others");
+       map.put(2,"Horse");
+       map.put(3,"Bird");
+       map.put(4,"Fish");
+       map.put(5,"Rabbit");
        String category=map.get(num);
        return ResponseEntity.ok(petService.getPostedPetOnBasisOfCategory(category));
+    }
+
+    // get latest posted pet
+    @GetMapping("/get/recently-posted/pets")
+    public List<Pet> getNewestPosted(){
+         return petService.getNewestPosted();
     }
 }

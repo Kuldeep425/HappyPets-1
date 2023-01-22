@@ -18,5 +18,7 @@ public interface PetService {
 
     
     List<Pet> getPostedPetOnBasisOfCategory(String category);
+
+    List<Pet> getNewestPosted();
     
 }

@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import com.example.happypets.Adapters.TabLayoutAdapter;
@@ -34,13 +36,11 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        System.out.println(token);
-
         //setting viewpager
         ViewPager viewPager = findViewById(R.id.viewpager);
         //setting adapter to viewpager
@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         TabLayout mainTab = findViewById(R.id.mainTab);
         mainTab.setupWithViewPager(viewPager);
         userId=getSharedPreferences(LoginActivity.PREFERENCE_DETAIL,MODE_PRIVATE).getString("userId",null);
-        System.out.println(userId);
         /* declaring objects needed for navigation view */
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
@@ -116,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.map_button){
             Intent i = new Intent(getApplicationContext(), MapsActivity.class);
             startActivity(i);
+        }
+        if(item.getItemId()==R.id.notification_icon){
+            Toast.makeText(getApplicationContext(), "I am touched", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);

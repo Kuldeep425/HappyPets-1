@@ -37,8 +37,7 @@ public class AllPetsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_pets_list);
 
         //receiving values from intent
-        int value = getIntent().getExtras().getInt("SelectedValue");
-        Toast.makeText(this, ""+value, Toast.LENGTH_SHORT).show();
+        int value = getIntent().getExtras().getInt("selectedValue");
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.all_pets_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

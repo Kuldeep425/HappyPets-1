@@ -6,4 +6,9 @@
         android:id="@+id/map_button"
         app:showAsAction="always"
         android:icon="@drawable/ic_baseline_map_24" />
+    <item
+          android:title=""
+          android:id="@+id/notification_icon"
+          app:showAsAction="always"
+          android:icon="@drawable/notification_icon"/>
 </menu>

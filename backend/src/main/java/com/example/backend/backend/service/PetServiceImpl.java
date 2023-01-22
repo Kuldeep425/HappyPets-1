@@ -92,6 +92,19 @@ public class PetServiceImpl implements PetService {
       
     }
 
+    @Override
+    public List<Pet> getNewestPosted() {
+         List<Pet> total=petRepo.findAll();
+         List<Pet> result=new ArrayList<>();
+         int cnt=10;
+         if(cnt>total.size()) cnt=total.size();
+         for(int i=1; i<=cnt; i++){
+              result.add(total.get(total.size()-i));
+         }
+          System.out.println(result);
+         return result;
+    }
+
   
 
 

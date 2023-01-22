@@ -3,6 +3,9 @@
     android:id="@+id/pet_list_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/popular_background"
+    android:layout_margin="5dp"
+    android:elevation="20dp"
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
@@ -19,7 +22,7 @@
             android:id="@+id/petImage"
             android:layout_width="150dp"
             android:layout_height="150dp"
-
+            android:layout_margin="5dp"
             android:src="@drawable/profile_image" />
 
 
@@ -37,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
                 android:layout_margin="2dp"
+                android:paddingLeft="60dp"
                 android:textAllCaps="true"
                 android:textColor="#000" />
             <TextView
@@ -47,6 +51,7 @@
                 android:textAlignment="textStart"
                 android:textAllCaps="true"
                 android:textColor="#000"
+                android:paddingLeft="60dp"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -56,6 +61,7 @@
                 android:layout_height="wrap_content"
                 tools:text="Text"
                 android:layout_margin="2dp"
+                android:paddingLeft="60dp"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
                 android:textColor="#000" />
@@ -68,6 +74,7 @@
                 android:layout_height="wrap_content"
                 tools:text="Text"
                 android:layout_margin="2dp"
+                android:paddingLeft="60dp"
                 android:textAlignment="textStart"
                 android:textAllCaps="true"
                 android:textColor="#000" />
@@ -95,7 +102,7 @@
                     android:id="@+id/ChatIcon"
                     android:layout_width="20dp"
                     android:layout_height="30dp"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginRight="5dp"
                     android:src="@drawable/chaticon"/>
 
             </LinearLayout>
@@ -113,6 +120,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="4dp"
         android:background="#000"
+        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="2dp"/>
 

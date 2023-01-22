@@ -41,6 +41,7 @@ public class ChatController {
         chatMessageService.save(chatMessage); 
         System.out.println(chatMessage);
     }
+    
     @GetMapping("/get/messages/{senderId}/{recipientId}")
     public ResponseEntity<?> findChatMessages ( @PathVariable String senderId,
                                                 @PathVariable String recipientId) {
