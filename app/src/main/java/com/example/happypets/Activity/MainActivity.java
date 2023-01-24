@@ -49,7 +49,15 @@ public class MainActivity extends AppCompatActivity {
         //setting viewpager to tab layout
         TabLayout mainTab = findViewById(R.id.mainTab);
         mainTab.setupWithViewPager(viewPager);
+        //adding icons to the tab bar
+        mainTab.getTabAt(0).setIcon(R.drawable.search);
+        mainTab.getTabAt(1).setIcon(R.drawable.dog_paw);
+        mainTab.getTabAt(2).setIcon(R.drawable.info);
+
+
+        // getting the value of userid from LoginActivity
         userId=getSharedPreferences(LoginActivity.PREFERENCE_DETAIL,MODE_PRIVATE).getString("userId",null);
+
         /* declaring objects needed for navigation view */
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);

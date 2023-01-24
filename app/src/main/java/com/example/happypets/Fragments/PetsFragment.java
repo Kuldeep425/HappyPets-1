@@ -46,13 +46,20 @@ public class PetsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.pets_tab);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_pets, container, false);
+
+        // changing the title of the activity
+        getActivity().setTitle(R.string.pets_tab);
 
         //initialising for calling api
         retrofitService=new RetrofitService();

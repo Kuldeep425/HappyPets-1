@@ -23,10 +23,18 @@ public class InfoFragment extends Fragment {
 
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.info_tab);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView =  inflater.inflate(R.layout.fragment_info, container, false);
+
+        getActivity().setTitle(R.string.info_tab);
 
 
         return rootView;
