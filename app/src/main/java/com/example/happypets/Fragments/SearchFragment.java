@@ -58,24 +58,9 @@ public class SearchFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        getActivity().setTitle(R.string.search_tab);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getActivity().setTitle(R.string.search_tab);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_search, container, false);
-
-        //setting the title of action bar when in this fragment
-        getActivity().setTitle(R.string.search_tab);
 
         recyclerViewCategory();
         recyclerViewPopular();
