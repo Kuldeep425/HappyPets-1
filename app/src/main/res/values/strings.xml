@@ -52,6 +52,8 @@
     <string name="chat_enter_the_message">Enter the Message</string>
     <string name="chat_sample_text">This is a sample text</string>
     <string name="chat_user_name">User name</string>
+    <string name="search_pet_here"><i>Search pet here</i></string>
+    <string name="share_your_beloved_pet">Share your beloved pet</string>
 
 </resources>
 
