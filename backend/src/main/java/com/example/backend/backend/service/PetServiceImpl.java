@@ -91,7 +91,9 @@ public class PetServiceImpl implements PetService {
       return petRepo.getPostedPetOnBasisOfCategory(category);
       
     }
+    
 
+    // to find the recently posted pets
     @Override
     public List<Pet> getNewestPosted() {
          List<Pet> total=petRepo.findAll();
@@ -103,6 +105,14 @@ public class PetServiceImpl implements PetService {
          }
           System.out.println(result);
          return result;
+    }
+    
+
+    // find the specific pet by its id
+    @Override
+    public Pet getSpecificPet(String petId){
+       Pet p=petRepo.findById(petId).get();
+       return p;
     }
 
   
