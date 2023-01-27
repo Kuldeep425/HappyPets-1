@@ -68,4 +68,12 @@ public class PetController {
     public List<Pet> getNewestPosted(){
          return petService.getNewestPosted();
     }
+    
+    // to get the pet by id
+
+    @GetMapping("/get/specific/pet/{petId}")
+    public Pet getSpecificPet(@PathVariable("petId") String petId){
+         return petService.getSpecificPet(petId);
+    }
+  
 }

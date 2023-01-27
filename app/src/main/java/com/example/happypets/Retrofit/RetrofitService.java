@@ -23,7 +23,7 @@ public class RetrofitService {
 
 
         retrofit=new Retrofit.Builder()
-                .baseUrl("http://192.168.103.112:8080")
+                .baseUrl("https://happypets-1-production.up.railway.app")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
                 .client(client.build())
                 .build();
