@@ -47,14 +47,6 @@ public class TabLayoutAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position){
-            case 1:
-                return context.getString(R.string.pets_tab);
-            case 2:
-                return context.getString(R.string.info_tab);
-            default:
-                return context.getString(R.string.search_tab);
-
-        }
+        return null;
     }
 }

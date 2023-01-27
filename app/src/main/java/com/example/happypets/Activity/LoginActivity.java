@@ -83,6 +83,12 @@ public class LoginActivity extends AppCompatActivity {
                          Toast.makeText(LoginActivity.this, "check entered credentials", Toast.LENGTH_SHORT).show();
                          return;
                      }
+
+                     /*
+                      * we are creating a shared preference which will store key value pair to be shared in different
+                      * activities
+                      * it stores these key value pairs in local storage
+                      */
                      LoginResponse loginResponse =response.body();
                      userDetail=getSharedPreferences(PREFERENCE_DETAIL,MODE_PRIVATE);
                      myedit=userDetail.edit();
