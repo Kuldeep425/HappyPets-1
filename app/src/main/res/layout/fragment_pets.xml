@@ -8,11 +8,25 @@
 
     <RelativeLayout
         android:visibility="gone"
+        android:id="@+id/pets_empty_list_container"
         android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/pets_empty_list_image"
+            android:src="@drawable/pets_list_empty"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="150dp"
+            android:layout_height="150dp"/>
+
+        <TextView
+            android:layout_below="@+id/pets_empty_list_image"
+            android:text="@string/oops_list_is_empty"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
@@ -21,27 +35,35 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-
-        android:id="@+id/pets_list_container"
+    <RelativeLayout
         android:layout_marginBottom="50dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/user_pets_recycler_view"
-            tools:listitem="@layout/pets_list_display"
+        <RelativeLayout
+            android:id="@+id/pets_list_container"
             android:layout_width="match_parent"
-            android:layout_weight="8"
-            android:layout_height="0dp"/>
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/pets_list_button_container"
+            android:layout_alignTop="@id/pets_list_button_container"
+            android:layout_alignParentTop="true">
 
-        <LinearLayout
-            android:layout_marginBottom="10dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/user_pets_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/pets_list_display" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/pets_list_button_container"
+            android:layout_alignParentBottom="true"
             android:gravity="end"
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/add_pets_button"
@@ -50,10 +72,10 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 
