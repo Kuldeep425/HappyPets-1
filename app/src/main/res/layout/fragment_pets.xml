@@ -6,51 +6,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.PetsFragment">
 
-
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="65dp"
-        android:elevation="10dp"
-        app:cardElevation="10dp"
-        app:cardCornerRadius="10dp">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+
+        android:id="@+id/pets_list_container"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/user_pets_recycler_view"
+            tools:listitem="@layout/pets_list_display"
+            android:layout_width="match_parent"
+            android:layout_weight="8"
+            android:layout_height="0dp"/>
 
         <LinearLayout
-            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            android:gravity="end"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/user_pets_recycler_view"
-                tools:listitem="@layout/pets_list_display"
-                android:layout_width="match_parent"
-                android:layout_weight="10"
-                android:layout_height="0dp"/>
-
-            <LinearLayout
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
-
-                <Button
-                    android:id="@+id/add_pets_button"
-                    android:layout_marginBottom="4dp"
-                    android:background="@drawable/button_background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_add_pets" />
-
-            </LinearLayout>
-
+            <Button
+                android:id="@+id/add_pets_button"
+                android:background="@drawable/button_background_circular"
+                android:layout_margin="10dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"/>
 
         </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
 
 
 
