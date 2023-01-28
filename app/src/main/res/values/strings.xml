@@ -54,6 +54,7 @@
     <string name="chat_user_name">User name</string>
     <string name="search_pet_here"><i>Search pet here</i></string>
     <string name="share_your_beloved_pet">Share your beloved pet</string>
+    <string name="oops_list_is_empty">OOPS!! List is empty</string>
 
 </resources>
 

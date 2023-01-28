@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.happypets.Activity.PetRegistrationActivity;
@@ -36,6 +37,7 @@ public class PetsFragment extends Fragment {
     APICall apiCall;
     RetrofitService retrofitService;
     RecyclerView userPetRecyclerView;
+    UserPetsListAdapter userPetsListAdapter;
     // creating global variable for fragment view
     private View rootView;
 
@@ -46,6 +48,9 @@ public class PetsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    //variable to toggle between empty list and non empty list
+    RelativeLayout emptyList;
+    RelativeLayout populatedList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +67,19 @@ public class PetsFragment extends Fragment {
         // calling api to display posted pets by loggedIn user
          loadUserPostedPet();
 
+         //adding functionality to the view containers
+        emptyList = rootView.findViewById(R.id.pets_empty_list_container);
+        populatedList = rootView.findViewById(R.id.pets_list_container);
+
+         //if adapter is empty different thing is seen
+        if(userPetsListAdapter==null || userPetsListAdapter.getItemCount()==0){
+            emptyList.setVisibility(View.VISIBLE);
+            populatedList.setVisibility(View.GONE);
+        }
+        else{
+            populatedList.setVisibility(View.VISIBLE);
+            emptyList.setVisibility(View.GONE);
+        }
 
         //hooking button
         addPetsButton = rootView.findViewById(R.id.add_pets_button);
@@ -93,7 +111,7 @@ public class PetsFragment extends Fragment {
                     return;
                 }
                 List<Pet>petList=response.body();
-                UserPetsListAdapter userPetsListAdapter=new UserPetsListAdapter(petList);
+                userPetsListAdapter= new UserPetsListAdapter(petList);
                 userPetRecyclerView.setAdapter(userPetsListAdapter);
             }
 
