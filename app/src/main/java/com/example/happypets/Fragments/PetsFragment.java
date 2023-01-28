@@ -94,7 +94,6 @@ public class PetsFragment extends Fragment {
         });
 
 
-
         return rootView;
     }
 
