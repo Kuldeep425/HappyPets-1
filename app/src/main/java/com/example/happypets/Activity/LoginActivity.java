@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_new);
         initialize();
 
         // retrofit service
@@ -63,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String email=emailTxt.getText().toString().trim();
                 String password=passwordTxt.getText().toString().trim();
                 if(password.length()==0 || email.length()==0){
@@ -78,12 +77,11 @@ public class LoginActivity extends AppCompatActivity {
              apiCall.loginUser(login).enqueue(new Callback<LoginResponse>() {
                  @Override
                  public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                     Toast.makeText(LoginActivity.this, ""+response.body(), Toast.LENGTH_SHORT).show();
+                     Toast.makeText(LoginActivity.this, "Login", Toast.LENGTH_SHORT).show();
                      if(response.body()==null){
                          Toast.makeText(LoginActivity.this, "check entered credentials", Toast.LENGTH_SHORT).show();
                          return;
                      }
-
                      /*
                       * we are creating a shared preference which will store key value pair to be shared in different
                       * activities
