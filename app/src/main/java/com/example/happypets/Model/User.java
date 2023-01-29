@@ -1,5 +1,9 @@
 package com.example.happypets.Model;
 
+/*
+* serializedName used to denote that the field for which this annotation is used
+* is serialized with to JASON with the provided name value in annotation attribute
+ */
 import com.google.gson.annotations.SerializedName;
 
 public class User {
@@ -19,6 +23,14 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
+    // this constructor is to take values from the signup page
+    public User(String name, String email, String password){
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    // this constructor will take values when the user profile is being updated
     public User(String name, String email, String password, String phoneNumber) {
         this.name = name;
         this.email = email;

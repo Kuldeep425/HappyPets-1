@@ -53,13 +53,9 @@ public class SignupActivity extends AppCompatActivity {
     // to initialize the components
     public void initialize(){
         nameEdtxt=findViewById(R.id.registerFullName);
-        phoneNumberEdtxt=findViewById(R.id.registerPhoneNumber);
         emailEdtxt=findViewById(R.id.registerEmail);
         passwordEdtxt=findViewById(R.id.registerPassword);
         registerbtn=findViewById(R.id.registerButton);
-        signUpProfileImage=findViewById(R.id.profile_image);
-        cardView=findViewById(R.id.cardViewSignup);
-        cardView.setTranslationY(2000);
     }
 
 
