@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.happypets.Model.Login;
@@ -28,7 +29,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     EditText emailTxt,passwordTxt;
-    Button loginBtn;
+    ImageView loginBtn;
     public static String userId;
     public static SharedPreferences userDetail;
     public static  String PREFERENCE_DETAIL="Details";
@@ -59,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         RetrofitService retrofitService=new RetrofitService();
         APICall apiCall=retrofitService.getRetrofit().create(APICall.class);
 
-        // to login
+         //to login
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

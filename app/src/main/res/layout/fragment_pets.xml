@@ -67,10 +67,13 @@
 
             <Button
                 android:id="@+id/add_pets_button"
-                android:background="@drawable/button_background_circular"
-                android:layout_margin="10dp"
                 android:layout_width="48dp"
-                android:layout_height="48dp"/>
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/button_background_circular" />
 
         </RelativeLayout>
 
