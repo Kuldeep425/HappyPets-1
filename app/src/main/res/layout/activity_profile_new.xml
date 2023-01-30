@@ -324,6 +324,7 @@
 
 
     <Button
+        android:id="@+id/user_update_profile_button"
         android:background="@drawable/bg_button_rectangle"
         android:text="@string/update_profile"
         android:textSize="20sp"

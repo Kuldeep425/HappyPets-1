@@ -5,7 +5,10 @@ import static com.example.happypets.Activity.LoginActivity.userId;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,8 @@ public class ProfileActivity extends AppCompatActivity {
 
      CircleImageView profileImageView;
      TextView name,email,phoneNumber,dob,address,pincode;
+
+     Button updateProfileButton;
      private void initialize(){
          profileImageView=findViewById(R.id.user_image);
          name=findViewById(R.id.user_name);
@@ -32,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
          dob = findViewById(R.id.user_dob);
          address = findViewById(R.id.user_address);
          pincode = findViewById(R.id.user_pincode);
+         updateProfileButton = findViewById(R.id.user_update_profile_button);
      }
 
     @Override
@@ -39,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_new);
         initialize();
+
         // retrofit service
         RetrofitService retrofitService=new RetrofitService();
         APICall apiCall=retrofitService.getRetrofit().create(APICall.class);
@@ -63,6 +70,15 @@ public class ProfileActivity extends AppCompatActivity {
                 System.out.println(call);
                 System.out.println(t);
                 Toast.makeText(ProfileActivity.this, "error in loading profile", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //adding functionality of update profile button
+        updateProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), UpdateProfileActivity.class);
+                startActivity(intent);
             }
         });
 
