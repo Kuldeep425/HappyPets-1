@@ -4,7 +4,7 @@
     <style name="user_profile_box">
         <item name="android:textAlignment"> viewStart</item>
         <item name="android:textStyle"> bold</item>
-        <item name="android:textSize"> 20sp</item>
+        <item name="android:textSize"> 15sp</item>
         <item name="android:textColor"> @color/black_300</item>
         <item name="android:layout_centerVertical"> true</item>
 
@@ -14,7 +14,7 @@
 
     <style name="user_profile_inputs">
         <item name="android:textAlignment"> viewEnd</item>
-        <item name="android:textSize"> 15sp</item>
+        <item name="android:textSize"> 10sp</item>
         <item name="android:textColor"> @color/brown_200</item>
         <item name="android:layout_alignParentEnd"> true</item>
 

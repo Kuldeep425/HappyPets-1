@@ -46,6 +46,9 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_new);
         initialize();
 
+        // hiding the action bar
+        getSupportActionBar().hide();
+
         // retrofit service
         RetrofitService retrofitService=new RetrofitService();
         APICall apiCall=retrofitService.getRetrofit().create(APICall.class);

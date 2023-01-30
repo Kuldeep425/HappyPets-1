@@ -22,9 +22,10 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_image"
+        android:src="@drawable/profile_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"/>
 
     <TextView
@@ -33,10 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/user_image"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textStyle="bold"/>
 
     <TextView
@@ -49,7 +50,7 @@
         android:layout_below="@id/user_name"
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
-        android:textSize="20sp"/>
+        android:textSize="15sp"/>
 
     <androidx.cardview.widget.CardView
         android:layout_below="@id/user_email"
@@ -89,8 +90,8 @@
                         <ImageView
                             android:src="@drawable/dog_paw"
                             android:layout_marginEnd="5dp"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"/>
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"/>
 
                         <LinearLayout
                             android:orientation="vertical"
@@ -99,7 +100,7 @@
 
                             <TextView
                                 android:text="Pets Added:"
-                                android:textSize="15sp"
+                                android:textSize="10sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/pink_300"
                                 android:layout_width="match_parent"
@@ -108,7 +109,7 @@
                             <TextView
                                 android:id="@+id/profile_no_pets_added"
                                 tools:text="2"
-                                android:textSize="22sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/pink_300"
                                 android:textAlignment="center"
@@ -140,8 +141,8 @@
                         <ImageView
                             android:src="@drawable/dog_paw"
                             android:layout_marginEnd="5dp"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"/>
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"/>
 
                         <LinearLayout
                             android:orientation="vertical"
@@ -150,7 +151,7 @@
 
                             <TextView
                                 android:text="Fav Pets:"
-                                android:textSize="15sp"
+                                android:textSize="10sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/pink_300"
                                 android:layout_width="match_parent"
@@ -159,7 +160,7 @@
                             <TextView
                                 android:id="@+id/profile_no_pets_fav"
                                 tools:text="2"
-                                android:textSize="22sp"
+                                android:textSize="15sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/pink_300"
                                 android:textAlignment="center"

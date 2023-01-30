@@ -70,8 +70,7 @@
             android:exported="false" />
         <activity
             android:name=".Activity.ProfileActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:exported="false"/>
         <activity
             android:name=".Activity.SPlashScreenActivity"
             android:exported="true"></activity>
