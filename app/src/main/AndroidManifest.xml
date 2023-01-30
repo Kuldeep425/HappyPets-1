@@ -17,7 +17,10 @@
         <activity
             android:name=".Activity.PetOwnerPreviewActivity"
             android:exported="false" >
-
+        </activity>
+        <activity
+            android:name=".Activity.PetDetailDisplayActivity"
+            android:exported="false" >
         </activity>
         <activity
             android:name=".Activity.AllPetsListActivity"
