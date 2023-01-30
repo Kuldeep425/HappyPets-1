@@ -207,6 +207,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:id="@+id/user_dob"
                     tools:text="29/02/2000"
                     android:layout_toEndOf="@id/dob_box"
                     style="@style/user_profile_inputs"
@@ -239,6 +240,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:id="@+id/user_phone"
                     tools:text="1234567890"
                     android:layout_toEndOf="@id/phone_box"
                     style="@style/user_profile_inputs"
@@ -270,6 +272,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:id="@+id/user_address"
                     tools:text="House 69, Varanasi, Uttar Pradesh"
                     android:layout_toEndOf="@id/address_box"
                     style="@style/user_profile_inputs"
@@ -301,6 +304,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:id="@+id/user_pincode"
                     tools:text="20034"
                     android:layout_toEndOf="@id/pincode_box"
                     style="@style/user_profile_inputs"

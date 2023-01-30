@@ -23,18 +23,21 @@ import retrofit2.Response;
 public class ProfileActivity extends AppCompatActivity {
 
      CircleImageView profileImageView;
-     TextView name,email,phoneNumber;
+     TextView name,email,phoneNumber,dob,address,pincode;
      private void initialize(){
-         profileImageView=findViewById(R.id.profileImage);
-         name=findViewById(R.id.name);
-         email=findViewById(R.id.email);
-         phoneNumber=findViewById(R.id.phoneNumber);
+         profileImageView=findViewById(R.id.user_image);
+         name=findViewById(R.id.user_name);
+         email=findViewById(R.id.user_email);
+         phoneNumber=findViewById(R.id.user_phone);
+         dob = findViewById(R.id.user_dob);
+         address = findViewById(R.id.user_address);
+         pincode = findViewById(R.id.user_pincode);
      }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_profile_new);
         initialize();
         // retrofit service
         RetrofitService retrofitService=new RetrofitService();
