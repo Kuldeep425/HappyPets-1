@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.happypets.Model.Login;
@@ -25,6 +26,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     EditText emailTxt,passwordTxt;
     ImageView loginBtn;
+
     public static String userId;
     public static SharedPreferences userDetail;
     public static  String PREFERENCE_DETAIL="Details";
