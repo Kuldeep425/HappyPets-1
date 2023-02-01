@@ -26,14 +26,15 @@
 
         <EditText
             android:id="@+id/chat_send_message_edit_text"
-            android:inputType="textMultiLine"
-            android:background="@drawable/bg_receive_message"
             android:layout_width="0dp"
-            android:layout_weight="100"
-            android:padding="6dp"
-            android:hint="@string/chat_enter_the_message"
+            android:layout_height="wrap_content"
             android:layout_marginRight="6dp"
-            android:layout_height="wrap_content"/>
+            android:layout_weight="100"
+            android:paddingLeft="5dp"
+            android:background="@drawable/bg_enter_message"
+            android:hint="@string/chat_enter_the_message"
+            android:inputType="textMultiLine"
+            android:padding="6dp" />
 
        <Button
            android:id="@+id/chat_send_message_button"
@@ -46,38 +47,36 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/chat_details_toolbar"
-        android:theme="?attr/actionBarTheme"
-        android:background="@color/light_pink"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/pink_300"
+        android:theme="?attr/actionBarTheme">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/light_pink">
+            android:background="@color/pink_300">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/chat_details_user_image"
-                android:src="@drawable/profile_image"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="6dp"
-                android:layout_marginLeft="6dp"
                 android:layout_width="40dp"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:src="@drawable/profile_image" />
 
             <TextView
-                tools:text="Text"
                 android:id="@+id/chat_details_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:textStyle="bold"
+                android:layout_toRightOf="@id/chat_details_user_image"
                 android:textColor="@color/white"
                 android:textSize="25sp"
-                android:layout_toRightOf="@id/chat_details_user_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold"
+                tools:text="Text" />
         </RelativeLayout>
-
-
 
 
     </androidx.appcompat.widget.Toolbar>

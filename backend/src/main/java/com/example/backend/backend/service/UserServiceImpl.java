@@ -129,11 +129,16 @@ public class UserServiceImpl implements UserService {
           user1.setName(user.getPhoneNumber());
           user1.setPassword(user.getPassword());
           Cloudinary cloudinary=utils.getCloudinary();
-          String profilePicName=file.getOriginalFilename();
-          File profilePic=new File(profilePicName);
+          File profFile=null;
+          try {
+             profFile=utils.convertMultiPartToFile(file);
+          } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
           Map uploadResponse;
           try {
-            uploadResponse=cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+            uploadResponse=cloudinary.uploader().upload(profFile, ObjectUtils.emptyMap());
           } catch (IOException e) {
                return ResponseEntity.ok("File not found");
           }

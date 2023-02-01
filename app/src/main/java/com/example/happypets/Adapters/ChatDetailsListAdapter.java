@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -97,7 +98,6 @@ public class ChatDetailsListAdapter extends RecyclerView.Adapter {
             if (message.getBoolean("isSent")) {
                 SentMessageHolder messageHolder = (SentMessageHolder) holder;
                 messageHolder.messageTxt.setText(message.getString("message"));
-
             }
             else {
                 ReceivedMessageHolder messageHolder = (ReceivedMessageHolder) holder;
@@ -106,6 +106,7 @@ public class ChatDetailsListAdapter extends RecyclerView.Adapter {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
     }
 
     // we create our method to add data to the list and notifys the change
