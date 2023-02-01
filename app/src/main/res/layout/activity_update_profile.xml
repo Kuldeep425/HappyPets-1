@@ -45,6 +45,9 @@
                     android:layout_below="@id/update_profile_image"
                     android:hint="@string/name"
                     app:startIconDrawable="@drawable/update_profile_name"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="#AA033C"
+                    app:helperText="Required*"
                     android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -64,6 +67,9 @@
                     app:startIconDrawable="@drawable/update_profile_email"
                     android:hint="@string/user_profile_email"
                     app:suffixText=".com"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="#AA033C"
+                    app:helperText="Required*"
                     android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -83,7 +89,12 @@
                     android:layout_below="@id/update_profile_email_container"
                     app:startIconDrawable="@drawable/profile_phone"
                     android:hint="@string/user_profile_phone"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="10"
                     android:layout_margin="5dp"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="@color/red_700"
+                    app:helperText="Required*"
                     app:prefixText="+91"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -92,6 +103,7 @@
                         android:id="@+id/update_profile_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxLength="10"
                         android:inputType="numberDecimal" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -159,6 +171,9 @@
                     android:layout_below="@id/update_profile_other_container"
                     app:startIconDrawable="@drawable/profile_address"
                     android:hint="@string/address"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="@color/red_700"
+                    app:helperText="Required*"
                     android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -178,6 +193,9 @@
                     android:layout_below="@id/update_profile_address_container"
                     app:startIconDrawable="@drawable/profile_pincode"
                     android:hint="@string/user_profile_pincode"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="6"
+                    app:counterOverflowTextColor="@color/red_700"
                     android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
