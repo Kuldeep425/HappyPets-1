@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/pink_300"
+    android:layout_height="match_parent"
+    tools:context=".Activity.PetDetailDisplayActivity"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/petdetail_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/petName"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="32dp"
+            android:text="Amber"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.103"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/petName"
+            app:srcCompat="@drawable/location_icon" />
+
+        <TextView
+            android:id="@+id/addressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Teliarganj Mnnit,211004"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.065"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/petName" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addressText">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginVertical="5dp"
+                app:cardBackgroundColor="#F9E4E4"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Male"
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="43dp"
+                    android:text="Sex"
+                    android:textAlignment="center"
+                    android:textSize="11dp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginVertical="5dp"
+                app:cardBackgroundColor="#EBFEE5"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginTop="20dp"
+                    android:text="10 years"
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="43dp"
+                    android:text="Age"
+                    android:textAlignment="center"
+                    android:textSize="11dp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginVertical="5dp"
+                app:cardBackgroundColor="#E5F1FE"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="10kg"
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="43dp"
+                    android:text="weight"
+                    android:textAlignment="center"
+                    android:textSize="11dp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/category_dog_backgroud"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginVertical="10dp"
+                    android:src="@drawable/virat_kohli" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="27dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/userNametxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:text="Kuldeep"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/userAddresstxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ayodhya, 272127" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="40dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageViewChat"
+                    android:layout_width="1dp"
+                    android:layout_height="27dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/chat" />
+
+                <ImageView
+                    android:id="@+id/imageVideoCall"
+                    android:layout_width="6dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/video_call" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/aboutTextview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="3dp"
+                    android:paddingLeft="10dp"
+                    android:text="Hi, This is my favourite pet I used to play with him ,But now as the T-20 world is there I need to full concentration on my practice so I want a sincere pet lover to adopt my loved one."
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/AdoptMebtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adopt me"
+            android:layout_marginBottom="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/bg_btn"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/parrot" />
+</androidx.constraintlayout.widget.ConstraintLayout>

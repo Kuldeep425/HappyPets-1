@@ -70,7 +70,6 @@ public class PetsFragment extends Fragment {
          //adding functionality to the view containers
         emptyList = rootView.findViewById(R.id.pets_empty_list_container);
         populatedList = rootView.findViewById(R.id.pets_list_container);
-
          //if adapter is empty different thing is seen
         if(userPetsListAdapter==null || userPetsListAdapter.getItemCount()==0){
             emptyList.setVisibility(View.VISIBLE);
@@ -92,7 +91,6 @@ public class PetsFragment extends Fragment {
                 startActivity(addPetsIntent);
             }
         });
-
 
 
         return rootView;

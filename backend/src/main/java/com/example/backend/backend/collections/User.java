@@ -24,6 +24,7 @@ public class User {
     private String phoneNumber;
     private String  imageURL;
     private List<String>postedPetId;
+    private List<String>favouritePetId;
     private boolean hasLoggedIn=false;
     private boolean verified=false;
 }

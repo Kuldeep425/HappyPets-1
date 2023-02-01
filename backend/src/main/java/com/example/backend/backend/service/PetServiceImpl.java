@@ -105,6 +105,39 @@ public class PetServiceImpl implements PetService {
          return result;
     }
 
+
+    // add pet in user's favourite pet list
+    @Override
+    public ResponseEntity<?> addToFavourite(String userId, String petId) {
+           if(userRepo.findById(userId).isEmpty()) return ResponseEntity.ok("User not found");
+           if(petRepo.findById(petId).isEmpty()) return ResponseEntity.ok("Pet not found");
+           User user=userRepo.findById(userId).get();
+           List<String>FavPetId=user.getFavouritePetId();
+           if(FavPetId==null){
+              List<String>pid=new ArrayList<>();
+              pid.add(petId);
+              user.setFavouritePetId(pid);
+           }
+           else
+           FavPetId.add(petId);
+           userRepo.save(user);
+           return ResponseEntity.ok("Pet added successfully");   
+    }
+
+
+    // get all favourite pets of a specific user
+    @Override
+    public List<Pet> getAllFovouritePets(String userId) {
+        if(userRepo.findById(userId).isEmpty()) return null;
+            List<String>petsId=userRepo.findById(userId).get().getFavouritePetId();
+            if(petsId==null) return null;
+            List<Pet>p=new ArrayList<>();
+            for(int i=0; i<petsId.size(); i++){
+                 if(petRepo.findById(petsId.get(i)).isPresent()==true) p.add(petRepo.findById(petsId.get(i)).get());
+            }
+            return p;
+    }
+
   
 
 

@@ -68,4 +68,18 @@ public class PetController {
     public List<Pet> getNewestPosted(){
          return petService.getNewestPosted();
     }
+
+    //add to favourite 
+    @PostMapping("/add/to/favourite/{userId}/{petId}")
+    public ResponseEntity<?> addToFavourite(@PathVariable("userId") String userId, @PathVariable("petId") String petId){
+        return petService.addToFavourite(userId,petId);
+    }
+
+    //get all favourite pets of a specific user
+
+    @GetMapping("/get/all/favourite/pets/{userId}")
+    public List<Pet> getAllFavouritePets(@PathVariable("userId") String userId){
+        return petService.getAllFovouritePets(userId);
+    }
+
 }
