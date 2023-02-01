@@ -15,9 +15,6 @@
         android:theme="@style/Theme.HappyPets"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".UpdateProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.PetOwnerPreviewActivity"
             android:exported="false"></activity>
         <activity
@@ -61,7 +58,7 @@
             android:exported="false" />
         <activity
             android:name=".Activity.PetDisplayActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Activity.SignupActivity"
             android:exported="false" />
@@ -72,8 +69,11 @@
             android:name=".Activity.ProfileActivity"
             android:exported="false"/>
         <activity
+            android:name=".Activity.UpdateProfileActivity"
+            android:exported="false"/>
+        <activity
             android:name=".Activity.SPlashScreenActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
