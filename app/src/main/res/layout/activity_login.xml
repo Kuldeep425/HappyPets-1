@@ -134,7 +134,6 @@ tools:context=".Activity.LoginActivity">
                 android:textSize="15dp"
                 android:text="Don't have an account ? sign up"
                 android:layout_marginTop="15dp"
-                android:onClick="goToRegistrationPage"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:gravity="center"/>
