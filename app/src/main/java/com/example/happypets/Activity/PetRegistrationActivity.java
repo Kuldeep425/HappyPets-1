@@ -72,16 +72,6 @@ public class PetRegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_registeration);
 
-       /* backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PetRegistrationActivity.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
-        */
-
         pet_profile_image = findViewById(R.id.pet_profile_image);
         registerPetName= findViewById(R.id.registerPetName);
         registerPetBreed = findViewById(R.id.registerPetBreed);
@@ -143,7 +133,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 pet.setName(PetName);
                 pet.setAge(PetAge);
                 pet.setBreed(PetBreed);
-               pet.setCategory(Category);
+                pet.setCategory(Category);
                 pet.setGender(Gender);
                 System.out.println("path: "+path);
                 File image=new File(path);
@@ -165,7 +155,6 @@ public class PetRegistrationActivity extends AppCompatActivity {
                     public void onFailure(Call<String> call, Throwable t) {
                         System.out.println(t);
                         System.out.println(call);
-                        System.out.println("hhhhhhhhhhhh");
                         Toast.makeText(PetRegistrationActivity.this, "error", Toast.LENGTH_SHORT).show();
 
                     }

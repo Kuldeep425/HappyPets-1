@@ -37,7 +37,7 @@ public class UserController {
    @Autowired PasswordEncoder passwordEncoder;
 
 
-   
+   // register a user
    @PostMapping("/register/user")
    public ResponseEntity<?> registerUser(@RequestBody User user,
    final HttpServletRequest request){
@@ -48,12 +48,14 @@ public class UserController {
     return ResponseEntity.ok(user1.getId());
    }
 
+   // update user profile
    @PostMapping("/update/user")
     public ResponseEntity<?> updateUser(@RequestPart("image") MultipartFile file,
     @RequestPart("user") User user){
       return userService.updateUser(user,file);
     }
    
+    // to verify email 
    @GetMapping("/verifyRegistration")
    public String verfifyUserRegisration(@RequestParam ("token") String token){
      String res=userService.VerifyTokenAndValidateUser(token); 
@@ -61,12 +63,14 @@ public class UserController {
      return res;
    }
    
+   // to login the user 
    @PostMapping("/login/user")
    public ResponseEntity<?> loginUser(@RequestBody LoginModel loginModel) throws Exception{
        System.out.println(loginModel.getEmail());
        return userService.loginUser(loginModel);
    }
-
+  
+   // to logout the user
    @GetMapping("/logout/user/{userId}")
    public ResponseEntity<?>logoutUser(@PathVariable ("userId") String userId){
       return userService.logoutUser(userId);
@@ -90,7 +94,7 @@ public class UserController {
 
 
 
-
+     
      private String applicationUrl(HttpServletRequest request) {
       return "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
     }

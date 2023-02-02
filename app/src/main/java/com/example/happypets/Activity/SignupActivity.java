@@ -111,7 +111,6 @@ public class SignupActivity extends AppCompatActivity {
                 File image=new File(path);
                 RequestBody requestFile=RequestBody.create(MediaType.parse("multipart/form-data"),image);
                 MultipartBody.Part body = MultipartBody.Part.createFormData("image", image.getName(), requestFile);
-                System.out.println(user.getEmail());
                 apiCall.registerUser(body,user).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -142,7 +141,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-    // to choose a pet photo from gallery
+    // to choose a user photo from gallery
     public void chooseImageFromGallery() {
         Intent i = new Intent();
         i.setType("image/*");
@@ -159,7 +158,6 @@ public class SignupActivity extends AppCompatActivity {
                     Intent data = result.getData();
                     if (data != null
                             && data.getData() != null) {
-                        System.out.println("In path finder");
                         selectedImageUri = data.getData();
                         Context context=SignupActivity.this;
                         path= RealPathUtil.getRealPath(context,selectedImageUri);
