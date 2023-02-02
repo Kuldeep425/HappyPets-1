@@ -13,7 +13,7 @@ import com.example.backend.backend.collections.User;
 
 public interface UserService {
 
-    User registerUser(User user,MultipartFile file);
+    User registerUser(User user);
    
 
     Optional<User> getUserByUserId(String user_id);
@@ -26,5 +26,8 @@ public interface UserService {
 
 
     List<User> getAllUsers();
+
+
+    ResponseEntity<?> updateUser(User user, MultipartFile file);
     
 }

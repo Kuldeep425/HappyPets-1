@@ -58,8 +58,14 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="create_account">Create \nAccount</string>
-    <string name="name">Name</string>
     <string name="forget_password">Forget your password? Recovery it</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="name">Name</string>
+    <string name="user_profile_email">Email</string>
+    <string name="user_profile_pincode">Pincode</string>
+    <string name="user_profile_phone">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="save">Save</string>
 
 </resources>
 

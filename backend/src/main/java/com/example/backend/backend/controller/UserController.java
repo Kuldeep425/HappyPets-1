@@ -36,16 +36,23 @@ public class UserController {
    @Autowired private GenerateToken generateToken;
    @Autowired PasswordEncoder passwordEncoder;
 
+
+   
    @PostMapping("/register/user")
-   public ResponseEntity<?> registerUser(@RequestPart("image") MultipartFile file,
-   @RequestPart("user") User user,
+   public ResponseEntity<?> registerUser(@RequestBody User user,
    final HttpServletRequest request){
     Optional<User>user2=userRepo.findByEmail(user.getEmail());
     if(user2.isPresent() && user2.get().isVerified()) return ResponseEntity.ok("Already registered Email");
-    User user1=userService.registerUser(user,file);
-     generateToken.generateToekn(user1,"Register", applicationUrl(request));
+    User user1=userService.registerUser(user);
+    generateToken.generateToekn(user1,"Register", applicationUrl(request));
     return ResponseEntity.ok(user1.getId());
    }
+
+   @PostMapping("/update/user")
+    public ResponseEntity<?> updateUser(@RequestPart("image") MultipartFile file,
+    @RequestPart("user") User user){
+      return userService.updateUser(user,file);
+    }
    
    @GetMapping("/verifyRegistration")
    public String verfifyUserRegisration(@RequestParam ("token") String token){
@@ -65,17 +72,24 @@ public class UserController {
       return userService.logoutUser(userId);
    }
    
+    // to find the specific user 
     @GetMapping("/get/user/{userId}")
     public Optional<User> getUserByUserId(@PathVariable String userId){ 
      return userService.getUserByUserId(userId); 
      }
 
      //to find all users
-
      @GetMapping("/get/all/users")
      public List<User> getAllUser(){
        return userService.getAllUsers();
      }
+
+     // to add favourite 
+
+     
+
+
+
 
      private String applicationUrl(HttpServletRequest request) {
       return "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();

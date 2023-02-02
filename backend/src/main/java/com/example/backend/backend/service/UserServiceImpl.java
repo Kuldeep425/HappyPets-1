@@ -19,6 +19,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.*;
+
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.example.backend.backend.Model.LoginModel;
 import com.example.backend.backend.Reposistory.TokenRepo;
 import com.example.backend.backend.Reposistory.UserRepo;
@@ -27,6 +30,7 @@ import com.example.backend.backend.collections.User;
 import com.example.backend.backend.config.SecurityConfigurer;
 import com.example.backend.backend.utils.DataBucketUtil;
 import com.example.backend.backend.utils.JwtUtil;
+import com.example.backend.backend.utils.Utils;
 import com.google.gson.JsonObject;
 
 @Service
@@ -39,28 +43,12 @@ public class UserServiceImpl implements UserService {
     @Autowired private AuthenticationManager authenticationManager;
     @Autowired private JwtUtil jwtUtil;
     @Autowired private JwtUserDetail jwtUserDetail;
+    @Autowired private Utils utils;
 
     // register a user 
     @Override
-    public User registerUser(User user,MultipartFile file) {
+    public User registerUser(User user) {
         user.setPassword(securityConfigurer.passwordEncoder().encode(user.getPassword()));
-        String originalFileName=file.getOriginalFilename();
-        if(originalFileName==null){
-           return null;
-         }
-        Path path=new File(originalFileName).toPath();
-        String url=null;
-         try {
-          String contentType=Files.probeContentType(path);
-           try {
-            url=dataBucketUtil.uploadFile(file,originalFileName,contentType);
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-        user.setImageURL(url);
        return userRepo.save(user);
     }
 
@@ -129,6 +117,30 @@ public class UserServiceImpl implements UserService {
   public List<User> getAllUsers() {
      return userRepo.findAll();
   }
+
+
+
+  // update user
+  @Override
+  public ResponseEntity<?> updateUser(User user, MultipartFile file){
+          if(userRepo.findById(user.getId()).isEmpty()) return ResponseEntity.ok("No user found with associated userId");
+          User user1=userRepo.findById(user.getId()).get();
+          user1.setName(user.getName());
+          user1.setName(user.getPhoneNumber());
+          user1.setPassword(user.getPassword());
+          Cloudinary cloudinary=utils.getCloudinary();
+          String profilePicName=file.getOriginalFilename();
+          File profilePic=new File(profilePicName);
+          Map uploadResponse;
+          try {
+            uploadResponse=cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+          } catch (IOException e) {
+               return ResponseEntity.ok("File not found");
+          }
+          String url=(String) uploadResponse.get("url");
+          user1.setImageURL(url);
+          return ResponseEntity.ok("user updated successfully");
+        }
 
 
   

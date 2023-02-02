@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.example.happypets.Model.Login;
@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         RetrofitService retrofitService=new RetrofitService();
         APICall apiCall=retrofitService.getRetrofit().create(APICall.class);
 
-        // to login
+         //to login
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
