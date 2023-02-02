@@ -45,7 +45,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private final String TAG = SignupActivity.class.getName();
 
-    private EditText nameEdtxt,phoneNumberEdtxt,emailEdtxt,passwordEdtxt;
+    private EditText nameEdtxt,emailEdtxt,passwordEdtxt;
     private ImageView registerbtn;
     private ProgressDialog progressDialog;
 
@@ -71,6 +71,9 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_new);
         initialize();
+        
+        // removing action bar
+        getSupportActionBar().hide();
 
         // creating retrofit service
         RetrofitService retrofitService = new RetrofitService();
@@ -87,13 +90,12 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //checking input
-                boolean flag = checkUserInput();
-                if(flag){
+                boolean fieldsCorrect = checkUserInput();
+                if(fieldsCorrect){
                     // open progress dialog
                     progressDialogOpen();
-                    // creating user object
+                    // creating user object to send
                     User user = new User(name,email,password);
-
                     // calling api
                     apiCall.signupUser(user).enqueue(new Callback<User>() {
                         @Override
@@ -120,11 +122,11 @@ public class SignupActivity extends AppCompatActivity {
 
     // this method is to check if the input given by the user is valid
     private boolean checkUserInput(){
-        boolean flag = true;
-        if(name.length()==0) flag = false;
-        else if(email.length()==0) flag = false;
+        boolean notEmptyField = true;
+        if(name.length()==0) notEmptyField = false;
+        else if(email.length()==0) notEmptyField = false;
         // checking password
-        else if(password.length()==0) flag = false;
+        else if(password.length()==0) notEmptyField = false;
 
         boolean ncheck=true, ccheck=true, capcheck=true;
         for(char ch : password.toCharArray()){
@@ -132,24 +134,23 @@ public class SignupActivity extends AppCompatActivity {
             else if(ch>='0' && ch<='9') ncheck=false;
             else if(ch>='A' && ch<='Z') capcheck = false;
         }
-        boolean passflag = ncheck && ccheck && capcheck && (password.length()<6);
+        boolean notRightPassword = ncheck && ccheck && capcheck && (password.length()<6);
 
         //showing the toast message
-        if(!flag) Toast.makeText(SignupActivity.this,  "Please fill empty fields", Toast.LENGTH_SHORT).show();
+        if(!notEmptyField) Toast.makeText(SignupActivity.this,  "Please fill empty fields", Toast.LENGTH_SHORT).show();
 
-        if(!passflag) Toast.makeText(SignupActivity.this, "Password should be more than 6 digits. \nIt should have a " +
+        if(!notRightPassword) Toast.makeText(SignupActivity.this, "Password should be more than 6 digits. \nIt should have a " +
                 "capital letter, a number and a small letter", Toast.LENGTH_SHORT);
 
-        return flag && passflag;
+        return notEmptyField && notRightPassword;
 
     }
-    // method to make empty to all fields if verification link has been sent
 
+    // method to make empty to all fields if verification link has been sent
     private void makeEmptyToAllfield(){
         nameEdtxt.setText("");
         emailEdtxt.setText("");
         passwordEdtxt.setText("");
-        phoneNumberEdtxt.setText("");
     }
 
 
@@ -176,7 +177,7 @@ public class SignupActivity extends AppCompatActivity {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("Successfully sent");
         builder.setIcon(R.drawable.rightcheck);
-        builder.setMessage("We have sent verification link on "+nameEdtxt.getText().toString()+"\n\nplease verify for further process..😊😊\nPlease verify and login");
+        builder.setMessage("We have sent verification link on "+nameEdtxt.getText().toString()+"\n\nplease verify for further process..\nPlease verify and login");
         builder.setCancelable(true);
         builder.setPositiveButton(
                 "ok",

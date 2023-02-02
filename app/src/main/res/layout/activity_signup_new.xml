@@ -105,6 +105,7 @@
                 android:textColor="@color/black_300"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="8dp"/>
         </LinearLayout>
     </ScrollView>
