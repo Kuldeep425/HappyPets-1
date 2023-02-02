@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.happypets.Model.Login;
@@ -17,19 +19,16 @@ import com.example.happypets.Model.LoginResponse;
 import com.example.happypets.R;
 import com.example.happypets.Retrofit.APICall;
 import com.example.happypets.Retrofit.RetrofitService;
-import com.google.android.gms.common.util.JsonUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText emailTxt,passwordTxt;
-    ImageView loginBtn;
+    private EditText emailTxt,passwordTxt;
+    private ImageView loginBtn;
+    private TextView signInText;
+
     public static String userId;
     public static SharedPreferences userDetail;
     public static  String PREFERENCE_DETAIL="Details";
@@ -41,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         emailTxt=findViewById(R.id.loginEmail);
         passwordTxt=findViewById(R.id.loginPassword);
         loginBtn=findViewById(R.id.loginButton);
+        signInText=findViewById(R.id.textView2);
     }
     // open progress
     public void progressDialogOpen(){
@@ -53,8 +53,20 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_new);
+        setContentView(R.layout.activity_login);
         initialize();
+
+        //removing action bar
+        getSupportActionBar().hide();
+
+        //setting listener to the sign in redirecting text
+        signInText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),SignupActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // retrofit service
         RetrofitService retrofitService=new RetrofitService();
@@ -113,10 +125,5 @@ public class LoginActivity extends AppCompatActivity {
              });
             }
         });
-    }
-
-  // go to registration page if don't have account
-    public void goToRegistrationPage(View v){
-        startActivity(new Intent(LoginActivity.this, SignupActivity.class));
     }
 }

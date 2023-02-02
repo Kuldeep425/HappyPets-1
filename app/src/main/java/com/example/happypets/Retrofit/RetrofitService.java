@@ -16,6 +16,12 @@ public class RetrofitService {
     }
 
     private void initializeRetrofit() {
+
+        /*
+        * creating OkHttpClient for connecting with http
+        * here we increase the connection time because image is sent is will take a lot of time
+        * so we need to increase the connection time out time
+         */
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         client.connectTimeout(400, TimeUnit.SECONDS);
         client.readTimeout(400, TimeUnit.SECONDS);

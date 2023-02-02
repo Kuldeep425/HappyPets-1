@@ -55,6 +55,10 @@
     <string name="search_pet_here"><i>Search pet here</i></string>
     <string name="share_your_beloved_pet">Share your beloved pet</string>
     <string name="oops_list_is_empty">OOPS!! List is empty</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="create_account">Create \nAccount</string>
+    <string name="forget_password">Forget your password? Recovery it</string>
     <string name="update_profile">Update Profile</string>
     <string name="name">Name</string>
     <string name="user_profile_email">Email</string>
