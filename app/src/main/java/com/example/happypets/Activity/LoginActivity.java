@@ -90,9 +90,9 @@ public class LoginActivity extends AppCompatActivity {
              apiCall.loginUser(login).enqueue(new Callback<LoginResponse>() {
                  @Override
                  public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                     Toast.makeText(LoginActivity.this, "Login", Toast.LENGTH_SHORT).show();
                      if(response.body()==null){
-                         Toast.makeText(LoginActivity.this, "check entered credentials", Toast.LENGTH_SHORT).show();
+                         Toast.makeText(LoginActivity.this, "email or password is not correct", Toast.LENGTH_SHORT).show();
+                          progressDialog.dismiss();
                          return;
                      }
                      /*

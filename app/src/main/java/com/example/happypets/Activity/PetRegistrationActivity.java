@@ -165,6 +165,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                     public void onFailure(Call<String> call, Throwable t) {
                         System.out.println(t);
                         System.out.println(call);
+                        System.out.println("hhhhhhhhhhhh");
                         Toast.makeText(PetRegistrationActivity.this, "error", Toast.LENGTH_SHORT).show();
 
                     }

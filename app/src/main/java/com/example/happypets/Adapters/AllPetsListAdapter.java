@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.happypets.Activity.ChatDetailActivity;
+import com.example.happypets.Activity.PetDetailDisplayActivity;
 import com.example.happypets.Model.Pet;
 import com.example.happypets.R;
 import com.squareup.picasso.Picasso;
@@ -78,6 +79,8 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
             @Override
             public void onClick(View v) {
                 //adding functionality
+                Intent intent=new Intent(context, PetDetailDisplayActivity.class);
+                context.startActivity(intent);
             }
         });
 

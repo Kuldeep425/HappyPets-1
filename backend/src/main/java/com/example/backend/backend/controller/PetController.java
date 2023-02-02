@@ -1,5 +1,6 @@
 package com.example.backend.backend.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale.Category;
@@ -27,12 +28,12 @@ public class PetController {
 
     // to post a pet 
     @PostMapping("/post/pet/{userId}")
-    public String postAPost(@PathVariable String userId,
+    public ResponseEntity<?> postAPost(@PathVariable String userId,
     @RequestPart ("image") MultipartFile file,
-    @RequestPart ("pet") Pet pet){
+    @RequestPart ("pet") Pet pet) throws IOException{
       System.out.println("api is called");
       System.out.println(pet.getName());
-     return petService.postAPet(userId,pet,file);
+     return ResponseEntity.ok(petService.postAPet(userId,pet,file));
     }
 
     // to get all posted pet of specific user

@@ -23,9 +23,9 @@ public class RetrofitService {
         * so we need to increase the connection time out time
          */
         OkHttpClient.Builder client = new OkHttpClient.Builder();
-        client.connectTimeout(200, TimeUnit.SECONDS);
-        client.readTimeout(200, TimeUnit.SECONDS);
-        client.writeTimeout(200, TimeUnit.SECONDS);
+        client.connectTimeout(400, TimeUnit.SECONDS);
+        client.readTimeout(400, TimeUnit.SECONDS);
+        client.writeTimeout(400, TimeUnit.SECONDS);
 
 
         retrofit=new Retrofit.Builder()
