@@ -2,23 +2,6 @@
     <string name="app_name">HappyPets</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string-array name="Gender">
-        <item>Select pets Gender</item>
-        <item>Female</item>
-        <item>Male</item>
-
-    </string-array>
-
-
-    <string-array name="PetCategory">
-        <item>Select pets category</item>
-        <item>Dog</item>
-        <item>Cat</item>
-        <item>Bird</item>
-        <item>Rabbit</item>
-        <item>Others</item>
-
-    </string-array>
 
     <!--    string for tab layout-->
     <string name="info_tab">Info</string>
@@ -66,6 +49,27 @@
     <string name="user_profile_phone">Phone Number</string>
     <string name="address">Address</string>
     <string name="save">Save</string>
+    <string name="pets_name">Pet\'s Name</string>
+    <string name="pet_s_type">Type</string>
+    <string name="pet_s_gender">Gender</string>
+    <string name="pet_s_breed">Pet\'s Breed</string>
+    <string name="pet_s_color">Pet\'s Color</string>
+
+<!--    string for drop down menu -->
+    <string-array name="pets_menu_gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="pets_menu_type">
+        <item>Dog</item>
+        <item>Cat</item>
+        <item>Fish</item>
+        <item>Rabbit</item>
+        <item>Bird</item>
+        <item>Other</item>
+    </string-array>
 
 </resources>
 

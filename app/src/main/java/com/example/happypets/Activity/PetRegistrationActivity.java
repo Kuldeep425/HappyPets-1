@@ -22,6 +22,9 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -54,36 +57,88 @@ public class PetRegistrationActivity extends AppCompatActivity {
 
     String path;
     private CircleImageView pet_profile_image;
-    private TextInputEditText registerPetName,registerPetBreed,
-            registerPetAge, registerPetWeight;
-    private Spinner GenderSpinner,CategorySpinner;
+    private TextInputEditText registerPetName,registerPetBreed, registerPetAge, registerPetWeight, registerPetColor;
+    private AutoCompleteTextView registerPetGender,registerPetType;
     private Button registerButton ;
+
     private Uri selectedImageUri;
     private Bitmap selectedImageBitmap;
 
     private ProgressDialog loader ;
 
+    // getting values from the user
+    String name, breed, age, weight, color, type, gender;
 
 
+    //this object is used to handle the object which would be responsible for creating path for image
+    // and also obtaining image from user input
+    private ActivityResultLauncher<Intent> launchSomeActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null && data.getData() != null) {
+                        System.out.println("In path finder");
+                        selectedImageUri = data.getData();
+                        path = RealPathUtil.getRealPath(PetRegistrationActivity.this,selectedImageUri);
+                        System.out.println(path);
+                        try {
+                            selectedImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        pet_profile_image.setImageBitmap(selectedImageBitmap);
+                    }
+                }
+            });
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //obtaining list of options for drop down menu
+        String[] pets_type = getResources().getStringArray(R.array.pets_menu_type);
+        String[] pets_gender = getResources().getStringArray(R.array.pets_menu_gender);
+        // creating array adapters
+        ArrayAdapter<String> type_adapter = new ArrayAdapter<>(getApplicationContext(),R.layout.pets_registration_drop_down_item, pets_type);
+        ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(getApplicationContext(),R.layout.pets_registration_drop_down_item, pets_gender);
+        //setting Array Adapters
+        registerPetGender.setAdapter(gender_adapter);
+        registerPetType.setAdapter(type_adapter);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pet_registeration);
 
+        setContentView(R.layout.activity_pet_registration_new);
+
+        // hooking various layouts to java
         pet_profile_image = findViewById(R.id.pet_profile_image);
-        registerPetName= findViewById(R.id.registerPetName);
-        registerPetBreed = findViewById(R.id.registerPetBreed);
-        registerPetAge = findViewById(R.id.registerPetAge);
-        registerPetWeight = findViewById(R.id.registerPetWeight);
-        GenderSpinner = findViewById(R.id.GenderSpinner);
-        CategorySpinner = findViewById(R.id.CategorySpinner);
-        registerButton = findViewById(R.id.registerButton);
+        registerPetName= findViewById(R.id.register_pet_name);
+        registerPetBreed = findViewById(R.id.register_pet_breed);
+        registerPetAge = findViewById(R.id.register_pet_age);
+        registerPetWeight = findViewById(R.id.register_pet_weight);
+        registerPetColor = findViewById(R.id.register_pet_color);
+        registerPetGender = findViewById(R.id.register_pet_type);
+        registerPetType = findViewById(R.id.register_pet_gender);
+        registerButton = findViewById(R.id.register_pet_save);
+
+        //creating object for the progress loader
         loader = new ProgressDialog(this);
 
+        //obtaining list of options for drop down menu
+        String[] pets_type = getResources().getStringArray(R.array.pets_menu_type);
+        String[] pets_gender = getResources().getStringArray(R.array.pets_menu_gender);
+        // creating array adapters
+        ArrayAdapter<String> type_adapter = new ArrayAdapter<>(getApplicationContext(),R.layout.pets_registration_drop_down_item, pets_type);
+        ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(getApplicationContext(),R.layout.pets_registration_drop_down_item, pets_gender);
+        // setting array adapter
+        registerPetGender.setAdapter(gender_adapter);
+        registerPetType.setAdapter(type_adapter);
 
 
+        // setting functionality of the register button
         pet_profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,49 +151,51 @@ public class PetRegistrationActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String PetName = registerPetName.getText().toString().trim();
-                final String PetBreed = registerPetBreed.getText().toString().trim();
-                final String PetAge = registerPetAge.getText().toString().trim();
-                final String PetWeight = registerPetWeight.getText().toString().trim();
-                final String Gender = GenderSpinner.getSelectedItem().toString();
-                final String Category = CategorySpinner.getSelectedItem().toString();
+                name = registerPetName.getText().toString().trim();
+                breed = registerPetBreed.getText().toString().trim();
+                age = registerPetAge.getText().toString().trim();
+                weight = registerPetWeight.getText().toString().trim();
+                color = registerPetColor.getText().toString().trim();
 
-                if(TextUtils.isEmpty(PetName)){
-                    registerPetName.setError("PetName is required!");
-                    return;
-                }
-                if(TextUtils.isEmpty(PetBreed)){
-                    registerPetBreed.setError("PetBreed is required!");
-                    return;
-                }
+                //obtaining selected item
+                registerPetGender.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        gender = gender_adapter.getItem(position);
+                    }
+                });
+                registerPetType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        type = type_adapter.getItem(position);
+                    }
+                });
 
-                if(TextUtils.isEmpty(PetAge)){
-                    registerPetAge.setError("PetAge is required!");
-                    return;
-                }
-                if(TextUtils.isEmpty(PetWeight)){
-                    registerPetWeight.setError("PetWeight is required!");
-                    return;
-                }
 
-                if(Gender.equals("Select pet's gender here!!")){
-                    Toast.makeText(PetRegistrationActivity.this, "Select your pet's gender!!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                // checking if all the entered inputs are correct
+                boolean correctFields = true;
+                if(name.length()==0 || breed.length()==0 || age.length()==0 || weight.length()==0) correctFields=false;
+
+                // if fields not correct then show toast message
+                if(!correctFields) Toast.makeText(PetRegistrationActivity.this,"Fill all fields",Toast.LENGTH_SHORT).show();
                 if(selectedImageUri==null){
                     Toast.makeText(PetRegistrationActivity.this, "Please select a image", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Pet pet=new Pet();
-                pet.setName(PetName);
-                pet.setAge(PetAge);
-                pet.setBreed(PetBreed);
-                pet.setCategory(Category);
-                pet.setGender(Gender);
+
+                // creating a pet object to send it through the api end point
+                Pet pet = new Pet(name,type,gender,breed,age,weight,color);
+
                 System.out.println("path: "+path);
+
+                // creating a file containing the path for the image that we are sending
                 File image=new File(path);
+                // creating a request to send it to the cloud
                 RequestBody requestFile=RequestBody.create(MediaType.parse("multipart/form-data"),image);
+                //crating a multibody to sent the request file through the api end point
                 MultipartBody.Part body = MultipartBody.Part.createFormData("image", image.getName(), requestFile);
+
+                // creating retrofit to use the api
                 RetrofitService retrofitService = new RetrofitService();
                 APICall apiCall = retrofitService.getRetrofit().create(APICall.class);
 
@@ -176,36 +233,12 @@ public class PetRegistrationActivity extends AppCompatActivity {
 
     // to choose a pet photo from gallery
     public void chooseImageFromGallery() {
-        Intent i = new Intent();
-        i.setType("image/*");
-        i.setAction(Intent.ACTION_GET_CONTENT);
-        launchSomeActivity.launch(i);
+        // creating an intent to open the picture selecting dialog and obtaining value from it
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        // launchSomeActivity is an object which is used to open intent and obtain value in the form of bitmap
+        launchSomeActivity.launch(intent);
     }
-    ActivityResultLauncher<Intent> launchSomeActivity
-            = registerForActivityResult(
-            new ActivityResultContracts
-                    .StartActivityForResult(),
-            result -> {
-                if (result.getResultCode()
-                        == Activity.RESULT_OK) {
-                    Intent data = result.getData();
-                    if (data != null
-                            && data.getData() != null) {
-                        System.out.println("In path finder");
-                        selectedImageUri = data.getData();
-                        Context context=PetRegistrationActivity.this;
-                        path=RealPathUtil.getRealPath(context,selectedImageUri);
-                        System.out.println(path);
-                        try {
-                            selectedImageBitmap
-                                    = MediaStore.Images.Media.getBitmap(
-                                    this.getContentResolver(),
-                                    selectedImageUri);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        pet_profile_image.setImageBitmap(selectedImageBitmap);
-                    }
-                }
-            });
+
 }
