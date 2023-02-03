@@ -26,5 +26,6 @@ public class User {
     private List<String>postedPetId;
     private List<String>favouritePetId;
     private boolean hasLoggedIn=false;
+    private boolean isProfileCompleted=false;
     private boolean verified=false;
 }

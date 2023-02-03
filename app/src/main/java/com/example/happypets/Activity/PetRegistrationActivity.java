@@ -110,6 +110,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_pet_registration_new);
 
         // hooking various layouts to java
@@ -184,6 +185,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
 
                 // creating a pet object to send it through the api end point
                 Pet pet = new Pet(name,type,gender,breed,age,weight,color);
+
                 System.out.println("path: "+path);
 
                 // creating a file containing the path for the image that we are sending

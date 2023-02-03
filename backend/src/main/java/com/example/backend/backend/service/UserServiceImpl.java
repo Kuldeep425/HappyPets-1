@@ -23,6 +23,7 @@ import java.util.*;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.example.backend.backend.Model.LoginModel;
+import com.example.backend.backend.Model.LoginResponse;
 import com.example.backend.backend.Reposistory.TokenRepo;
 import com.example.backend.backend.Reposistory.UserRepo;
 import com.example.backend.backend.collections.Token;
@@ -96,10 +97,8 @@ public class UserServiceImpl implements UserService {
         if(user.isVerified()==false) throw new Exception("Account is not verified");
         String  token=jwtUtil.generateToken(jwtUserDetail.loadUserByUsername(loginModel.getEmail()));
         System.out.println(token);
-        HashMap<String,String>map=new HashMap<>();
-        map.put("id",user.getId());
-        map.put("token",token);
-        return ResponseEntity.ok(map); 
+       LoginResponse loginResponse=new LoginResponse(user.getId(),token,user.isProfileCompleted());
+        return ResponseEntity.ok(loginResponse); 
    }
 
    // logout the user
@@ -129,20 +128,21 @@ public class UserServiceImpl implements UserService {
           user1.setName(user.getPhoneNumber());
           user1.setPassword(user.getPassword());
           Cloudinary cloudinary=utils.getCloudinary();
-          String profilePicName=file.getOriginalFilename();
-          File profilePic=new File(profilePicName);
+          File profFile=null;
+          try {
+             profFile=utils.convertMultiPartToFile(file);
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
           Map uploadResponse;
           try {
-            uploadResponse=cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+            uploadResponse=cloudinary.uploader().upload(profFile, ObjectUtils.emptyMap());
           } catch (IOException e) {
                return ResponseEntity.ok("File not found");
           }
           String url=(String) uploadResponse.get("url");
           user1.setImageURL(url);
+          user1.setProfileCompleted(true);
           return ResponseEntity.ok("user updated successfully");
         }
-
-
-  
-   
 }

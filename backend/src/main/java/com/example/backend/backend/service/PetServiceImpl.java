@@ -1,11 +1,13 @@
 package com.example.backend.backend.service;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.bson.BsonBinarySubType;
@@ -15,10 +17,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.example.backend.backend.Reposistory.PetRepo;
 import com.example.backend.backend.Reposistory.UserRepo;
 import com.example.backend.backend.collections.*;
 import com.example.backend.backend.utils.DataBucketUtil;
+import com.example.backend.backend.utils.Utils;
 
 
 @Service
@@ -30,30 +35,30 @@ public class PetServiceImpl implements PetService {
       private PetRepo petRepo;
      @Autowired
       private DataBucketUtil dataBucketUtil;
+     @Autowired 
+      private Utils utils;
 
     // post a pet to adopt 
     @Override
-    public String postAPet(String userId, Pet pet, MultipartFile file) {
+    public String postAPet(String userId, Pet pet, MultipartFile file){
       Optional<User>user=userRepo.findById(userId);
-      if(user.isEmpty())
-        return "logged in user not found";
+      if(user.isEmpty()) return "user not found";
         pet.setOwnerId(userId);
-        String originalFileName=file.getOriginalFilename();
-        if(originalFileName==null){
-           return "original file name is null";
-         }
-        Path path=new File(originalFileName).toPath();
         String url=null;
-         try {
-          String contentType=Files.probeContentType(path);
-           try {
-            url=dataBucketUtil.uploadFile(file,originalFileName,contentType);
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
+        File file1=null;
+        try {
+          file1 = utils.convertMultiPartToFile(file);
         } catch (IOException e) {
           e.printStackTrace();
         }
+        Cloudinary cloudinary=utils.getCloudinary();
+        Map uploadResponse;
+        try {
+          uploadResponse=cloudinary.uploader().upload(file1, ObjectUtils.emptyMap());
+        } catch (IOException e) {
+             return "File not found";
+        }
+        url=uploadResponse.get("url").toString();
         System.out.println(url);
         pet.setImageURL(url);
         Pet p=petRepo.save(pet);
