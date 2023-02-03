@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,7 +49,6 @@ public class SignupActivity extends AppCompatActivity {
     private EditText nameEdtxt,emailEdtxt,passwordEdtxt;
     private ImageView registerbtn;
     private ProgressDialog progressDialog;
-
     private String name, email, password;
 
     // to initialize the components
@@ -79,15 +79,15 @@ public class SignupActivity extends AppCompatActivity {
         RetrofitService retrofitService = new RetrofitService();
         APICall apiCall = retrofitService.getRetrofit().create(APICall.class);
 
-        //obtaining values from the edit text
-        name = nameEdtxt.getText().toString();
-        email = emailEdtxt.getText().toString();
-        password = passwordEdtxt.getText().toString();
-
         // setting functionality of the register button
         registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //obtaining values from the edit text
+                name = nameEdtxt.getText().toString();
+                email = emailEdtxt.getText().toString();
+                password = passwordEdtxt.getText().toString();
 
                 //checking input
                 boolean fieldsCorrect = checkUserInput();
@@ -97,12 +97,13 @@ public class SignupActivity extends AppCompatActivity {
                     // creating user object to send
                     User user = new User(name,email,password);
                     // calling api
-                    apiCall.signupUser(user).enqueue(new Callback<User>() {
+                    apiCall.signupUser(user).enqueue(new Callback<String>() {
                         @Override
-                        public void onResponse(Call<User> call, Response<User> response) {
+                        public void onResponse(Call<String> call, Response<String> response) {
 
                             // when user response is successful
                             if(response.isSuccessful()){
+                                System.out.println(response.body());
                                 progressDialog.dismiss();
                                 showAlertDialogmessageOnResponse();
                                 makeEmptyToAllfield();
@@ -110,7 +111,7 @@ public class SignupActivity extends AppCompatActivity {
                             }
                         }
                         @Override
-                        public void onFailure(Call<User> call, Throwable t) {
+                        public void onFailure(Call<String> call, Throwable t) {
                             progressDialog.dismiss();
                             showAlertDialogmessageOnErrorResponse();
                         }
@@ -128,19 +129,22 @@ public class SignupActivity extends AppCompatActivity {
         // checking password
         else if(password.length()==0) notEmptyField = false;
 
-        boolean ncheck=true, ccheck=true, capcheck=true;
+        boolean ncheck=false, ccheck=false, capcheck=false;
         for(char ch : password.toCharArray()){
-            if(ch>='a' && ch<='z') ccheck=false;
-            else if(ch>='0' && ch<='9') ncheck=false;
-            else if(ch>='A' && ch<='Z') capcheck = false;
+            if(ch>='a' && ch<='z') ccheck=true;
+            else if(ch>='0' && ch<='9') ncheck=true;
+            else if(ch>='A' && ch<='Z') capcheck = true;
         }
-        boolean notRightPassword = ncheck && ccheck && capcheck && (password.length()<6);
+        boolean notRightPassword = ncheck && ccheck && capcheck && (password.length()>=6);
 
+        Log.e("signup", "values: "+name+" "+email+" "+password);
+
+        Log.e("signup ","notEmptyField: "+notEmptyField+" notRightPassword: "+notRightPassword);
         //showing the toast message
         if(!notEmptyField) Toast.makeText(SignupActivity.this,  "Please fill empty fields", Toast.LENGTH_SHORT).show();
 
         if(!notRightPassword) Toast.makeText(SignupActivity.this, "Password should be more than 6 digits. \nIt should have a " +
-                "capital letter, a number and a small letter", Toast.LENGTH_SHORT);
+                "capital letter, a number and a small letter", Toast.LENGTH_LONG).show();
 
         return notEmptyField && notRightPassword;
 

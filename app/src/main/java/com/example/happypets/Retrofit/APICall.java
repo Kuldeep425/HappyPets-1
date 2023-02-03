@@ -24,7 +24,7 @@ public interface APICall {
 
     // creating new post request to sign up the user initially
     @POST("/register/user")
-    Call<User> signupUser(@Body User user);
+    Call<String> signupUser(@Body User user);
 
     // to login user
     @POST("/login/user")

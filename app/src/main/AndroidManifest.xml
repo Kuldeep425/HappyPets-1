@@ -48,10 +48,6 @@
         <activity
             android:name=".Activity.MainActivity"
             android:exported="true">
-<<<<<<< HEAD
-=======
-
->>>>>>> 5c19ffb501689f2555a1899d7f623836f5576d4e
         </activity>
         <activity
             android:name=".Activity.LoginActivity"
@@ -76,22 +72,13 @@
             android:exported="false"/>
         <activity
             android:name=".Activity.SPlashScreenActivity"
-<<<<<<< HEAD
             android:exported="true">
-=======
-            android:exported="true" >
 
->>>>>>> 5c19ffb501689f2555a1899d7f623836f5576d4e
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-
-=======
->>>>>>> 5c19ffb501689f2555a1899d7f623836f5576d4e
 
     </application>
 
