@@ -38,6 +38,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements DatePick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
 
+        //changing action bar
+        getSupportActionBar().setTitle("Update Profile");
+
         // hooking layout elements
         initializing();
 

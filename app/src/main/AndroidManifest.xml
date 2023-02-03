@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".Activity.PetOwnerPreviewActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <activity
             android:name=".Activity.AllPetsListActivity"

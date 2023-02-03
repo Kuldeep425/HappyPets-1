@@ -7,12 +7,35 @@ public class Pet {
     private String breed;
     private String gender;
     private String age;
+    private String color;
+    private String weight;
     private String category;
     private String imageURL;
     private String ownerId;
 
     public Pet(){
 
+    }
+
+    public Pet(String name, String category, String gender, String breed, String age, String weight, String color){
+        this.name = name;
+        this.category = category;
+        this.gender = gender;
+        this.breed = breed;
+        this.age = age;
+        this.weight = weight;
+        this.color = color;
+    }
+
+    public Pet(String name, String breed, String gender, String category, String imageURL,  String ownerId, String age, String color) {
+        this.name = name;
+        this.breed = breed;
+        this.gender = gender;
+        this.category = category;
+        this.imageURL = imageURL;
+        this.id = id;
+        this.ownerId = ownerId;
+        this.age = age;
     }
 
     public String getName() {
@@ -79,16 +102,7 @@ public class Pet {
         this.age = age;
     }
 
-    public Pet(String name, String breed, String gender, String category, String imageURL, String id, String ownerId, String age) {
-        this.name = name;
-        this.breed = breed;
-        this.gender = gender;
-        this.category = category;
-        this.imageURL = imageURL;
-        this.id = id;
-        this.ownerId = ownerId;
-        this.age = age;
-    }
+
 
 
 
