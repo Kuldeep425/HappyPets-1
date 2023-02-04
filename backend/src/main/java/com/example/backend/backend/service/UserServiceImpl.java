@@ -29,7 +29,6 @@ import com.example.backend.backend.Reposistory.UserRepo;
 import com.example.backend.backend.collections.Token;
 import com.example.backend.backend.collections.User;
 import com.example.backend.backend.config.SecurityConfigurer;
-import com.example.backend.backend.utils.DataBucketUtil;
 import com.example.backend.backend.utils.JwtUtil;
 import com.example.backend.backend.utils.Utils;
 import com.google.gson.JsonObject;
@@ -40,7 +39,6 @@ public class UserServiceImpl implements UserService {
     @Autowired private UserRepo userRepo;
     @Autowired private SecurityConfigurer securityConfigurer;
     @Autowired private TokenRepo tokenRepo;
-    @Autowired DataBucketUtil dataBucketUtil;
     @Autowired private AuthenticationManager authenticationManager;
     @Autowired private JwtUtil jwtUtil;
     @Autowired private JwtUserDetail jwtUserDetail;

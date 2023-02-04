@@ -22,7 +22,6 @@ import com.cloudinary.utils.ObjectUtils;
 import com.example.backend.backend.Reposistory.PetRepo;
 import com.example.backend.backend.Reposistory.UserRepo;
 import com.example.backend.backend.collections.*;
-import com.example.backend.backend.utils.DataBucketUtil;
 import com.example.backend.backend.utils.Utils;
 
 
@@ -33,8 +32,6 @@ public class PetServiceImpl implements PetService {
      private UserRepo userRepo;
      @Autowired
       private PetRepo petRepo;
-     @Autowired
-      private DataBucketUtil dataBucketUtil;
      @Autowired 
       private Utils utils;
 
