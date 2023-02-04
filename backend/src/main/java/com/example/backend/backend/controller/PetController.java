@@ -32,8 +32,9 @@ public class PetController {
     @RequestPart ("image") MultipartFile file,
     @RequestPart ("pet") Pet pet) throws IOException{
       System.out.println("api is called");
-      System.out.println(pet.getName());
-     return ResponseEntity.ok(petService.postAPet(userId,pet,file));
+      Pet p=petService.postAPet(userId, pet, file);
+      if(p==null) return ResponseEntity.ok("error");
+     return ResponseEntity.ok(p.getId());
     }
 
     // to get all posted pet of specific user

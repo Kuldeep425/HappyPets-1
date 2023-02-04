@@ -40,9 +40,9 @@ public class PetServiceImpl implements PetService {
 
     // post a pet to adopt 
     @Override
-    public String postAPet(String userId, Pet pet, MultipartFile file){
+    public Pet postAPet(String userId, Pet pet, MultipartFile file){
       Optional<User>user=userRepo.findById(userId);
-      if(user.isEmpty()) return "user not found";
+      if(user.isEmpty()) return null;
         pet.setOwnerId(userId);
         String url=null;
         File file1=null;
@@ -56,7 +56,7 @@ public class PetServiceImpl implements PetService {
         try {
           uploadResponse=cloudinary.uploader().upload(file1, ObjectUtils.emptyMap());
         } catch (IOException e) {
-             return "File not found";
+             return null;
         }
         url=uploadResponse.get("url").toString();
         System.out.println(url);
@@ -72,7 +72,7 @@ public class PetServiceImpl implements PetService {
         else
         PetId.add(p.getId());
         userRepo.save(u);
-        return "Pet posted successfully";
+        return p;
     }
 
    // get all posted pets of a specific user
@@ -97,6 +97,7 @@ public class PetServiceImpl implements PetService {
       
     }
 
+    // to find the latest posted pets 
     @Override
     public List<Pet> getNewestPosted() {
          List<Pet> total=petRepo.findAll();
@@ -106,7 +107,6 @@ public class PetServiceImpl implements PetService {
          for(int i=1; i<=cnt; i++){
               result.add(total.get(total.size()-i));
          }
-          System.out.println(result);
          return result;
     }
 
