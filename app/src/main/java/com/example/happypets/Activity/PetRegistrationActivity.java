@@ -207,7 +207,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
 
                 //opening progress dialog
                 openProgressDialog();
-                
+
                 // to post a pet
                 apiCall.postAPet(token,userId,body,pet).enqueue(new Callback<String>() {
                     @Override

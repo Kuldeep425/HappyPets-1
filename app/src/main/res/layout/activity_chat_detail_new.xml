@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activity.ChatDetailActivity">
 
     <RelativeLayout
         android:layout_above="@id/message_container"
@@ -37,7 +38,7 @@
                 android:layout_height="wrap_content">
 
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/chat_details_user_image"
                     android:src="@drawable/profile_image"
                     android:layout_marginEnd="10dp"

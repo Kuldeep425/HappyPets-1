@@ -90,8 +90,9 @@ public class PetServiceImpl implements PetService {
     // to find pets on basis of category 
     @Override
     public List<Pet> getPostedPetOnBasisOfCategory(String category) {
-      return petRepo.getPostedPetOnBasisOfCategory(category);
-      
+      List<Pet>p=petRepo.getPostedPetOnBasisOfCategory(category);
+      System.out.println(p);
+      return p;
     }
 
     // to find the latest posted pets 
