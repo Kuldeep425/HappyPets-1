@@ -41,6 +41,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         View listItem= layoutInflater.inflate(R.layout.chat_user_list_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
+
     }
 
     @Override
