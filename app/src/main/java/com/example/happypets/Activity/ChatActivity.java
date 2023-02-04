@@ -33,10 +33,14 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_chat_new);
         chatRecyclerView = findViewById(R.id.chat_recycler_view);
         chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // changing the title of chat
+        getSupportActionBar().setTitle("Chat User List");
+
+        // making retrofit object
         RetrofitService retrofitService=new RetrofitService();
         APICall apiCall=retrofitService.getRetrofit().create(APICall.class);
 
