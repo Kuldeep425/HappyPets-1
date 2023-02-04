@@ -72,7 +72,7 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_detail);
+        setContentView(R.layout.activity_chat_detail_new);
 
         // getting the user id to retrieve its data in the toolbar
         chatUserId=getIntent().getStringExtra("ownerId");
