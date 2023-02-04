@@ -21,6 +21,7 @@ import android.net.Uri;
 
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -68,6 +69,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
 
     // getting values from the user
     String name, breed, age, weight, color, type, gender;
+
 
 
     //this object is used to handle the object which would be responsible for creating path for image
@@ -199,20 +201,31 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 RetrofitService retrofitService = new RetrofitService();
                 APICall apiCall = retrofitService.getRetrofit().create(APICall.class);
 
+                /*once it starts to call api we need to open progressdialog so that user can't
+                     press save btn again and again ..until the previous posting request does not respond.
+                 */
+
+                //opening progress dialog
+                openProgressDialog();
+                
                 // to post a pet
                 apiCall.postAPet(token,userId,body,pet).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        Toast.makeText(PetRegistrationActivity.this, ""+response, Toast.LENGTH_SHORT).show();
-                        System.out.println(response);
-                        makeEmptyAllField();
+                        if(response.isSuccessful()){
+                            //once pet posted successfully,dismiss the progress dialog
+                            loader.dismiss();
+                            Toast.makeText(PetRegistrationActivity.this, "Successfully posted", Toast.LENGTH_SHORT).show();
+                            makeEmptyAllField();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        System.out.println(t);
                         System.out.println(call);
-                        Toast.makeText(PetRegistrationActivity.this, "error", Toast.LENGTH_SHORT).show();
+                        // although the pet does not posted successfully,stop the progress dialog and let him know
+                        loader.dismiss();
+                        Toast.makeText(PetRegistrationActivity.this, "Error in posting", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -226,7 +239,9 @@ public class PetRegistrationActivity extends AppCompatActivity {
         registerPetAge.setText("");
         registerPetWeight.setText("");
         registerPetBreed.setText("");
-
+        registerPetColor.setText("");
+        registerPetGender.setText("");
+        registerPetType.setText("");
         pet_profile_image.setImageDrawable(getResources().getDrawable(R.drawable.profile_image));
     }
 
@@ -240,5 +255,14 @@ public class PetRegistrationActivity extends AppCompatActivity {
         // launchSomeActivity is an object which is used to open intent and obtain value in the form of bitmap
         launchSomeActivity.launch(intent);
     }
+
+    // opening progressdiallog to restrict user to click other btn until the request does not complete.
+     public void openProgressDialog(){
+         loader=new ProgressDialog(this);
+         loader.setCancelable(false);
+         loader.setTitle("Posting your pet");
+         loader.setMessage("Please wait....");
+         loader.show();
+     }
 
 }

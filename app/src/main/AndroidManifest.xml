@@ -53,6 +53,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".Activity.LoginActivity"
@@ -78,7 +79,6 @@
         <activity
             android:name=".Activity.SPlashScreenActivity"
             android:exported="true">
-
         </activity>
 
     </application>

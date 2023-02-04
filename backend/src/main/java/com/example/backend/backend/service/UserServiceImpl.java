@@ -50,7 +50,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User registerUser(User user) {
         user.setPassword(securityConfigurer.passwordEncoder().encode(user.getPassword()));
-       return userRepo.save(user);
+        if(userRepo.findByEmail(user.getEmail()).isPresent()){
+            User user1=userRepo.findByEmail(user.getEmail()).get();
+            if(user1.isVerified()) return null;
+        }
+        User user1=userRepo.save(user);
+        return user1;
     }
 
     

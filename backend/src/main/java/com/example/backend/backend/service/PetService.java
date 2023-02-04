@@ -10,7 +10,7 @@ import com.example.backend.backend.collections.Pet;
 
 public interface PetService {
 
-    String postAPet(String userId, Pet pet, MultipartFile file);
+    Pet postAPet(String userId, Pet pet, MultipartFile file);
 
     List<Pet> getAllpostedPetOfASpecificUser(String userId);
 

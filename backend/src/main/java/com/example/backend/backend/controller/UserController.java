@@ -41,8 +41,9 @@ public class UserController {
    @PostMapping("/register/user")
    public ResponseEntity<?> registerUser(@RequestBody User user,
    final HttpServletRequest request){
+    System.out.println(user.getEmail());
     Optional<User>user2=userRepo.findByEmail(user.getEmail());
-    if(user2.isPresent() && user2.get().isVerified()) return ResponseEntity.ok("Already registered Email");
+    if(user2.isPresent() && user2.get().isVerified())return ResponseEntity.ok("Already registered Email");
     User user1=userService.registerUser(user);
     generateToken.generateToekn(user1,"Register", applicationUrl(request));
     return ResponseEntity.ok(user1.getId());
