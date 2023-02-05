@@ -51,6 +51,8 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
                public void onClick(View v) {
                    Toast.makeText(context, "I am touched", Toast.LENGTH_SHORT).show();
                    Intent intent = new Intent(context,PetDetailDisplayActivity.class);
+                   intent.putExtra("ownerId",pets.get(position).getOwnerId());
+                   intent.putExtra("petId",pets.get(position).getId());
                    context.startActivity(intent);
                }
            });

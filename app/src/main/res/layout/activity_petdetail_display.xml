@@ -45,7 +45,7 @@
             app:srcCompat="@drawable/location_icon" />
 
         <TextView
-            android:id="@+id/addressText"
+            android:id="@+id/pet_addressText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -62,11 +62,11 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addressText">
+            app:layout_constraintTop_toBottomOf="@+id/pet_addressText">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="90dp"
@@ -78,6 +78,7 @@
                 app:cardElevation="5dp">
 
                 <TextView
+                    android:id="@+id/petGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -107,6 +108,7 @@
                 app:cardElevation="5dp">
 
                 <TextView
+                    android:id="@+id/petAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="23dp"
@@ -136,6 +138,7 @@
                 app:cardElevation="5dp">
 
                 <TextView
+                    android:id="@+id/petWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -177,6 +180,7 @@
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userProfilePic"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginVertical="10dp"
@@ -218,6 +222,7 @@
                     android:layout_height="27dp"
                     android:layout_marginTop="7dp"
                     android:layout_weight="1"
+                    android:onClick="goToChatDetailActivity"
                     app:srcCompat="@drawable/chat" />
 
                 <ImageView
@@ -285,11 +290,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
+        <androidx.cardview.widget.CardView
+            app:cardElevation="5dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:cardCornerRadius="35dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.938"
+            app:layout_constraintStart_toEndOf="@+id/petName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.363" >
+
+            <ImageView
+                android:id="@+id/add_fav_icon"
+                android:layout_width="45dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="9dp"
+                android:layout_height="45dp"
+                app:srcCompat="@drawable/heart_add_fav" />
+        </androidx.cardview.widget.CardView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/pet_imageView"
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"

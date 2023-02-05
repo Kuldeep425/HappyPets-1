@@ -1,5 +1,7 @@
 package com.example.happypets.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Pet {
 
     private String id;
@@ -12,6 +14,7 @@ public class Pet {
     private String category;
     private String imageURL;
     private String ownerId;
+    private int fav;
 
     public Pet(){
 
@@ -102,8 +105,32 @@ public class Pet {
         this.age = age;
     }
 
+    public void setWeight(String weight){this.weight=weight;}
+
+    public String getWeight(){return weight;}
 
 
+    public String getColor() {
+        return color;
+    }
 
+    public void setColor(String color) {
+        this.color = color;
+    }
 
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public int getFav() {
+        return fav;
+    }
+
+    public void setFav(int fav) {
+        this.fav = fav;
+    }
 }

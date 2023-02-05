@@ -66,7 +66,7 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
     APICall apiCall;
     ChatDetailsListAdapter messageAdapter;
     List<ChatMessage>previousMessages;
-    final private String SERVER_PATH = "ws://192.168.41.222:8080/topic/websocket";
+    final private String SERVER_PATH = "ws://192.168.244.88:8080/topic/websocket";
 
 
     @Override

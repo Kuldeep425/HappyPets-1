@@ -60,4 +60,16 @@ public interface APICall {
 
     @GET("/get/recently-posted/pets")
     Call<List<Pet>>getPopularPets(@Header("Authorization") String token);
+
+    // find the specific pet
+    @GET("/get/specific/pet/{userId}/{petId}")
+    Call<Pet>getSpecificPet(@Header("Authorization") String token,@Path("userId") String userId,@Path("petId") String petId);
+
+    // remove from favourite list
+
+    @POST("/remove/from/favourite/list/{userId}/{petId}")
+    Call<String>removeFromFavourite(@Header("Authorization") String token,@Path("userId") String userId,@Path("petId") String petId);
+
+    @POST("/add/to/favourite/{userId}/{petId}")
+    Call<String>addToFavourite(@Header("Authorization") String token,@Path("userId") String userId,@Path("petId") String petId);
 }

@@ -19,6 +19,7 @@
         <RelativeLayout
             android:id="@+id/chat_details_toolbar"
             android:padding="10dp"
+            android:background="@color/pink_300"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -48,6 +49,7 @@
                 <TextView
                     android:id="@+id/chat_details_user_name"
                     android:textSize="20sp"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     tools:text="Ayanokoji Kiyotaka"
                     android:layout_width="wrap_content"
@@ -60,61 +62,58 @@
         </RelativeLayout>
 
 
-
-
-        <ScrollView
-            android:layout_below="@id/chat_details_toolbar"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chat_display_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/chat_details_toolbar"
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/chat_display_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+            />
 
 
 
-        </ScrollView>
 
     </RelativeLayout>
 
 
     <LinearLayout
         android:id="@+id/message_container"
-        android:orientation="horizontal"
-        android:padding="4dp"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_below="@id/message_container"
+        android:orientation="horizontal"
+        android:padding="4dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/chat_send_message_edit_text_container"
-            android:hint="@string/pet_s_color"
-            app:hintTextColor="@color/white"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="10"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:hint="Type your message..."
+            android:paddingLeft="5dp"
+            app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/chat_send_message_edit_text"
-                android:background="@drawable/bg_button_rectangle"
                 android:layout_width="match_parent"
-                android:textColor="@color/white"
                 android:layout_height="match_parent"
-                android:inputType="text"/>
+                android:background="@drawable/bg_button_rectangle"
+                android:inputType="text"
+                android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/chat_send_message_button"
-            android:background="@drawable/bg_button_circle"
-            android:drawableTop="@drawable/ic_baseline_send_24"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="40dp"/>
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_circle"
+            android:drawableTop="@drawable/ic_baseline_send_24" />
 
     </LinearLayout>
 </RelativeLayout>
