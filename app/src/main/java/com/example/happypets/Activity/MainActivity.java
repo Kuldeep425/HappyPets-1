@@ -85,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.drawer_layout_fav:
                         Log.e(TAG,"fav");
+                        System.out.println("fav");
+                        Intent intent=new Intent(getApplicationContext(),FavouritePetListActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.drawer_layout_share:
                         Log.e(TAG,"share");
