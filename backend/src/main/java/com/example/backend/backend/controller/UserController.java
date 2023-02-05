@@ -89,13 +89,6 @@ public class UserController {
        return userService.getAllUsers();
      }
 
-     // to add favourite 
-
-     
-
-
-
-     
      private String applicationUrl(HttpServletRequest request) {
       return "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
     }

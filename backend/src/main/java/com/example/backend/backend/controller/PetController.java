@@ -74,14 +74,31 @@ public class PetController {
     //add to favourite 
     @PostMapping("/add/to/favourite/{userId}/{petId}")
     public ResponseEntity<?> addToFavourite(@PathVariable("userId") String userId, @PathVariable("petId") String petId){
-        return petService.addToFavourite(userId,petId);
+        Pet p=petService.addToFavourite(userId,petId);
+        if(p==null)return null;
+        return ResponseEntity.ok("Added");
     }
 
-    //get all favourite pets of a specific user
+    //remove from favourite list
+    @PostMapping("/remove/from/favourite/list/{userId}/{petId}")
+    public ResponseEntity<?> removeFromFavourite(@PathVariable("userId") String userId, @PathVariable("petId") String petId){
+      Pet p=petService.removeFromFavourite(userId,petId);
+      if(p==null) return null;
+      return ResponseEntity.ok("Removed");
+  }
 
+    //get all favourite pets of a specific user
     @GetMapping("/get/all/favourite/pets/{userId}")
     public List<Pet> getAllFavouritePets(@PathVariable("userId") String userId){
         return petService.getAllFovouritePets(userId);
+    }
+
+    //get a specific pet based on PetId
+
+    @GetMapping("/get/specific/pet/{userId}/{petId}")
+    public Pet getSpecificPet(@PathVariable("userId") String userId,@PathVariable("petId") String petId){
+        Pet p=petService.getSpecificPet(userId,petId);
+        return p;
     }
 
 }

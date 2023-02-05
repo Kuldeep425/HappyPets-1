@@ -21,8 +21,12 @@ public interface PetService {
 
     List<Pet> getNewestPosted();
 
-    ResponseEntity<?> addToFavourite(String userId, String petId);
+    Pet addToFavourite(String userId, String petId);
+
+    Pet removeFromFavourite(String userId, String petId);
 
     List<Pet> getAllFovouritePets(String userId);
+
+    Pet getSpecificPet(String userId, String petId);
     
 }

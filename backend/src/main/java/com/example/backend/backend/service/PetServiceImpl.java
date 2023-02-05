@@ -111,9 +111,9 @@ public class PetServiceImpl implements PetService {
 
     // add pet in user's favourite pet list
     @Override
-    public ResponseEntity<?> addToFavourite(String userId, String petId) {
-           if(userRepo.findById(userId).isEmpty()) return ResponseEntity.ok("User not found");
-           if(petRepo.findById(petId).isEmpty()) return ResponseEntity.ok("Pet not found");
+    public Pet addToFavourite(String userId, String petId) {
+           if(userRepo.findById(userId).isEmpty()) return null;
+           if(petRepo.findById(petId).isEmpty()) return null;
            User user=userRepo.findById(userId).get();
            List<String>FavPetId=user.getFavouritePetId();
            if(FavPetId==null){
@@ -124,7 +124,20 @@ public class PetServiceImpl implements PetService {
            else
            FavPetId.add(petId);
            userRepo.save(user);
-           return ResponseEntity.ok("Pet added successfully");   
+           return petRepo.findById(petId).get(); 
+    }
+
+    // remove from favourite list
+    @Override
+    public Pet removeFromFavourite(String userId, String petId) {
+           if(userRepo.findById(userId).isEmpty()) return null;
+          //if(petRepo.findById(petId).isEmpty()) return ResponseEntity.ok("Pet not found");
+           User user=userRepo.findById(userId).get();
+           List<String>FavPetId=user.getFavouritePetId();
+           if(FavPetId!=null)FavPetId.remove(petId); 
+           user.setFavouritePetId(FavPetId); 
+           userRepo.save(user);
+           return petRepo.findById(petId).get();   
     }
 
 
@@ -139,6 +152,27 @@ public class PetServiceImpl implements PetService {
                  if(petRepo.findById(petsId.get(i)).isPresent()==true) p.add(petRepo.findById(petsId.get(i)).get());
             }
             return p;
+    }
+    
+
+    // get specific pet 
+    @Override
+    public Pet getSpecificPet(String userId, String petId) {
+       User user=userRepo.findById(userId).get();
+       if(user==null) return null;
+       Pet pet=petRepo.findById(petId).get();
+       if(pet==null) return null;
+       int isFav=0;
+       if(user.getFavouritePetId()!=null){
+       for(int i=0; i<user.getFavouritePetId().size(); i++){
+        System.out.println(petId+ " "+user.getFavouritePetId().get(i));
+        if(petId.compareTo(user.getFavouritePetId().get(i))==0) isFav=1;
+        if(isFav==1) break;
+       }
+      }
+      System.out.println(isFav);
+      pet.setFav(isFav);
+      return pet;
     }
 
   

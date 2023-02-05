@@ -4,6 +4,8 @@ import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,5 +26,5 @@ public class Pet {
     private String category;
     private String imageURL;
     private String ownerId;
-    
+    private int fav;
 }
