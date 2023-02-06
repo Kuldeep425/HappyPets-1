@@ -1,35 +1,51 @@
 package com.example.happypets.Activity;
 
+import static com.example.happypets.Activity.LoginActivity.PREFERENCE_DETAIL;
+import static com.example.happypets.Activity.LoginActivity.token;
+import static com.example.happypets.Activity.LoginActivity.userId;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.happypets.Fragments.DatePickerFragment;
+import com.example.happypets.Model.User;
 import com.example.happypets.R;
+import com.example.happypets.Retrofit.APICall;
+import com.example.happypets.Retrofit.RetrofitService;
 import com.example.happypets.Utils.RealPathUtil;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UpdateProfileActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -42,9 +58,17 @@ public class UpdateProfileActivity extends AppCompatActivity implements DatePick
     Uri selectedImageUri;
     Bitmap selectedImageBitmap;
     String path;
-
+    ProgressDialog progressDialog;
     // variables to store user data
-    String name, email, phone, address, pincode, currentDate;
+    String name, email, phone, address, pincode, dateOfBirth;
+
+    public void openDialog(){
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setTitle("Saving");
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false); // so that it doesn't disappear when user clicks on screen
+        progressDialog.show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +80,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements DatePick
 
         // hooking layout elements
         initializing();
-
-        // obtaining values from edittexts
-        name = editText_name.getText().toString();
-        email = editText_email.getText().toString();
-        phone = editText_phone.getText().toString();
-        address = editText_address.getText().toString();
-        pincode = editText_pincode.getText().toString();
 
         // adding functionality to date picker button
         select_dob.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +98,89 @@ public class UpdateProfileActivity extends AppCompatActivity implements DatePick
             }
         });
 
+        // method to save profile
+        save_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // obtaining values from edittexts
+                name = editText_name.getText().toString();
+                email = editText_email.getText().toString();
+                phone = editText_phone.getText().toString();
+                address = editText_address.getText().toString();
+                pincode = editText_pincode.getText().toString();
+                System.out.println(dateOfBirth);
+                if(name.length()==0 || phone.length()==0 || address.length()==0 || pincode.length()==0 || dateOfBirth.length()==0){
+                    Toast.makeText(UpdateProfileActivity.this, "fill all entries", Toast.LENGTH_SHORT).show();
+                     return;
+                }
+                if(pincode.length()!=6){
+                    Toast.makeText(UpdateProfileActivity.this, "pincode length must be 6", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+                if(selectedImageUri==null){
+                    Toast.makeText(UpdateProfileActivity.this, "Please select a image", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                 User user=new User(userId,name,email,phone,address,pincode,dateOfBirth);
+                File image=new File(path);
+                // creating a request to send it to the cloud
+                RequestBody requestFile=RequestBody.create(MediaType.parse("multipart/form-data"),image);
+                //crating a multibody to sent the request file through the api end point
+                MultipartBody.Part body = MultipartBody.Part.createFormData("image", image.getName(), requestFile);
+
+                // creating retrofit to use the api
+                RetrofitService retrofitService = new RetrofitService();
+                APICall apiCall = retrofitService.getRetrofit().create(APICall.class);
+
+                //open progress dialog
+                openDialog();
+                apiCall.updateUser(token,body,user).enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if(response.isSuccessful()){
+                            int a=getSharedPreferences(PREFERENCE_DETAIL,MODE_PRIVATE).getInt("isProfileCompleted",0);
+                            // taking this integer this will tell from where the user has come to update activity
+                            /*
+                              if a=0 it means user has come from the main activity else user has come from the profile activity
+                             */
+                            getSharedPreferences(PREFERENCE_DETAIL,MODE_PRIVATE).edit().putInt("isProfileCompleted",1).commit();
+                            // dismiss the progress dialog once request is received
+                            progressDialog.dismiss();
+                            // make all field empty once user is successfully updated
+                            makeAllfieldsEmpty();
+                            Toast.makeText(UpdateProfileActivity.this, "updated profile", Toast.LENGTH_LONG).show();
+                            if(a==1) {
+                                startActivity(new Intent(UpdateProfileActivity.this, ProfileActivity.class));
+                                finish();
+                            }
+                            else {
+                                startActivity(new Intent(UpdateProfileActivity.this, MainActivity.class));
+                                finish();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Log.d("Error : ","Call : "+call+" Throwable : "+t);
+                        progressDialog.dismiss();
+                    }
+                });
+
+            }
+        });
+
+
+    }
+
+    private void makeAllfieldsEmpty() {
+        select_image.setImageResource(R.drawable.user);
+        editText_name.setText("");
+        editText_address.setText("");
+        editText_phone.setText("");
+        editText_pincode.setText("");
+        display_dob.setText("");
     }
 
     private void initializing(){
@@ -105,9 +204,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements DatePick
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         // obtaining the date as string
-        currentDate = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
+        dateOfBirth = DateFormat.getDateInstance(DateFormat.DEFAULT).format(calendar.getTime());
         // updating textview
-        display_dob.setText(currentDate);
+        display_dob.setText(dateOfBirth);
         display_dob.setTextColor(getResources().getColor(R.color.pink_300));
     }
 

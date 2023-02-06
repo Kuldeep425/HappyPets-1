@@ -26,7 +26,7 @@ import retrofit2.Response;
 public class ProfileActivity extends AppCompatActivity {
 
      CircleImageView profileImageView;
-     TextView name,email,phoneNumber,dob,address,pincode;
+     TextView name,email,phoneNumber,dob,address,pincode,addedPetNumber,favPetNumber;
 
      Button updateProfileButton;
      private void initialize(){
@@ -38,6 +38,8 @@ public class ProfileActivity extends AppCompatActivity {
          address = findViewById(R.id.user_address);
          pincode = findViewById(R.id.user_pincode);
          updateProfileButton = findViewById(R.id.user_update_profile_button);
+         addedPetNumber=findViewById(R.id.profile_no_pets_added);
+         favPetNumber=findViewById(R.id.profile_no_pets_fav);
      }
 
     @Override
@@ -63,6 +65,11 @@ public class ProfileActivity extends AppCompatActivity {
                     name.setText(user.getName());
                     email.setText(user.getEmail());
                     phoneNumber.setText(user.getPhoneNumber());
+                    dob.setText(user.getDob());
+                    address.setText(user.getAddress());
+                    pincode.setText(user.getPincode());
+                    addedPetNumber.setText(user.getPostedPet()+"");
+                    favPetNumber.setText(user.getFavouritePet()+"");
                 }
                 else
                     Toast.makeText(ProfileActivity.this, ""+response.body(), Toast.LENGTH_SHORT).show();
@@ -82,6 +89,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), UpdateProfileActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

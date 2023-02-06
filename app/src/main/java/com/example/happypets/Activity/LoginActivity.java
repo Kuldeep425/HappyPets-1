@@ -107,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                          myedit.putBoolean("hasLoggedIn", true);
                          myedit.putString("userId", loginResponse.getId());
                          myedit.putString("token", "Bearer "+loginResponse.getToken());
+                         myedit.putInt("isProfileCompleted",loginResponse.getProfileCompleted());
                          token="Bearer "+loginResponse.getToken();
                      }
                      catch(Exception e){

@@ -11,6 +11,7 @@ import androidx.core.app.RemoteInput;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,7 +68,8 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
     APICall apiCall;
     ChatDetailsListAdapter messageAdapter;
     List<ChatMessage>previousMessages;
-    final private String SERVER_PATH = "ws://192.168.244.88:8080/topic/websocket";
+    ImageView backImageButton;
+    final private String SERVER_PATH = "ws://192.168.115.60:8080/topic/websocket";
 
 
     @Override
@@ -78,10 +81,19 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
         chatUserId=getIntent().getStringExtra("ownerId");
         chatUserProfile=findViewById(R.id.chat_details_user_image);
         chatUserName=findViewById(R.id.chat_details_user_name);
+        backImageButton=findViewById(R.id.chat_details_back_button);
         // this is to hide the action bar
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+        // on pressing backImageButton user must go to chat list activity
+        backImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChatDetailActivity.this,ChatActivity.class));
+                finish();
+            }
+        });
         // calling chatting user data in the toolbar
         RetrofitService retrofitService=new RetrofitService();
          apiCall=retrofitService.getRetrofit().create(APICall.class);

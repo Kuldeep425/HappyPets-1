@@ -122,8 +122,8 @@ public class PetRegistrationActivity extends AppCompatActivity {
         registerPetAge = findViewById(R.id.register_pet_age);
         registerPetWeight = findViewById(R.id.register_pet_weight);
         registerPetColor = findViewById(R.id.register_pet_color);
-        registerPetGender = findViewById(R.id.register_pet_type);
-        registerPetType = findViewById(R.id.register_pet_gender);
+        registerPetGender = findViewById(R.id.register_pet_gender);
+        registerPetType = findViewById(R.id.register_pet_type);
         registerButton = findViewById(R.id.register_pet_save);
 
         //creating object for the progress loader
@@ -148,6 +148,22 @@ public class PetRegistrationActivity extends AppCompatActivity {
             }
         });
 
+        //obtaining selected item
+        registerPetGender.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                gender = parent.getItemAtPosition(position).toString();
+                System.out.println("Gender: "+gender);
+            }
+        });
+
+        registerPetType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                type = parent.getItemAtPosition(position).toString();
+                System.out.println("type: " +type);
+            }
+        });
 
         // to register a pet
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -159,24 +175,9 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 weight = registerPetWeight.getText().toString().trim();
                 color = registerPetColor.getText().toString().trim();
 
-                //obtaining selected item
-                registerPetGender.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        gender = gender_adapter.getItem(position);
-                    }
-                });
-                registerPetType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        type = type_adapter.getItem(position);
-                    }
-                });
-
-
                 // checking if all the entered inputs are correct
                 boolean correctFields = true;
-                if(name.length()==0 || breed.length()==0 || age.length()==0 || weight.length()==0) correctFields=false;
+                if(name.length()==0 || breed.length()==0 || age.length()==0 || weight.length()==0 || type==null || gender==null) correctFields=false;
 
                 // if fields not correct then show toast message
                 if(!correctFields) Toast.makeText(PetRegistrationActivity.this,"Fill all fields",Toast.LENGTH_SHORT).show();
@@ -184,7 +185,8 @@ public class PetRegistrationActivity extends AppCompatActivity {
                     Toast.makeText(PetRegistrationActivity.this, "Please select a image", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                System.out.println("type: " +type);
+                System.out.println("gender : " + gender);
                 // creating a pet object to send it through the api end point
                 Pet pet = new Pet(name,type,gender,breed,age,weight,color);
 
@@ -208,7 +210,7 @@ public class PetRegistrationActivity extends AppCompatActivity {
                 //opening progress dialog
                 openProgressDialog();
 
-                // to post a pet
+               //  to post a pet
                 apiCall.postAPet(token,userId,body,pet).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {

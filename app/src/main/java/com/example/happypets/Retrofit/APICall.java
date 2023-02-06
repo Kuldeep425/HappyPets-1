@@ -17,10 +17,10 @@ import retrofit2.http.Path;
 import java.util.*;
 public interface APICall {
 
-//     to register a user
+   //to update a user
     @POST("/update/user")
     @Multipart
-    Call<String> updateUser(@Part MultipartBody.Part image, @Part("user") User user);
+    Call<String> updateUser(@Header("Authorization") String token,@Part MultipartBody.Part image, @Part("user") User user);
 
     // creating new post request to sign up the user initially
     @POST("/register/user")

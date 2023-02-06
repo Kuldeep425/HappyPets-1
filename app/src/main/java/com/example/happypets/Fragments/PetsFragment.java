@@ -70,15 +70,6 @@ public class PetsFragment extends Fragment {
          //adding functionality to the view containers
         emptyList = rootView.findViewById(R.id.pets_empty_list_container);
         populatedList = rootView.findViewById(R.id.pets_list_container);
-         //if adapter is empty different thing is seen
-        if(userPetsListAdapter==null || userPetsListAdapter.getItemCount()==0){
-            emptyList.setVisibility(View.VISIBLE);
-            populatedList.setVisibility(View.GONE);
-        }
-        else{
-            populatedList.setVisibility(View.VISIBLE);
-            emptyList.setVisibility(View.GONE);
-        }
 
         //hooking button
         addPetsButton = rootView.findViewById(R.id.add_pets_button);
@@ -109,8 +100,17 @@ public class PetsFragment extends Fragment {
                     return;
                 }
                 List<Pet>petList=response.body();
-                userPetsListAdapter= new UserPetsListAdapter(petList);
+                userPetsListAdapter= new UserPetsListAdapter(petList,getContext());
                 userPetRecyclerView.setAdapter(userPetsListAdapter);
+                //if adapter is empty different thing is seen
+                if(userPetsListAdapter==null || userPetsListAdapter.getItemCount()==0){
+                    emptyList.setVisibility(View.VISIBLE);
+                    populatedList.setVisibility(View.GONE);
+                }
+                else{
+                    populatedList.setVisibility(View.VISIBLE);
+                    emptyList.setVisibility(View.GONE);
+                }
             }
 
             @Override

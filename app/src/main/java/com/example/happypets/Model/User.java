@@ -14,6 +14,11 @@ public class User {
     private String phoneNumber;
     @SerializedName("imageURL")
     private String imageUrl;
+    private String address;
+    private String pincode;
+    private String dob;
+    private int postedPet;
+    private int favouritePet;
 
     public String getImageUrl() {
         return imageUrl;
@@ -37,6 +42,17 @@ public class User {
         this.password = password;
         this.phoneNumber = phoneNumber;
     }
+
+    public User(String id,String name, String email, String phoneNumber, String address, String pincode,String dob) {
+        this.id=id;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.pincode = pincode;
+        this.dob=dob;
+    }
+
     public String getId(){ return id; }
     public String getName() {
         return name;
@@ -68,5 +84,49 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public int getPostedPet() {
+        return postedPet;
+    }
+
+    public void setPostedPet(int postedPet) {
+        this.postedPet = postedPet;
+    }
+
+    public int getFavouritePet() {
+        return favouritePet;
+    }
+
+    public void setFavouritePet(int favouritePet) {
+        this.favouritePet = favouritePet;
     }
 }

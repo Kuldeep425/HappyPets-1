@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
 public class RetrofitService {
     public Retrofit retrofit;
     public RetrofitService(){
@@ -29,7 +30,7 @@ public class RetrofitService {
 
 
         retrofit=new Retrofit.Builder()
-                .baseUrl("http://192.168.244.88:8080")
+                .baseUrl("http://192.168.115.60:8080")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
                 .client(client.build())
                 .build();

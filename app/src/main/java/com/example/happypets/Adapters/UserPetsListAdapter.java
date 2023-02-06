@@ -1,14 +1,18 @@
 package com.example.happypets.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.happypets.Activity.PetDetailDisplayActivity;
 import com.example.happypets.Model.Pet;
 import com.example.happypets.R;
 import com.squareup.picasso.Picasso;
@@ -21,8 +25,10 @@ public class UserPetsListAdapter extends RecyclerView.Adapter<UserPetsListAdapte
 
     // list of user pets
     private List<Pet> userPetsList;
-    public UserPetsListAdapter(List<Pet> userPetsList){
+    private Context context;
+    public UserPetsListAdapter(List<Pet> userPetsList,Context context){
         this.userPetsList=userPetsList;
+        this.context=context;
     }
 
 
@@ -30,7 +36,7 @@ public class UserPetsListAdapter extends RecyclerView.Adapter<UserPetsListAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.pet_display_format, parent, false);
+        View listItem= layoutInflater.inflate(R.layout.pets_list_display, parent, false);
         ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
     }
@@ -50,7 +56,11 @@ public class UserPetsListAdapter extends RecyclerView.Adapter<UserPetsListAdapte
         holder.user_pets_item_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // setting functionality
+                //creating intent to go to petdetaildisplay activity
+                Intent intent=new Intent(context, PetDetailDisplayActivity.class);
+                intent.putExtra("petId",userPet.getId());
+                intent.putExtra("ownerId",userPet.getOwnerId());
+                context.startActivity(intent);
             }
         });
     }
@@ -67,7 +77,7 @@ public class UserPetsListAdapter extends RecyclerView.Adapter<UserPetsListAdapte
         public TextView pet_name_textview;
         public TextView pet_breed_textview;
         public TextView pet_gender_textview;
-        public RelativeLayout user_pets_item_layout;
+        public LinearLayout user_pets_item_layout;
 
         public ViewHolder(@NonNull View itemView) {
 
@@ -77,7 +87,7 @@ public class UserPetsListAdapter extends RecyclerView.Adapter<UserPetsListAdapte
             pet_name_textview = (TextView) itemView.findViewById(R.id.DisplayPetName);
             pet_breed_textview = (TextView) itemView.findViewById(R.id.DisplayPetBreed);
             pet_gender_textview = (TextView) itemView.findViewById(R.id.DisplayPetGender);
-            user_pets_item_layout = (RelativeLayout) itemView.findViewById(R.id.pet_list_item_layout);
+            user_pets_item_layout =  (LinearLayout) itemView.findViewById(R.id.pet_list_item_layout);
 
         }
     }

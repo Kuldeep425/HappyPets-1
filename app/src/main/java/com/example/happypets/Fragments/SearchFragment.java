@@ -1,8 +1,12 @@
 package com.example.happypets.Fragments;
 
+import static com.example.happypets.Activity.LoginActivity.PREFERENCE_DETAIL;
 import static com.example.happypets.Activity.LoginActivity.token;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -14,11 +18,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.happypets.Activity.AllPetsListActivity;
+import com.example.happypets.Activity.UpdateProfileActivity;
 import com.example.happypets.Adapters.CategoryAdapter;
 import com.example.happypets.Adapters.PopularAdapter;
 import com.example.happypets.Model.Category;
@@ -46,8 +52,11 @@ public class SearchFragment extends Fragment {
     private RecyclerView recyclerViewPopularList;
     private  RecyclerView.Adapter popularAdapter;
     private List<Pet>pets;
+    private Button profileBuildBtn;
     ImageView imageView;
     EditText searchEditText;
+    // shared preference to get whether the user has completed own profile or not ...
+    public static SharedPreferences userInfo;
 
 
     // variable to know which option selected
@@ -64,8 +73,31 @@ public class SearchFragment extends Fragment {
 
         recyclerViewCategory();
         recyclerViewPopular();
-
+        userInfo= getActivity().getSharedPreferences(PREFERENCE_DETAIL, Context.MODE_PRIVATE);
+        userInfo.edit();
+        // if profile is not complete open an alert dialog to complete the profile
+        System.out.println(userInfo.getInt("isProfileCompleted",0));
+        if(userInfo.getInt("isProfileCompleted",0)==0) {
+            openDialog();
+        }
         return rootview;
+    }
+
+    // open dialog to complete profile
+    private void openDialog(){
+        Dialog dialog=new Dialog(getContext());
+        dialog.setContentView(R.layout.custom_dialog_alert_profile);
+        profileBuildBtn=dialog.findViewById(R.id.profile_build_btn);
+       // dialog.setCancelable(false);
+        dialog.show();
+        // go to update profile once profileBuild btn is clicked
+        profileBuildBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(getContext(), UpdateProfileActivity.class));
+            }
+        });
+
     }
 
     private void recyclerViewPopular() {
@@ -89,8 +121,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Pet>> call, Throwable t) {
-                System.out.println(t);
-                System.out.println("fdjfhdkjghdfhg iudfhgdf g");
+                System.out.println("Call : t");
             }
         });
 
