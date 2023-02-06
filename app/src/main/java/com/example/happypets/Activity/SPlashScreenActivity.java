@@ -3,6 +3,7 @@ package com.example.happypets.Activity;
 import static com.example.happypets.Activity.LoginActivity.token;
 import static com.example.happypets.Activity.LoginActivity.userId;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -25,13 +26,14 @@ import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.bumptech.glide.Glide;
 import com.example.happypets.R;
 
 public class SPlashScreenActivity extends Activity {
-    private ImageView logo;
-    private TextView title,slogan;
+    private LottieAnimationView animationView;
+    private ImageView textGif;
     public static boolean isLoggedIn=false;
-    Animation topAnimation,bottomAnimation;
     public static SharedPreferences userInfo;
     private final String CHANNEL_ID="WelcomeChannel";
     private final int NOTIFICATION_INTEGER=100;
@@ -39,18 +41,14 @@ public class SPlashScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_splash_screen);
-        logo = findViewById(R.id.logo);
-        title = findViewById(R.id.title);
-        slogan = findViewById(R.id.slogan);
-        topAnimation = AnimationUtils.loadAnimation(this,R.anim.top_animation);
-        bottomAnimation = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
-        logo.setAnimation(topAnimation);
-        title.setAnimation(bottomAnimation);
-        slogan.setAnimation(bottomAnimation);
+        setContentView(R.layout.activity_splash_screen_new);
+
+        //hooking layouts
+        animationView = findViewById(R.id.splash_screen_lottie_animation);
 
 
-        //notification to welcome user
+        //notification which is sent when the app is started
+        //this notification is just to be used in the front end and does not require firebase
         Drawable drawable= ResourcesCompat.getDrawable(getResources(),R.drawable.petlogo,null);
         BitmapDrawable bitmapDrawable= (BitmapDrawable) drawable;
         Bitmap largeIcon=bitmapDrawable.getBitmap();
@@ -84,7 +82,13 @@ public class SPlashScreenActivity extends Activity {
         notificationManager.notify(NOTIFICATION_INTEGER,notification);
 
         // splash screen
-        int SPLASH_SCREEN = 4500;
+        final int SPLASH_SCREEN_TIME =5000;
+        /*
+        * handler class is used for updating the ui thread from another thread
+        * here we are checking if we are already logged in or not
+        * if already logged in then we will directly enter the app
+        * after that login page will be visible
+         */
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -93,13 +97,14 @@ public class SPlashScreenActivity extends Activity {
                 boolean isLoggedIn=userInfo.getBoolean("hasLoggedIn",false);
                 userId=userInfo.getString("userId",null);
                 token=userInfo.getString("token",null);
-                if(isLoggedIn && userId!=null && token!=null) intent=new Intent(SPlashScreenActivity.this,MainActivity.class);
+                if(isLoggedIn && userId!=null && token!=null)
+                    intent=new Intent(SPlashScreenActivity.this,MainActivity.class);
                 else
-                intent = new Intent(SPlashScreenActivity.this, LoginActivity.class);
+                    intent = new Intent(SPlashScreenActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
-        },SPLASH_SCREEN );
+        },SPLASH_SCREEN_TIME );
 
     }
 }

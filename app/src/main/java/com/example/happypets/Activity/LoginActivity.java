@@ -84,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 // open dialog box
                  progressDialogOpen();
+                // making login object to store login data
                 Login login=new Login(email,password);
 
                 // this is api calling which will take Login model and send to the server
@@ -101,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                       * it stores these key value pairs in local storage
                       */
                      LoginResponse loginResponse =response.body();
+                     // creating a shared preference
                      userDetail=getSharedPreferences(PREFERENCE_DETAIL,MODE_PRIVATE);
                      myedit=userDetail.edit();
                      try {
@@ -113,8 +115,11 @@ public class LoginActivity extends AppCompatActivity {
                          System.out.println(e);
                      }
                      myedit.commit();
+                     // starting login acitivity
                      startActivity(new Intent(LoginActivity.this,MainActivity.class));
+
                      progressDialog.dismiss();
+
                      finish();
                  }
 
