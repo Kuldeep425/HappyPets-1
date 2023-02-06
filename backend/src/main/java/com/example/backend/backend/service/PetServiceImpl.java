@@ -39,6 +39,7 @@ public class PetServiceImpl implements PetService {
     @Override
     public Pet postAPet(String userId, Pet pet, MultipartFile file){
       Optional<User>user=userRepo.findById(userId);
+      System.out.println(pet.getCategory());
       if(user.isEmpty()) return null;
         pet.setOwnerId(userId);
         String url=null;

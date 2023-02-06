@@ -4,11 +4,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.backend.backend.Model.LoginModel;
+import com.example.backend.backend.Model.UserUpdateResponse;
 import com.example.backend.backend.Reposistory.UserRepo;
 import com.example.backend.backend.collections.User;
 import com.example.backend.backend.service.UserService;
 import com.example.backend.backend.utils.GenerateToken;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +18,7 @@ import java.util.Optional;
 import javax.mail.Multipart;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -52,8 +55,12 @@ public class UserController {
    // update user profile
    @PostMapping("/update/user")
     public ResponseEntity<?> updateUser(@RequestPart("image") MultipartFile file,
-    @RequestPart("user") User user){
-      return userService.updateUser(user,file);
+    @RequestPart("user") User user)throws IOException{
+      User user1=userService.updateUser(user,file);
+      if(user1==null) return ResponseEntity.ok("Error in updating profile");
+      System.out.println(user1);
+      System.out.println(ResponseEntity.ok(user1));
+      return ResponseEntity.ok(user1.getId());
     }
    
     // to verify email 
@@ -79,7 +86,7 @@ public class UserController {
    
     // to find the specific user 
     @GetMapping("/get/user/{userId}")
-    public Optional<User> getUserByUserId(@PathVariable String userId){ 
+    public User getUserByUserId(@PathVariable String userId){ 
      return userService.getUserByUserId(userId); 
      }
 

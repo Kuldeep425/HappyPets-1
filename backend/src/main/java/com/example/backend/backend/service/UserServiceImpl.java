@@ -59,8 +59,15 @@ public class UserServiceImpl implements UserService {
     
    // to find a user based on user id
    @Override
-   public Optional<User> getUserByUserId(String user_id) {
-       return userRepo.findById(user_id);
+   public User getUserByUserId(String user_id) {
+       User user=userRepo.findById(user_id).get();
+       if(user!=null){
+           user.setFavouritePet(0);
+           user.setPostedPet(0);
+           if(user.getFavouritePetId()!=null) user.setFavouritePet(user.getFavouritePetId().size());
+           if(user.getPostedPetId()!=null) user.setPostedPet(user.getPostedPetId().size());
+       }
+       return user;
    }
 
    // to verify token
@@ -100,7 +107,7 @@ public class UserServiceImpl implements UserService {
         if(user.isVerified()==false) throw new Exception("Account is not verified");
         String  token=jwtUtil.generateToken(jwtUserDetail.loadUserByUsername(loginModel.getEmail()));
         System.out.println(token);
-       LoginResponse loginResponse=new LoginResponse(user.getId(),token,user.isProfileCompleted());
+       LoginResponse loginResponse=new LoginResponse(user.getId(),token,user.getProfileCompleted());
         return ResponseEntity.ok(loginResponse); 
    }
 
@@ -124,12 +131,9 @@ public class UserServiceImpl implements UserService {
 
   // update user
   @Override
-  public ResponseEntity<?> updateUser(User user, MultipartFile file){
-          if(userRepo.findById(user.getId()).isEmpty()) return ResponseEntity.ok("No user found with associated userId");
-          User user1=userRepo.findById(user.getId()).get();
-          user1.setName(user.getName());
-          user1.setName(user.getPhoneNumber());
-          user1.setPassword(user.getPassword());
+  public User updateUser(User user, MultipartFile file){
+          if(userRepo.findById(user.getId()).isEmpty()) return null;
+          
           Cloudinary cloudinary=utils.getCloudinary();
           File profFile=null;
           try {
@@ -141,11 +145,19 @@ public class UserServiceImpl implements UserService {
           try {
             uploadResponse=cloudinary.uploader().upload(profFile, ObjectUtils.emptyMap());
           } catch (IOException e) {
-               return ResponseEntity.ok("File not found");
+               return null;
           }
+          User user1=userRepo.findById(user.getId()).get();
+          user1.setName(user.getName());
+          user1.setPhoneNumber(user.getPhoneNumber());
           String url=(String) uploadResponse.get("url");
           user1.setImageURL(url);
-          user1.setProfileCompleted(true);
-          return ResponseEntity.ok("user updated successfully");
+          user1.setAddress(user.getAddress());
+          user1.setPincode(user.getPincode());
+          user1.setDob(user.getDob());
+          user1.setProfileCompleted(1);
+          User u=userRepo.save(user1);
+          System.out.println(url);
+          return u;
         }
 }

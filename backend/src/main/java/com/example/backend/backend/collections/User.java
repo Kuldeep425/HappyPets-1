@@ -23,9 +23,14 @@ public class User {
     private String password;
     private String phoneNumber;
     private String  imageURL;
+    private String dob;
+    private String address;
+    private String pincode;
     private List<String>postedPetId;
     private List<String>favouritePetId;
     private boolean hasLoggedIn=false;
-    private boolean isProfileCompleted=false;
+    private int profileCompleted=0;
     private boolean verified=false;
+    private int postedPet;
+    private int favouritePet;
 }

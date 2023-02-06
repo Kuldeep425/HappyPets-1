@@ -34,7 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired JwtUserDetail jwtUserDetail;
     @Autowired JwtUtil jwtUtil;
 
-    private static List<String> skipFilterUrls = Arrays.asList("/login/user","/register/user");
+    private static List<String> skipFilterUrls = Arrays.asList("/login/user","/register/user","/verifyRegistration");
     @Override
    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 

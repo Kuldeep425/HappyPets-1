@@ -98,6 +98,7 @@ public class PetController {
     @GetMapping("/get/specific/pet/{userId}/{petId}")
     public Pet getSpecificPet(@PathVariable("userId") String userId,@PathVariable("petId") String petId){
         Pet p=petService.getSpecificPet(userId,petId);
+        System.out.println(p);
         return p;
     }
 

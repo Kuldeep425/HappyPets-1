@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class LoginResponse {
     private String id;
     private String token;
-    private boolean isProfileCompleted;
+    private int profileCompleted;
 }

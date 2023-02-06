@@ -16,7 +16,7 @@ public interface UserService {
     User registerUser(User user);
    
 
-    Optional<User> getUserByUserId(String user_id);
+    User getUserByUserId(String user_id);
 
     String VerifyTokenAndValidateUser(String token);
 
@@ -28,6 +28,6 @@ public interface UserService {
     List<User> getAllUsers();
 
 
-    ResponseEntity<?> updateUser(User user, MultipartFile file);
+    User updateUser(User user, MultipartFile file);
     
 }
