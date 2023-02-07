@@ -81,4 +81,10 @@ public interface APICall {
     // to delete the posted pet
    @DELETE("/delete/specific/pet/{petId}/{userId}")
    Call<String> deletePet(@Header("Authorization") String token,@Path("petId") String petId,@Path("userId") String userId);
+
+   @POST("/generate/reset/password/token/{email}")
+  Call<String> sendRecoveryEmail(@Path("email") String email);
+
+   @POST("/user/reset/password")
+  Call<ResetPassword> confirmedResetPassword(@Body ResetPassword resetPassword);
 }
