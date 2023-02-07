@@ -42,7 +42,8 @@ public class SecurityConfigurer {
         http.csrf()
           .disable()
           .authorizeHttpRequests()
-          .antMatchers("/login/user","/register/user","/verifyRegistration")
+          .antMatchers("/login/user","/register/user","/verifyRegistration",
+          "/generate/reset/password/token/**","/user/reset/password")
           .permitAll()
           .anyRequest()
           .authenticated()

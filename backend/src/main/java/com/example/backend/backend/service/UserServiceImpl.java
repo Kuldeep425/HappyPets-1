@@ -24,6 +24,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.example.backend.backend.Model.LoginModel;
 import com.example.backend.backend.Model.LoginResponse;
+import com.example.backend.backend.Model.ResetPasswordModel;
 import com.example.backend.backend.Reposistory.TokenRepo;
 import com.example.backend.backend.Reposistory.UserRepo;
 import com.example.backend.backend.collections.Token;
@@ -88,6 +89,28 @@ public class UserServiceImpl implements UserService {
        tokenRepo.delete(tkn);
        return "valid";
    }
+   
+   // reset password method 
+  @Override
+  public ResponseEntity<?> resetPassword(ResetPasswordModel resetPasswordModel) throws Exception {
+         if(resetPasswordModel==null) throw new Exception("Body is null");
+             String token=resetPasswordModel.getResetToken();
+             String newPassword=resetPasswordModel.getNewPassword();
+             if(token==null || newPassword==null) throw new Exception("Reset token or newPassword is null");
+             Token tkn=tokenRepo.findById(token).get();
+             if(tkn==null) throw new Exception("Token is not right");
+             User user=userRepo.findById(tkn.getUserId()).get();
+             if(user==null) throw new Exception("user not found");
+             Calendar calendar=Calendar.getInstance();
+             if(tkn.getExpirationTime().getTime()-calendar.getTime().getTime()<=0){
+                tokenRepo.delete(tkn);
+                    throw new Exception("Token expired");   
+               }
+              user.setPassword(securityConfigurer.passwordEncoder().encode(newPassword));
+              userRepo.save(user);
+              tokenRepo.delete(tkn);
+              return ResponseEntity.ok(resetPasswordModel);
+  }
 
    // to login user
    @Override
@@ -160,4 +183,7 @@ public class UserServiceImpl implements UserService {
           System.out.println(url);
           return u;
         }
+
+
+
 }

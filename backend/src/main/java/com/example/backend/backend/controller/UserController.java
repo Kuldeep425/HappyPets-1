@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.backend.backend.Model.LoginModel;
-
+import com.example.backend.backend.Model.ResetPasswordModel;
 import com.example.backend.backend.Reposistory.UserRepo;
 import com.example.backend.backend.collections.User;
 import com.example.backend.backend.service.UserService;
@@ -96,10 +96,25 @@ public class UserController {
        return userService.getAllUsers();
      }
 
+     // to generate token for reset password 
+     @PostMapping("/generate/reset/password/token/{email}")
+      public ResponseEntity<?> generatePasswordResetToken(@PathVariable("email") String email){
+          String result=generateToken.generateTokenForResetPassword(email);
+          return ResponseEntity.ok(result);
+      }
+
+      // to reset password 
+      @PostMapping("/user/reset/password")
+      public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordModel resetPasswordModel) throws Exception{
+          return userService.resetPassword(resetPasswordModel);
+      }
+
+
      private String applicationUrl(HttpServletRequest request) {
       return "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
     }
-
+     
+    
    
    
 

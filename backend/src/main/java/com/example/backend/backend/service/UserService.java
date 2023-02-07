@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.backend.backend.Model.LoginModel;
+import com.example.backend.backend.Model.ResetPasswordModel;
 import com.example.backend.backend.collections.User;
 
 public interface UserService {
@@ -29,5 +30,10 @@ public interface UserService {
 
 
     User updateUser(User user, MultipartFile file);
+
+
+    ResponseEntity<?> resetPassword(ResetPasswordModel resetPasswordModel) throws Exception;
+
+    
     
 }

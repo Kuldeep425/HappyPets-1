@@ -33,6 +33,7 @@ public class ChatController {
     @Autowired private Utils utils;
 
     @MessageMapping("/chat")
+    
     public void processMessage(@Payload ChatMessageModel chatMessageModel) throws Exception {
         messagingTemplate.convertAndSendToUser(
                 chatMessageModel.getReceiverId(),"/queue/messages"+chatMessageModel.getSenderId(),
