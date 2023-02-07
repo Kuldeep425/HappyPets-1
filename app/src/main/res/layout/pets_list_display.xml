@@ -93,6 +93,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/pets_list_delete_button"
                 android:background="@color/brown_200"
                 android:layout_weight="1"
                 android:layout_width="0dp"
