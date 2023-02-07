@@ -99,6 +99,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/delete_icon"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/pets_delete"

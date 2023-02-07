@@ -77,9 +77,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder>{
             gender=itemView.findViewById(R.id.DisplayPetGender);
             petImage = itemView.findViewById(R.id.petImage);
             category=itemView.findViewById(R.id.PetType);
-            addToFavourite=itemView.findViewById(R.id.favIcon);
-            notifyToOwner=itemView.findViewById(R.id.notifyIcon);
-            chatWithOwner=itemView.findViewById(R.id.ChatIcon);
+
         }
     }
 }

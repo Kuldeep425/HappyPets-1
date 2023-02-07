@@ -7,6 +7,7 @@ import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.Header;
@@ -76,4 +77,8 @@ public interface APICall {
     // get all favourite pets of user
     @GET("/get/all/favourite/pets/{userId}")
     Call<List<Pet>>getAllFavouritePets(@Header("Authorization") String token,@Path("userId") String userId);
+
+    // to delete the posted pet
+   @DELETE("/delete/specific/pet/{petId}/{userId}")
+   Call<String> deletePet(@Header("Authorization") String token,@Path("petId") String petId,@Path("userId") String userId);
 }

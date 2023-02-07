@@ -57,29 +57,14 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
         holder.pet_breed_textview.setText(pet.getBreed());
         holder.pet_gender_textview.setText(pet.getGender());
 
-        holder.chatWithOwner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, pet.getOwnerId(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, ChatDetailActivity.class);
-                System.out.println(pet.getOwnerId());
-                intent.putExtra("ownerId", pet.getOwnerId());
-                context.startActivity(intent);
-            }
-        });
-        holder.notifyToOwner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, pet.getId(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
         //setting item click listener
         holder.pets_relative_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //adding functionality
                 Intent intent=new Intent(context, PetDetailDisplayActivity.class);
+                intent.putExtra("petId",pet.getId());
+                intent.putExtra("ownerId",pet.getOwnerId());
                 context.startActivity(intent);
             }
         });
@@ -112,9 +97,6 @@ public class AllPetsListAdapter extends RecyclerView.Adapter<AllPetsListAdapter.
             pet_name_textview = (TextView) itemView.findViewById(R.id.DisplayPetName);
             pet_breed_textview = (TextView) itemView.findViewById(R.id.DisplayPetBreed);
             pet_gender_textview = (TextView) itemView.findViewById(R.id.DisplayPetGender);
-            addToFavourite = itemView.findViewById(R.id.favIcon);
-            notifyToOwner = itemView.findViewById(R.id.notifyIcon);
-            chatWithOwner = itemView.findViewById(R.id.ChatIcon);
             pets_relative_layout = (RelativeLayout) itemView.findViewById(R.id.pet_list_item_layout);
 
         }
