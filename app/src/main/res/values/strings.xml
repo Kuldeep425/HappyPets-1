@@ -57,6 +57,7 @@
     <string name="delete_pet_dialog">Are you sure, you want to delete this pet?</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="recover">Recover</string>
 
     <!--    string for drop down menu -->
     <string-array name="pets_menu_gender">
