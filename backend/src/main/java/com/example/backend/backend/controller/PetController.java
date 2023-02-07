@@ -7,6 +7,7 @@ import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -94,12 +95,21 @@ public class PetController {
     }
 
     //get a specific pet based on PetId
-
     @GetMapping("/get/specific/pet/{userId}/{petId}")
     public Pet getSpecificPet(@PathVariable("userId") String userId,@PathVariable("petId") String petId){
         Pet p=petService.getSpecificPet(userId,petId);
         System.out.println(p);
         return p;
+    }
+
+    //delete a pet based on petId
+    @DeleteMapping("/delete/specific/pet/{petId}/{userId}")
+    public ResponseEntity<?> deleteSpecificPet(@PathVariable("userId") String userId,@PathVariable("petId") String petId){
+          System.out.println("delete is called");
+         Pet pet=petService.deleteSpecificPet(userId,petId);
+         if(pet==null){System.out.println("pet is null"); return null;}
+         System.out.println("deleted");
+         return ResponseEntity.ok(pet.getId());
     }
 
 }

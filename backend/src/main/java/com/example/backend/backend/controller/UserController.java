@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.backend.backend.Model.LoginModel;
-import com.example.backend.backend.Model.UserUpdateResponse;
+
 import com.example.backend.backend.Reposistory.UserRepo;
 import com.example.backend.backend.collections.User;
 import com.example.backend.backend.service.UserService;

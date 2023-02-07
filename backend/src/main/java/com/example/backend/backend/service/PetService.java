@@ -28,5 +28,6 @@ public interface PetService {
     List<Pet> getAllFovouritePets(String userId);
 
     Pet getSpecificPet(String userId, String petId);
-    
+
+    Pet deleteSpecificPet(String userId,String petId);
 }

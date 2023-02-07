@@ -12,6 +12,7 @@ import java.util.Optional;
 
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
+import org.checkerframework.checker.units.qual.s;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -174,6 +175,22 @@ public class PetServiceImpl implements PetService {
       System.out.println(isFav);
       pet.setFav(isFav);
       return pet;
+    }
+
+    //delete the pet 
+    @Override
+    public Pet deleteSpecificPet(String userId, String petId){
+        if(userId==null || petId==null) return null;
+        Pet pet=petRepo.findById(petId).get();
+        User user=userRepo.findById(userId).get();
+        if(pet==null || user==null) return null;
+        if(pet.getOwnerId().compareTo(userId)!=0) return null;
+        petRepo.deleteById(petId);
+        List<String>postedPetId=user.getPostedPetId();
+        if(postedPetId!=null)postedPetId.remove(petId); 
+        user.setPostedPetId(postedPetId); 
+        userRepo.save(user);
+        return pet;
     }
 
   
