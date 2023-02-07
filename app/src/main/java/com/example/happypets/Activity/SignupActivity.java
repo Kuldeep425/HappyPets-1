@@ -2,6 +2,7 @@ package com.example.happypets.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -28,6 +30,8 @@ import com.example.happypets.Retrofit.APICall;
 import com.example.happypets.Retrofit.RetrofitService;
 import com.example.happypets.Utils.RealPathUtil;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,6 +51,7 @@ public class SignupActivity extends AppCompatActivity {
     private final String TAG = SignupActivity.class.getName();
 
     private EditText nameEdtxt,emailEdtxt,passwordEdtxt;
+    private TextView forgotPassword;
     private ImageView registerbtn;
     private ProgressDialog progressDialog;
     private String name, email, password;
@@ -57,6 +62,7 @@ public class SignupActivity extends AppCompatActivity {
         emailEdtxt=findViewById(R.id.user_signin_profile_email);
         passwordEdtxt=findViewById(R.id.user_signin_profile_password);
         registerbtn=findViewById(R.id.user_signin_button);
+        forgotPassword = findViewById(R.id.user_signin_forget_password);
     }
 
 
@@ -70,10 +76,21 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_new);
+
+        // hooking the layout
         initialize();
         
         // removing action bar
         getSupportActionBar().hide();
+
+        // adding reset password functionality
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                callResetPasswordDialog();
+            }
+        });
 
         // creating retrofit service
         RetrofitService retrofitService = new RetrofitService();
@@ -191,5 +208,33 @@ public class SignupActivity extends AppCompatActivity {
                 });
         AlertDialog alertDialog=builder.create();
         alertDialog.show();
+    }
+
+    // reset password dialog box
+    private void callResetPasswordDialog(){
+
+        Dialog resetPasswordDialog = new Dialog(this);
+        resetPasswordDialog.setContentView(R.layout.dialog_box_forgot_password_layout);
+        // adding functionality of elements in dialog box
+        EditText recoveryEmail = (EditText) resetPasswordDialog.findViewById(R.id.reset_password_dialog_email);
+        Button cancelButton = (Button) resetPasswordDialog.findViewById(R.id.reset_password_dialog_cancel);
+        Button recoverButton = (Button) resetPasswordDialog.findViewById(R.id.reset_password_dialog_recover);
+
+        // adding functionality
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetPasswordDialog.dismiss();
+            }
+        });
+        recoverButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // obtaining email
+                String email = recoveryEmail.getText().toString();
+
+            }
+        });
+
     }
 }
