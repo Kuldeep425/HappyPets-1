@@ -71,10 +71,11 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-    public void progressDialogOpen(){
+    public void progressDialogOpen(String message){
         progressDialog=new ProgressDialog(this);
         progressDialog.setCancelable(false);
-        progressDialog.setMessage("Please wait....");
+        progressDialog.setTitle("Please wait....");
+        progressDialog.setMessage(message);
         progressDialog.show();
     }
     @Override
@@ -114,8 +115,10 @@ public class SignupActivity extends AppCompatActivity {
                 //checking input
                 boolean fieldsCorrect = checkUserInput();
                 if(fieldsCorrect){
+                    // message to show on progress dialog
+                    String message="We are sending registration mail";
                     // open progress dialog
-                    progressDialogOpen();
+                    progressDialogOpen(message);
                     // creating user object to send
                     User user = new User(name,email,password);
                     // calling api
@@ -236,24 +239,30 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // obtaining email
-                String email = recoveryEmail.getText().toString();
+                String email = recoveryEmail.getText().toString().trim();
+                //message to show on dialog
+                String message="Otp is being send on your email";
+                progressDialogOpen(message);
                 //sending data from api
                 apiCall.sendRecoveryEmail(email).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         if(response.isSuccessful()){
                             // adding toast
-
+                            Toast.makeText(SignupActivity.this, "otp has been sent", Toast.LENGTH_SHORT).show();
+                            //dismissing the progress dialog
+                            progressDialog.dismiss();
                             // dismissing dialog
                             resetPasswordDialog.dismiss();
                             // calling new dialog box
-                            updatePassword();
+                            updatePassword(email);
                         }
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-
+                       Log.d("Call :"+call,"Throwable :"+t);
+                       progressDialog.dismiss();
                     }
                 });
             }
@@ -262,7 +271,7 @@ public class SignupActivity extends AppCompatActivity {
         resetPasswordDialog.show();
     }
 
-    private void updatePassword(){
+    private void updatePassword(String email){
 
         Dialog newPasswordDialog = new Dialog(this);
         newPasswordDialog.setContentView(R.layout.dialog_box_new_password);
@@ -290,22 +299,29 @@ public class SignupActivity extends AppCompatActivity {
                 boolean correctPassword = false;
                 if(newPassword.length()!=0) correctPassword = true;
                 boolean ncheck=false, ccheck=false, capcheck=false;
-                for(char ch : password.toCharArray()) {
+                for(char ch : confirmPassword.toCharArray()) {
                     if (ch >= 'a' && ch <= 'z') ccheck = true;
                     else if (ch >= '0' && ch <= '9') ncheck = true;
                     else if (ch >= 'A' && ch <= 'Z') capcheck = true;
                 }
-                correctPassword = ncheck && ccheck && capcheck && (password.length()>=6);
+                correctPassword = ncheck && ccheck && capcheck && (confirmPassword.length()>=6);
 
                 boolean checkPassword = (confirmPassword.compareTo(newPassword)==0);
 
                 if(checkPassword && correctPassword){
-                    apiCall.confirmedResetPassword(new ResetPassword(newToken,newPassword)).enqueue(new Callback<ResetPassword>() {
+                    int otp=Integer.parseInt(newToken);
+                    //message to show on progress dialog
+                    String message="Password is being updated";
+                    //open progress diallog
+                    progressDialogOpen(message);
+                    apiCall.confirmedResetPassword(new ResetPassword(email,otp,newPassword)).enqueue(new Callback<ResetPassword>() {
                         @Override
                         public void onResponse(Call<ResetPassword> call, Response<ResetPassword> response) {
                             if(response.isSuccessful()){
                                 // making toast
                                 Toast.makeText(getApplicationContext(),"New password is set", Toast.LENGTH_SHORT).show();
+                                //dismiss the progress dialog
+                                progressDialog.dismiss();
                                 // dismiss dialog
                                 newPasswordDialog.dismiss();
                             }
@@ -313,7 +329,9 @@ public class SignupActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<ResetPassword> call, Throwable t) {
-
+                             // dismiss the progress dialog
+                              progressDialog.dismiss();
+                              Log.d("Call"+call,"Throwable: "+t);
                         }
                     });
                 }

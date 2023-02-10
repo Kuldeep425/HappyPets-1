@@ -43,7 +43,7 @@ public class SecurityConfigurer {
           .disable()
           .authorizeHttpRequests()
           .antMatchers("/login/user","/register/user","/verifyRegistration",
-          "/generate/reset/password/token/**","/user/reset/password")
+          "/generate/reset/password/**","/user/reset/password")
           .permitAll()
           .anyRequest()
           .authenticated()

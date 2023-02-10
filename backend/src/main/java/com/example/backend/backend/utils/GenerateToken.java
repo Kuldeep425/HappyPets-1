@@ -1,4 +1,5 @@
 package com.example.backend.backend.utils;
+import java.util.Random;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +32,19 @@ public String generateToekn(User user,String tokenType,String url){
   return "";
 }
 
-public String generateTokenForResetPassword(String email){
-      if(userRepo.findByEmail(email).isEmpty() || userRepo.findByEmail(email).get().isVerified()==false) return "User not found";       
-      User user=userRepo.findByEmail(email).get();
+public User generateTokenForResetPassword(String email) throws Exception{
+      if(userRepo.findByEmail(email).isEmpty() )throw new Exception("user not found");    
+     User user=userRepo.findByEmail(email).get();  
+      Token t=tokenRepo.findByEmail(email);
+      if(t!=null) tokenRepo.delete(t);
       String token=UUID.randomUUID().toString();
-      Token tk=new Token(user.getId(),token,"Reset Password");
+      int otp=new Random().nextInt(900000)+100000;
+      Token tk=new Token(user.getId(),otp,"Reset Password",email,5);
       String message="Hi, "+user.getName()+"\n";
-      Token t=tokenRepo.save(tk);
-      message+="Please enter this token in order to change your password, This token is valid for 10 min\n";
-      message+="Token : "+t.getId();
+      tokenRepo.save(tk);
+      message+="Please enter this otp in order to change your password, This otp is valid for 5 min\n";
+      message+="Otp : "+otp;
       mailSending.sendSimpleMail(user, message);
-      return "Email sent successfully";
+      return user;
 }
 }

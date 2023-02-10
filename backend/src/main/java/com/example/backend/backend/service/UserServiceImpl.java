@@ -94,10 +94,11 @@ public class UserServiceImpl implements UserService {
   @Override
   public ResponseEntity<?> resetPassword(ResetPasswordModel resetPasswordModel) throws Exception {
          if(resetPasswordModel==null) throw new Exception("Body is null");
-             String token=resetPasswordModel.getResetToken();
+             int otp=resetPasswordModel.getOtp();
              String newPassword=resetPasswordModel.getNewPassword();
-             if(token==null || newPassword==null) throw new Exception("Reset token or newPassword is null");
-             Token tkn=tokenRepo.findById(token).get();
+             String email=resetPasswordModel.getEmail();
+             if(otp==0 || newPassword==null || email==null) throw new Exception("Reset token or newPassword is null");
+             Token tkn=tokenRepo.findByEmail(email);
              if(tkn==null) throw new Exception("Token is not right");
              User user=userRepo.findById(tkn.getUserId()).get();
              if(user==null) throw new Exception("user not found");
@@ -106,6 +107,7 @@ public class UserServiceImpl implements UserService {
                 tokenRepo.delete(tkn);
                     throw new Exception("Token expired");   
                }
+             if(tkn.getOtp()!=otp) throw new Exception("Otp does not match");
               user.setPassword(securityConfigurer.passwordEncoder().encode(newPassword));
               userRepo.save(user);
               tokenRepo.delete(tkn);

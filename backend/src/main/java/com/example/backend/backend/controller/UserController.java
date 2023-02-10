@@ -98,9 +98,10 @@ public class UserController {
 
      // to generate token for reset password 
      @PostMapping("/generate/reset/password/token/{email}")
-      public ResponseEntity<?> generatePasswordResetToken(@PathVariable("email") String email){
-          String result=generateToken.generateTokenForResetPassword(email);
-          return ResponseEntity.ok(result);
+      public ResponseEntity<?> generatePasswordResetToken(@PathVariable("email") String email) throws Exception{
+           System.out.println(email);
+          User user=generateToken.generateTokenForResetPassword(email);
+          return ResponseEntity.ok(user.getId());
       }
 
       // to reset password 

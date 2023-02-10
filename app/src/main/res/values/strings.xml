@@ -58,9 +58,9 @@
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="recover">Recover</string>
-    <string name="get_new_password">Please enter token received on your email and enter new password:</string>
+    <string name="get_new_password">Please enter otp received on your email and enter new password:</string>
     <string name="new_password">New Password</string>
-    <string name="token">Token</string>
+    <string name="Otp">Otp</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="send">Send</string>
 

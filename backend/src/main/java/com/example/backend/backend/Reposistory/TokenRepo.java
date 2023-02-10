@@ -7,5 +7,6 @@ import com.example.backend.backend.collections.Token;
 public interface TokenRepo extends MongoRepository<Token,String>{
 
     Token findByToken(String token);
+    Token findByEmail(String email);
     
 }

@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import com.example.backend.backend.collections.User;
 
 public interface UserRepo extends MongoRepository<User,String>{
-
+     
     Optional<User> findByEmail(String email);
      
     @Query("{email:?0,password:?1}")

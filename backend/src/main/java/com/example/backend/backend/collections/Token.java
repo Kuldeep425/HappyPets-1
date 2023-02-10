@@ -23,6 +23,8 @@ private String token;
 private Date expirationTime;
 private String tokenType;
 private String userId;
+private int otp;
+private String email;
 
 
 public Token(String userId, String token,String tokenType){
@@ -32,6 +34,14 @@ public Token(String userId, String token,String tokenType){
     this.token=token;
     this.tokenType=tokenType;
     this.expirationTime=calculateExpirationDate(EXPIRATION_TIME);
+}
+
+public Token(String userId,int otp,String tokenType,String email,int time){
+    this.userId=userId;
+    this.tokenType=tokenType;
+    this.otp=otp;
+    this.email=email;
+    this.expirationTime=calculateExpirationDate(time);
 }
 
 public Token(String token){
