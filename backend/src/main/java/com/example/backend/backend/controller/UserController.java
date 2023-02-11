@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.backend.backend.Model.LoginModel;
 import com.example.backend.backend.Model.ResetPasswordModel;
 import com.example.backend.backend.Reposistory.UserRepo;
+import com.example.backend.backend.collections.Notification;
 import com.example.backend.backend.collections.User;
 import com.example.backend.backend.service.UserService;
 import com.example.backend.backend.utils.GenerateToken;
@@ -110,7 +111,22 @@ public class UserController {
           return userService.resetPassword(resetPasswordModel);
       }
 
+        // send notification to the owner
+      @PostMapping("/send/notification/to/owner/{userId}/{ownerId}/{petId}")
+      public ResponseEntity<?> sendNotification (
+        @PathVariable("userId") String userId,
+        @PathVariable("ownerId")String ownerId,
+        @PathVariable("petId") String petId) throws Exception{
+          return userService.sendNotificationToOwner(userId,ownerId,petId);
+        }
 
+
+        // get all notification of a user
+
+        @GetMapping("/get/all/notification/{userId}")
+         List<Notification> getAllNotification(@PathVariable("userId") String userId){
+          return userService.getAllNotification(userId);
+         }
      private String applicationUrl(HttpServletRequest request) {
       return "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
     }

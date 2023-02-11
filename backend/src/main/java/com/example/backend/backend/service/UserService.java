@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.backend.backend.Model.LoginModel;
 import com.example.backend.backend.Model.ResetPasswordModel;
+import com.example.backend.backend.collections.Notification;
 import com.example.backend.backend.collections.User;
 
 public interface UserService {
@@ -33,6 +34,11 @@ public interface UserService {
 
 
     ResponseEntity<?> resetPassword(ResetPasswordModel resetPasswordModel) throws Exception;
+
+    ResponseEntity<?> sendNotificationToOwner(String userId,String ownerId,String petId) throws Exception;
+
+
+    List<Notification> getAllNotification(String userId);
 
     
     

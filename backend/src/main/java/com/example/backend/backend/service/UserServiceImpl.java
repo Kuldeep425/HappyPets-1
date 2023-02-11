@@ -25,10 +25,14 @@ import com.cloudinary.utils.ObjectUtils;
 import com.example.backend.backend.Model.LoginModel;
 import com.example.backend.backend.Model.LoginResponse;
 import com.example.backend.backend.Model.ResetPasswordModel;
+import com.example.backend.backend.Reposistory.PetRepo;
+import com.example.backend.backend.Reposistory.NotificationRepo;
 import com.example.backend.backend.Reposistory.TokenRepo;
 import com.example.backend.backend.Reposistory.UserRepo;
 import com.example.backend.backend.collections.Token;
 import com.example.backend.backend.collections.User;
+import com.example.backend.backend.collections.Notification;
+import com.example.backend.backend.collections.Pet;
 import com.example.backend.backend.config.SecurityConfigurer;
 import com.example.backend.backend.utils.JwtUtil;
 import com.example.backend.backend.utils.Utils;
@@ -38,6 +42,8 @@ import com.google.gson.JsonObject;
 public class UserServiceImpl implements UserService {
 
     @Autowired private UserRepo userRepo;
+    @Autowired private PetRepo petRepo;
+    @Autowired private NotificationRepo notificationRepo;
     @Autowired private SecurityConfigurer securityConfigurer;
     @Autowired private TokenRepo tokenRepo;
     @Autowired private AuthenticationManager authenticationManager;
@@ -184,6 +190,33 @@ public class UserServiceImpl implements UserService {
           User u=userRepo.save(user1);
           System.out.println(url);
           return u;
+        }
+
+        // to send the notification to the ownerId
+        @Override
+        public ResponseEntity<?> sendNotificationToOwner(String userId,String ownerId,String petId) throws Exception{
+          Notification notification=new Notification(); 
+          User senderUser=userRepo.findById(userId).get();
+          if(senderUser==null) throw new Exception("sendder user is not found");
+          User receiverUser=userRepo.findById(userId).get();
+          if(receiverUser==null) throw new Exception("owner is not found");
+          Pet pet=petRepo.findById(petId).get();
+          if(pet==null) throw new Exception("pet is not found");
+          notification.setPetId(petId);
+          notification.setReceiverId(ownerId);
+          notification.setSenderId(userId);
+          notification.setSenderName(senderUser.getName());
+          notification.setSenderImageUrl(senderUser.getImageURL());
+          notification=notificationRepo.save(notification);
+          return ResponseEntity.ok(notification.getId());
+        }
+
+        
+        // get all notification sent to a specific user
+        @Override
+        public List<Notification> getAllNotification(String userId) {
+            List<Notification> notifications=notificationRepo.findByUserId(userId);
+            return notifications;
         }
 
 

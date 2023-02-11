@@ -16,8 +16,9 @@ public class Notification {
     @Id
     private String id;
     private String senderName;
-    private String receiverName;
+    private String senderId;
+    private String receiverId;
     private String petId;
-    private String petImageUrl; 
+    private String senderImageUrl; 
 
 }
