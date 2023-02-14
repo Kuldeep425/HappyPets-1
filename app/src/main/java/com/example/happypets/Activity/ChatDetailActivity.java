@@ -69,7 +69,7 @@ public class ChatDetailActivity extends AppCompatActivity implements TextWatcher
     ChatDetailsListAdapter messageAdapter;
     List<ChatMessage>previousMessages;
     ImageView backImageButton;
-    final private String SERVER_PATH = "ws://192.168.220.48:8080/topic/websocket";
+    final private String SERVER_PATH = "ws://192.168.164.215:8080/topic/websocket";
 
 
     @Override

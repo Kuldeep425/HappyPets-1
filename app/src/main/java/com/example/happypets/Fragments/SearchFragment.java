@@ -88,13 +88,14 @@ public class SearchFragment extends Fragment {
         Dialog dialog=new Dialog(getContext());
         dialog.setContentView(R.layout.custom_dialog_alert_profile);
         profileBuildBtn=dialog.findViewById(R.id.profile_build_btn);
-       // dialog.setCancelable(false);
+        //dialog.setCancelable(false);
         dialog.show();
         // go to update profile once profileBuild btn is clicked
         profileBuildBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 startActivity(new Intent(getContext(), UpdateProfileActivity.class));
+
             }
         });
 

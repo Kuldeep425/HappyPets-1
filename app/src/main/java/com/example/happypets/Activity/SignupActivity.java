@@ -318,12 +318,12 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<ResetPassword> call, Response<ResetPassword> response) {
                             if(response.isSuccessful()){
-                                // making toast
-                                Toast.makeText(getApplicationContext(),"New password is set", Toast.LENGTH_SHORT).show();
                                 //dismiss the progress dialog
                                 progressDialog.dismiss();
                                 // dismiss dialog
                                 newPasswordDialog.dismiss();
+                                // open dialog box to show the user that password has been successfully updated
+                                openDialogBoxOnPasswordSuccessfullySet();
                             }
                         }
 
@@ -344,5 +344,14 @@ public class SignupActivity extends AppCompatActivity {
         });
         //showing dialog
         newPasswordDialog.show();
+    }
+    // method to show the dialog box if the password is successfully updated
+    private void openDialogBoxOnPasswordSuccessfullySet() {
+          Dialog dialog=new Dialog(this);
+          dialog.setContentView(R.layout.dialog_box_success);
+          TextView responseTextView=dialog.findViewById(R.id.response_message_textview);
+          // adding message to show
+          responseTextView.setText("Password has been updated successfully.");
+          dialog.show();
     }
 }

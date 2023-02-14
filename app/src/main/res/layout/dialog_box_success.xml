@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@color/pink_300"
+        android:src="@drawable/completed_icon"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/pink_300"
+        android:textStyle="bold"
+        android:textSize="34sp"
+        android:text="Success"
+        android:layout_margin="20dp"/>
+    <TextView
+        android:id="@+id/response_message_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/pink_300"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:text="Profile is updated successfully !"
+        android:layout_margin="10dp"/>
+
+</LinearLayout>

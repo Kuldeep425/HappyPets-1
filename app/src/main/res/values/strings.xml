@@ -55,6 +55,7 @@
     <string name="pet_s_breed">Pet\'s Breed</string>
     <string name="pet_s_color">Pet\'s Color</string>
     <string name="delete_pet_dialog">Are you sure, you want to delete this pet?</string>
+    <string name="profile_build_dialog">Please complete your profile</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="recover">Recover</string>

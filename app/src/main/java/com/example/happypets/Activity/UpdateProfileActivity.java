@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -80,7 +81,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements DatePick
 
         // hooking layout elements
         initializing();
-
+        openDialogBoxOnProfileUpdationSuccessfully();
         // adding functionality to date picker button
         select_dob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,7 +150,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements DatePick
                             progressDialog.dismiss();
                             // make all field empty once user is successfully updated
                             makeAllfieldsEmpty();
-                            Toast.makeText(UpdateProfileActivity.this, "updated profile", Toast.LENGTH_LONG).show();
+                            // open dialog box to show to that profile is updated successfully
+                            openDialogBoxOnProfileUpdationSuccessfully();
                             if(a==1) {
                                 startActivity(new Intent(UpdateProfileActivity.this, ProfileActivity.class));
                                 finish();
@@ -174,6 +176,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements DatePick
 
     }
 
+
+     // to make all fields empty
     private void makeAllfieldsEmpty() {
         select_image.setImageResource(R.drawable.user);
         editText_name.setText("");
@@ -183,6 +187,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements DatePick
         display_dob.setText("");
     }
 
+    // to initialize the widgets
     private void initializing(){
         select_image = findViewById(R.id.update_profile_image);
         editText_name = findViewById(R.id.update_profile_name);
@@ -193,6 +198,15 @@ public class UpdateProfileActivity extends AppCompatActivity implements DatePick
         select_dob = findViewById(R.id.update_profile_dob);
         display_dob = findViewById(R.id.update_profile_dob_display);
         save_button = findViewById(R.id.update_profile_save);
+    }
+
+    // method to show dialog box if the profile is updated successfully
+    private void openDialogBoxOnProfileUpdationSuccessfully() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_box_success);
+        TextView responseTextView=dialog.findViewById(R.id.response_message_textview);
+        responseTextView.setText("Your profile is updated successfully.");
+        dialog.show();
     }
 
     @Override

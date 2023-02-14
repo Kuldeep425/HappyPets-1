@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import com.example.happypets.Adapters.TabLayoutAdapter;
@@ -85,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.drawer_layout_fav:
                         Log.e(TAG,"fav");
-                        System.out.println("fav");
                         Intent intent=new Intent(getApplicationContext(),FavouritePetListActivity.class);
                         startActivity(intent);
                         break;
@@ -93,10 +94,8 @@ public class MainActivity extends AppCompatActivity {
                         Log.e(TAG,"share");
                         break;
                     case R.id.drawer_layout_logout:
-                        getSharedPreferences(LoginActivity.PREFERENCE_DETAIL,MODE_PRIVATE).edit().putBoolean("hasLoggedIn",false).commit();
-                        getSharedPreferences(LoginActivity.PREFERENCE_DETAIL,MODE_PRIVATE).edit().putString("userId",null).commit();
-                        Toast.makeText(MainActivity.this, "logout", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this,SPlashScreenActivity.class));
+                        // open dialog box for confirmation of logout
+                        openDialogBoxToConfirmLogout();
                         Log.e(TAG,"logout");
                         break;
                 }
@@ -106,6 +105,41 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    // method to show dialog box for make sure that whether the user want or not to logout
+    private void openDialogBoxToConfirmLogout() {
+        Dialog dialog=new Dialog(this);
+        dialog.setContentView(R.layout.dialog_alert_logout);
+        TextView noTextView=dialog.findViewById(R.id.textviewNo);
+        TextView yesTextView=dialog.findViewById(R.id.textviewYes);
+        dialog.setCancelable(false);
+        dialog.show();
+        // if user select the noTextView dismiss the alert dialog
+        noTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        // if user select yesTextview dismiss the dialog and make user logout
+        yesTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                // calling function to logout user
+                logoutCurrentLoggedInUser();
+            }
+        });
+    }
+
+    // method to logout the user
+    private void logoutCurrentLoggedInUser() {
+        getSharedPreferences(LoginActivity.PREFERENCE_DETAIL,MODE_PRIVATE).edit().putBoolean("hasLoggedIn",false).commit();
+        getSharedPreferences(LoginActivity.PREFERENCE_DETAIL,MODE_PRIVATE).edit().putString("userId",null).commit();
+        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+        finish();
     }
 
 
@@ -128,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
         if(item.getItemId()==R.id.notification_icon){
-            Toast.makeText(getApplicationContext(), "I am touched", Toast.LENGTH_SHORT).show();
+
         }
 
         return super.onOptionsItemSelected(item);

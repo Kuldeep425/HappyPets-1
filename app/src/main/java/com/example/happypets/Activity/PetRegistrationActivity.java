@@ -6,6 +6,7 @@ import static com.example.happypets.Activity.LoginActivity.token;
 import static com.example.happypets.Activity.LoginActivity.userId;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -217,8 +218,9 @@ public class PetRegistrationActivity extends AppCompatActivity {
                         if(response.isSuccessful()){
                             //once pet posted successfully,dismiss the progress dialog
                             loader.dismiss();
-                            Toast.makeText(PetRegistrationActivity.this, "Successfully posted", Toast.LENGTH_SHORT).show();
                             makeEmptyAllField();
+                            // open dialog box to show the user that his/her pet is posted successfully
+                            openDialogBoxOnPetPostedSuccessfully();
                         }
                     }
 
@@ -235,7 +237,10 @@ public class PetRegistrationActivity extends AppCompatActivity {
         });
 
     }
-  // to clear all fields if pet posted successfully
+
+
+
+    // to clear all fields if pet posted successfully
     private void makeEmptyAllField() {
         registerPetName.setText("");
         registerPetAge.setText("");
@@ -266,5 +271,14 @@ public class PetRegistrationActivity extends AppCompatActivity {
          loader.setMessage("Please wait....");
          loader.show();
      }
+
+     // method to show dialog on completion of pet registration
+     private void openDialogBoxOnPetPostedSuccessfully() {
+         Dialog dialog = new Dialog(this);
+         dialog.setContentView(R.layout.dialog_box_success);
+         TextView responseMessageTextview=dialog.findViewById(R.id.response_message_textview);
+         responseMessageTextview.setText("Pet has been posted successfully");
+         dialog.show();
+    }
 
 }
