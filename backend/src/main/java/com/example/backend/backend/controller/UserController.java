@@ -56,7 +56,7 @@ public class UserController {
    // update user profile
    @PostMapping("/update/user")
     public ResponseEntity<?> updateUser(@RequestPart("image") MultipartFile file,
-    @RequestPart("user") User user)throws IOException{
+    @RequestPart("user") User user)throws IOException,Exception{
       User user1=userService.updateUser(user,file);
       if(user1==null) return ResponseEntity.ok("Error in updating profile");
       System.out.println(user1);

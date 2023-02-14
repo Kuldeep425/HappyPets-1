@@ -162,8 +162,9 @@ public class UserServiceImpl implements UserService {
 
   // update user
   @Override
-  public User updateUser(User user, MultipartFile file){
-          if(userRepo.findById(user.getId()).isEmpty()) return null;
+  public User updateUser(User user, MultipartFile file) throws Exception{
+          System.out.println(user.getId());
+          if(userRepo.findById(user.getId()).isEmpty()) throw new Exception("User not found");
           
           Cloudinary cloudinary=utils.getCloudinary();
           File profFile=null;
@@ -178,10 +179,12 @@ public class UserServiceImpl implements UserService {
           } catch (IOException e) {
                return null;
           }
+          
           User user1=userRepo.findById(user.getId()).get();
           user1.setName(user.getName());
           user1.setPhoneNumber(user.getPhoneNumber());
           String url=(String) uploadResponse.get("url");
+          System.out.println(url);
           user1.setImageURL(url);
           user1.setAddress(user.getAddress());
           user1.setPincode(user.getPincode());

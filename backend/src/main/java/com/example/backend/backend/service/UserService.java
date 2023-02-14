@@ -30,7 +30,7 @@ public interface UserService {
     List<User> getAllUsers();
 
 
-    User updateUser(User user, MultipartFile file);
+    User updateUser(User user, MultipartFile file) throws Exception;
 
 
     ResponseEntity<?> resetPassword(ResetPasswordModel resetPasswordModel) throws Exception;
