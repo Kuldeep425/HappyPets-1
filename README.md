@@ -10,9 +10,9 @@ Pet abandonment is a significant issue throughout the world and we witness many 
 
 ## Features
 
-- Add, edit and delete pets entries.
-- Has a real-time chats feature which pets owner can use to contact with potential adopter.
-- Adopters can smartly search for pets according to type, breed, color and other criterias.
+- Create forms where pet owners can input information about their pets, including type, breed, color, age, and description. Allow them to upload images. Implement functionality to edit and delete pet entries.
+- Create a messaging interface where pet owners and potential adopters can communicate in real-time. Implement a user-friendly chat window with message history, typing indicators, and delivery/read receipts.
+- Design a search interface where adopters can input criteria such as type, breed, color, age, and more. Offer filter options to refine search results. Display search results with images and relevant information
 
 
 ## Contibutors
@@ -20,5 +20,5 @@ Pet abandonment is a significant issue throughout the world and we witness many 
 - [Kuldeep](https://github.com/Kuldeep425)
 - [Apoorv Pranjal](https://github.com/CarefoDragneel)
 - [Lucky Kumari](https://github.com/Lucky-coder14)
-
+- [Vishesh Pratap Singh](https://github.com/vishesCode)
 
