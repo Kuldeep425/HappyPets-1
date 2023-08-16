@@ -1,6 +1,6 @@
 # Happy Pets
 
-Pet abandonment is a major issue thoroughout the world and we witness many pets become homeless, roaming on the streets, especially in India. Owners leaving their pets just like that not only creates problems for the society but also is simply animal cruelty. One of the reasons for this issue is non-availability of a platform which can help pet owners to find potential adopters at the right time. Thus, we have created a java mobile application, which will provide a seamless interface for adopting a pet as well as provide new owners for these pets. 
+Pet abandonment is a significant issue throughout the world and we witness many pets become homeless, roaming on the streets, especially in India. Owners leaving their pets just like that not only creates problems for society but is, simply, animal cruelty. One of the reasons for this issue is the non-availability of a platform that can help pet owners find potential adopters at the right time. Thus, we have created a Java mobile application, which will provide a seamless interface for adopting as well as finding new owners for these pets.
 
 ## Tech Stack
 - JAVA
